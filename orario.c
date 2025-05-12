@@ -13,6 +13,10 @@
 
 
 
+
+
+
+
 // Funzione per creare una nuova istanza di Orario
 Orario* newOrario() {
     Orario* orario = (Orario*)malloc(sizeof(Orario));
@@ -28,6 +32,23 @@ Orario* newOrario() {
 
 int getOra(const Orario* orario) {
     return orario->ora;
+}
+
+Orario* creaOrario(int ora, int minuti) {
+    if (ora < 0 || ora > 23 || minuti < 0 || minuti > 59) {
+        printf("Orario non valido.\n");
+        return NULL;
+    }
+
+    Orario* nuovo_orario = malloc(sizeof(Orario));
+    if (nuovo_orario == NULL) {
+        printf("Errore allocazione memoria per Orario.\n");
+        return NULL;
+    }
+
+    nuovo_orario->ora = ora;
+    nuovo_orario->minuti = minuti;
+    return nuovo_orario;
 }
 
 
@@ -75,18 +96,23 @@ void stampaOrarioAttuale() {
 }
 
 
-// Funzione per leggere un orario
 Orario* leggiOrario() {
-    Orario* o;
+    Orario* o = malloc(sizeof(Orario));
+    if (o == NULL) {
+        printf("Errore di allocazione memoria per Orario.\n");
+        exit(1);  // o gestisci l’errore in altro modo
+    }
+
     while (1) {
         printf("Inserisci ora di inizio (formato HH MM): ");
         if (scanf("%hd %hd", &o->ora, &o->minuti) != 2 || o->ora < 0 || o->ora > 23 || o->minuti < 0 || o->minuti > 59) {
-            printf("%sOrario non valido, riprova.%s\n",ROSSO,RESET);
+            printf("%sOrario non valido, riprova.%s\n", ROSSO, RESET);
             while (getchar() != '\n'); // pulisci buffer
         } else {
             break;
         }
     }
+
     return o;
 }
 

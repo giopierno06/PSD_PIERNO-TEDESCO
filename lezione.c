@@ -35,8 +35,8 @@ lezione* creaLezione() {
     l->codice_lezione = 0;
     strcpy(l->nome, "");
     strcpy(l->disciplina, "");
-    l->data= creaData(1,1,200);
-    l->ora_di_inizio = NULL;
+    l->data= creaData(1,1,2000);
+    l->ora_di_inizio = creaOrario(0,0);
     l->durata = 0;
     l->postimax = 0;
 }
@@ -134,9 +134,12 @@ void setDataLezione(lezione* l, Data* data) {
     l->data =data; 
 }
 
-// Imposta l’orario di inizio
-void setOrarioInizio(lezione* l, Orario* orario) {
-    l->ora_di_inizio = orario;
+void setOrarioInizio(lezione* l, Orario* o) {
+    if (l != NULL && o != NULL) {
+        if (l->ora_di_inizio == NULL)
+            l->ora_di_inizio = malloc(sizeof(Orario));
+        *(l->ora_di_inizio) = *o;
+    }
 }
 
 // Imposta la durata della lezione

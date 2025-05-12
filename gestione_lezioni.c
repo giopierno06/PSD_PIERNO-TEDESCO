@@ -96,20 +96,20 @@ int aggiungi_lezione(listL** lezioni) {
         return 0;
     }
 
-    printf("\n========================================================================================================\n");
-    printf("                                     Aggiungi Nuova Lezione\n");
-    printf("========================================================================================================\n"); 
-    printf("Se vuoi annullare e tornare al menu gestore digitare 'exit' nel campo 'nome'\n");
-    printf("========================================================================================================\n");
-
     int max_id=0;
     max_id = getMaxCodiceLezione(*lezioni);
-    printf("Valore max_id prima di setCodiceLezione: %d\n", max_id);
     setCodiceLezione(nuova_lezione, max_id + 1);
-    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
     
     // Scelta disciplina
     while (1) {
+        printf("\n========================================================================================================\n");
+        printf("                                     Aggiungi Nuova Lezione\n");
+        printf("========================================================================================================\n"); 
+        printf("Se vuoi annullare e tornare al menu gestore digitare 'exit' nel campo 'nome'\n");
+        printf("========================================================================================================\n");
+
+
+
         int scelta;
         char buffer_nome[50];
 
@@ -117,6 +117,7 @@ int aggiungi_lezione(listL** lezioni) {
         printf("1: Yoga\n2: Pilates\n3: Zumba\n4: Spinning\n5: Aerobica\n6: Altro\n0: Torna al menu%s\n> ", RESET);
         if (scanf("%d", &scelta) != 1) {
             while (getchar() != '\n');
+            pulisciSchermo();
             printf("%sERRORE%s Inserisci un numero valido.\n", ROSSO, RESET);
             continue;
         }
@@ -147,6 +148,7 @@ int aggiungi_lezione(listL** lezioni) {
                 distruggiLezione(nuova_lezione);
                 return 0;
             default:
+                pulisciSchermo();
                 printf("%sERRORE%s Scelta non valida.\n", ROSSO, RESET);
                 continue;
         }
@@ -196,13 +198,12 @@ int aggiungi_lezione(listL** lezioni) {
             setDataLezione(nuova_lezione, data_input);
             break;
         }
-    }
 
+    }
     // Orario
     printf("%sOrario della lezione: %s\n", VERDE, RESET);
     Orario* orario_inizio = leggiOrario();
     setOrarioInizio(nuova_lezione, orario_inizio);
-
     // Durata
     short int durata;
     while (1) {
@@ -231,9 +232,8 @@ int aggiungi_lezione(listL** lezioni) {
     printf(", termina alle ");
     stampaOrario(orario_fine);
     printf("\n===================================================\n");
-    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
+    
     *lezioni = lezione_consList(nuova_lezione, *lezioni);
-    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
     salvaLezioniSuFile(*lezioni,"lezioni.txt");
     getchar();
     printf("\nPremi INVIO per continuare...\n");

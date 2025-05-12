@@ -1,10 +1,10 @@
 Lezioni:
 ===========================
-Codice Lezione: 917518
+Codice Lezione: 1
 Disciplina: Spinning
-Nome: afdfd
-Posti massimi: 45
-Posti occupati: 0
+Nome: sfdsag
+Posti massimi: 14
+Posti occupati: 117835526
 Data: 14-05-2025
 Ora di inizio: 14:14
 Durata (in minuti): 14

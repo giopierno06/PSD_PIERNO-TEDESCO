@@ -8,6 +8,9 @@ typedef struct {
 } Orario;
 
 
+Orario* creaOrario(int,int);
+
+
 // Funzione per creare una nuova istanza di Orario
 Orario* newOrario();
 
