@@ -1,0 +1,74 @@
+Abbonamenti:
+===========================
+Codice Abbonamento: 11
+Nome: Franco
+Cognome: Di Maio
+Data di inizio: 12-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 9
+Nome: Giorgio
+Cognome: De Polis
+Data di inizio: 08-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 7
+Nome: Simone
+Cognome: Tedesco
+Data di inizio: 12-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 5
+Nome: Antonio
+Cognome: Elia
+Data di inizio: 06-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 4
+Nome: Elena
+Cognome: Mele
+Data di inizio: 06-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 3
+Nome: Genny
+Cognome: Pierno
+Data di inizio: 02-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 2
+Nome: Giovanni
+Cognome: Pierno
+Data di inizio: 09-04-2024
+Durata (in mesi): 36
+---------------------------
+Codice Abbonamento: 1
+Nome: Salvatore
+Cognome: Pierno
+Data di inizio: 04-05-2025
+Durata (in mesi): 4
+---------------------------
+Codice Abbonamento: 8
+Nome: Vittoria
+Cognome: Marrandino
+Data di inizio: 07-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 10
+Nome: Francesco
+Cognome: Mele
+Data di inizio: 07-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 12
+Nome: Mario
+Cognome: Di Marco
+Data di inizio: 09-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 15
+Nome: Andrea
+Cognome: Bosco
+Data di inizio: 09-05-2025
+Durata (in mesi): 5
+---------------------------

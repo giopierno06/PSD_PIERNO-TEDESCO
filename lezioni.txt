@@ -1,0 +1,11 @@
+Lezioni:
+===========================
+Codice Lezione: 3014670
+Disciplina: Spinning
+Nome: asfd
+Posti massimi: 14
+Posti occupati: 0
+Data: 14-05-2025
+Ora di inizio: 14:46
+Durata (in minuti): 45
+---------------------------
