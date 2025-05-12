@@ -15,7 +15,7 @@
 #define GIALLO   "\033[1;33m"
 #define RESET    "\033[0m"     //comandi per stampare a video defini come define per rendere il tutto più ordinato
 
-listL* lezioni;  // Modifica: usa un singolo puntatore per la lista delle lezioni
+extern listL* lezioni;  // Modifica: usa un singolo puntatore per la lista delle lezioni
 
 //menu gestione lezioni
 void gestione_Lezioni() {
@@ -102,10 +102,12 @@ int aggiungi_lezione(listL** lezioni) {
     printf("Se vuoi annullare e tornare al menu gestore digitare 'exit' nel campo 'nome'\n");
     printf("========================================================================================================\n");
 
-    int max_id = getMaxCodiceLezione(*lezioni);
-    
+    int max_id=0;
+    max_id = getMaxCodiceLezione(*lezioni);
+    printf("Valore max_id prima di setCodiceLezione: %d\n", max_id);
     setCodiceLezione(nuova_lezione, max_id + 1);
-
+    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
+    
     // Scelta disciplina
     while (1) {
         int scelta;
@@ -229,10 +231,10 @@ int aggiungi_lezione(listL** lezioni) {
     printf(", termina alle ");
     stampaOrario(orario_fine);
     printf("\n===================================================\n");
+    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
     *lezioni = lezione_consList(nuova_lezione, *lezioni);
-    
+    printf("Valore codice_lezione dopo setCodiceLezione: %d\n",  getCodiceLezione(nuova_lezione));
     salvaLezioniSuFile(*lezioni,"lezioni.txt");
-
     getchar();
     printf("\nPremi INVIO per continuare...\n");
     getchar();
@@ -240,61 +242,6 @@ int aggiungi_lezione(listL** lezioni) {
 
     return 1;
 }
-
-
-// Funzione per visualizzare le lezioni di un giorno specifico (data)
-void visualizzaLezioni(listL* lezioni) {
-    int scelta;
-    Data* data_input = NULL;
-
-    while (1) {
-        // Mostra il menu per la scelta dell'utente
-        printf("\n%s===================================\n",GIALLO);
-        printf("          Scegli un'opzione:\n");
-        printf("===================================%s\n",RESET);
-        printf("1. Visualizza lezioni per un giorno specifico\n");
-        printf("2. Visualizza tutte le lezioni\n");
-        printf("%s0. Torna indietro%s\n",ROSSO,RESET);
-        printf("%s===================================%s\n",GIALLO,RESET);
-        printf("Inserisci la tua scelta: ");
-        
-        // Acquisisci la scelta dell'utente
-        if (scanf("%d", &scelta) != 1) {
-            while (getchar() != '\n');  // Pulisce il buffer
-            printf("Scelta non valida. Riprova.\n");
-            continue;  // Torna all'inizio del ciclo
-        }
-        
-        switch (scelta) {
-            case 1:
-                // Visualizza lezioni per un giorno specifico
-                data_input = leggiData();  // Funzione per leggere la data dall'utente
-                if (data_input != NULL) {
-                    lezione_printByDate(lezioni, data_input);
-                } else {
-                    printf("Errore nell'inserimento della data.\n");
-                }
-                break;
-                
-            case 2:
-                // Visualizza tutte le lezioni
-                lezione_printList(lezioni);  // Funzione che stampa tutte le lezioni
-                getchar();
-                printf("Premi INVIO per tornare indietro......");
-                getchar();
-                pulisciSchermo();
-                break;
-                
-            case 0:
-                // Torna indietro
-                return;
-                
-            default:
-                printf("Scelta non valida. Riprova.\n");
-        }
-    }
-}
-
 
 // Funzione per stampare le lezioni di un giorno specifico (data)
 void lezione_printByDate(listL* lezioni, Data* data_input) {
@@ -312,23 +259,103 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
 
     // Scorre tutte le lezioni e stampa quelle che corrispondono alla data
     while (temp != NULL) {
-        // Usa un getter per ottenere la data della lezione (assumiamo che getDataLezione() sia definita correttamente)
-        Data* data_lezione = getDataLezione(lezione_getValue(temp));
+        lezione* lezione_corrente = lezione_getValue(temp);
         
+        if (lezione_corrente == NULL) {
+            temp = lezione_getNext(temp); // Vai al prossimo elemento
+            continue;  // Ignora la lezione corrente e continua con la successiva
+        }
+
+        Data* data_lezione = getDataLezione(lezione_corrente);
+        
+        if (data_lezione == NULL) {
+            printf("Errore: data lezione non valida.\n");
+            temp = lezione_getNext(temp); // Vai al prossimo elemento
+            continue;  // Ignora la lezione corrente e continua con la successiva
+        }
+
         // Confronta la data della lezione con la data inserita
         if (confrontaDate(data_input, data_lezione) == 0) {
             // Se la data corrisponde, stampa i dettagli della lezione
-            printf("Lezione: %s, Disciplina: %s\n", getNomeLezione(lezione_getValue(temp)), getDisciplinaLezione(lezione_getValue(temp)));
+            printf("Lezione: %s, Disciplina: %s\n", getNomeLezione(lezione_corrente), getDisciplinaLezione(lezione_corrente));
             stampaData(data_lezione);  // Funzione che stampa la data
-            stampaOrario(getOrarioLezione(lezione_getValue(temp)));  // Funzione che stampa l'orario
+            stampaOrario(getOrarioLezione(lezione_corrente));  // Funzione che stampa l'orario
             printf("\n");
             trovato = 1;
         }
-       lezione_getNext(temp); // Passa al prossimo elemento della lista
+        
+        temp = lezione_getNext(temp); // Passa al prossimo elemento della lista
     }
 
-    if (!trovato) {
-        printf("%sNessuna lezione trovata per questa data.%s\n", ROSSO, RESET);
-    }
+    if(!trovato)
+    printf("\n%sNessuna lezione in questa data: %s ",ROSSO,RESET);
+
+    getchar();
+    printf("\nPremi INVIO per tornare indietro.....");
+    getchar();
+    pulisciSchermo();
+
 }
 
+// Funzione per visualizzare tutte le lezioni
+void visualizzaLezioni(listL* lezioni) {
+    int scelta;
+    Data* data_input = NULL;
+
+    while (1) {
+        // Mostra il menu per la scelta dell'utente
+        printf("\n%s===================================\n", GIALLO);
+        printf("          Scegli un'opzione:\n");
+        printf("===================================%s\n", RESET);
+        printf("1. Visualizza lezioni per un giorno specifico\n");
+        printf("2. Visualizza tutte le lezioni\n");
+        printf("%s0. Torna indietro%s\n", ROSSO, RESET);
+        printf("%s===================================%s\n", GIALLO, RESET);
+        printf("Inserisci la tua scelta: ");
+        
+        // Acquisisci la scelta dell'utente
+        if (scanf("%d", &scelta) != 1) {
+            while (getchar() != '\n');  // Pulisce il buffer
+            pulisciSchermo();
+             printf("%sScelta non valida. Riprova.%s\n",ROSSO,RESET);
+            continue;  // Torna all'inizio del ciclo
+        }
+        
+        switch (scelta) {
+            case 1:
+                // Visualizza lezioni per un giorno specifico
+                data_input = leggiData();  // Funzione per leggere la data dall'utente
+                if (data_input != NULL) {
+                    printf("\nVisualizzazione lezioni per la data: ");
+                    stampaData(data_input);  // Funzione per stampare la data
+                    lezione_printByDate(lezioni, data_input);  // Funzione che stampa le lezioni per la data specificata
+                } else {
+                    printf("Errore nell'inserimento della data.\n");
+                }
+                break;
+                
+            case 2:
+                // Visualizza tutte le lezioni
+                if (lezioni != NULL) {
+                    lezione_printList(lezioni);  // Funzione che stampa tutte le lezioni
+                } else {
+                    
+                    printf("Non ci sono lezioni da visualizzare.\n");
+                }
+                getchar();  // Pulisce il buffer
+                printf("Premi INVIO per tornare indietro...\n");
+                getchar();
+                pulisciSchermo();
+                break;
+                
+            case 0:
+                // Torna indietro
+                return;
+                
+            default:
+                pulisciSchermo();
+                printf("%sScelta non valida. Riprova.%s\n",ROSSO,RESET);
+                break;
+        }
+    }
+}

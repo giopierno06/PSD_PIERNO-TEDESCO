@@ -1,11 +1,11 @@
 Lezioni:
 ===========================
-Codice Lezione: 3014670
+Codice Lezione: 917518
 Disciplina: Spinning
-Nome: asfd
-Posti massimi: 14
+Nome: afdfd
+Posti massimi: 45
 Posti occupati: 0
 Data: 14-05-2025
-Ora di inizio: 14:46
-Durata (in minuti): 45
+Ora di inizio: 14:14
+Durata (in minuti): 14
 ---------------------------

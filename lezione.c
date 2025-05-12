@@ -14,6 +14,7 @@
 #define GIALLO   "\033[1;33m"
 #define RESET    "\033[0m"     //comandi per stampare a video defini come define per rendere il tutto più ordinato
 
+listL* lezioni;
 
 
  struct lezione {
@@ -30,14 +31,15 @@
 
 lezione* creaLezione() {
     lezione* l = malloc(sizeof(lezione));
-    if (!l) return NULL;
+    if (l!=NULL){
+    l->codice_lezione = 0;
     strcpy(l->nome, "");
     strcpy(l->disciplina, "");
-    l->data = NULL;
+    l->data= creaData(1,1,200);
     l->ora_di_inizio = NULL;
-    l->codice_lezione = 0;
     l->durata = 0;
     l->postimax = 0;
+}
     return l;
 }
 
@@ -93,11 +95,13 @@ short int getDurataLezione(const lezione* l) {
 
 // Setter (modificano i campi in modo sicuro)
 
-// Imposta il codice identificativo della lezione
+// Funzione per impostare il codice della lezione
 void setCodiceLezione(lezione* l, int codice) {
-    if (l != NULL) 
-        l->codice_lezione = codice;
-    
+    if (l != NULL) {
+        l->codice_lezione = codice;  // Assegna il codice alla lezione
+    } else {
+        printf("Errore: la lezione è NULL.\n");
+    }
 }
 
 

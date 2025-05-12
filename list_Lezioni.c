@@ -43,13 +43,12 @@ int lezione_emptyList(listL* l) {
     return (l == NULL);
 }
 
-// Funzione per aggiungere una nuova lezione alla lista
-listL* lezione_consList(lezione* val, listL* next) {
-    listL* nuovo_nodo = malloc(sizeof(listL));
-    if (!nuovo_nodo) return NULL;
-    nuovo_nodo->value = val;
-    nuovo_nodo->next = next;
-    return nuovo_nodo;
+listL* lezione_consList(lezione* l, listL* head) {
+    listL* nuovo = malloc(sizeof(listL));
+    if (nuovo == NULL) return head;  // Se l'allocazione fallisce, restituisce la testa invariata
+    nuovo->value = l;  // Copia la lezione nella nuova struttura
+    nuovo->next = head;   // Inserisce la nuova lezione all'inizio della lista
+    return nuovo;         // Ritorna il nuovo puntatore alla testa della lista
 }
 
 // Restituisce la coda della lista, cioè tutti i nodi tranne il primo
@@ -70,20 +69,27 @@ lezione* lezione_getFirst(listL* l) {
 
 // Stampa tutte le lezioni nella lista su standard output
 void lezione_printList(listL* l) {
-    if(l==NULL)
-    printf("%sLISTA VUOTA%s \n",ROSSO,RESET);
-    
+    if (l == NULL) {
+        printf("%sLISTA VUOTA%s \n", ROSSO, RESET);
+        return;
+    }
+
     while (l != NULL) {
-        printf("Codice Lezione: %d\n", getCodiceLezione(l->value));
-        printf("Disciplina: %s\n", getDisciplinaLezione(l->value));
-        printf("Nome: %s\n", getNomeLezione(l->value));
-        printf("Data: ");
-        stampaData(getDataLezione(l->value));
-        printf("\nOrario di inizio: ");
-        stampaOrario(getOrarioLezione(l->value));
-        printf("Durata: %d minuti\n", getDurataLezione(l->value));
-        printf("Posti Occupati: %d\n", getPostiOccupati(l->value));
-        printf("Posti Max: %d\n\n", getPostiMax(l->value));
+        if (l->value == NULL) {
+            printf("%sLezione non valida (value is NULL)%s\n", ROSSO, RESET);
+        } else {
+            printf("Codice Lezione: %d\n", getCodiceLezione(l->value));
+            printf("Disciplina: %s\n", getDisciplinaLezione(l->value));
+            printf("Nome: %s\n", getNomeLezione(l->value));
+            printf("Data: ");
+            stampaData(getDataLezione(l->value));
+            printf("\nOrario di inizio: ");
+            stampaOrario(getOrarioLezione(l->value));
+            printf("Durata: %d minuti\n", getDurataLezione(l->value));
+            printf("Posti Occupati: %d\n", getPostiOccupati(l->value));
+            printf("Posti Max: %d\n\n", getPostiMax(l->value));
+        }
+
         l = l->next;
     }
 }
