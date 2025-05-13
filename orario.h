@@ -1,46 +1,52 @@
 #ifndef ORARIO_H 
 #define ORARIO_H
 
-// Definizione della struttura Orario
-typedef struct {
-    short int ora;     // Ora (da 0 a 23)
-    short int minuti;  // Minuti (da 0 a 59)
-} Orario;
+// Forward declaration della struttura Orario (struttura definita altrove)
+typedef struct Orario Orario;
 
+// === CREAZIONE / INIZIALIZZAZIONE ===
 
-Orario* creaOrario(int,int);
+// Crea un orario con ora e minuti specificati (es. 14, 30 -> 14:30)
+Orario* creaOrario(int, int);
 
-
-// Funzione per creare una nuova istanza di Orario
+// Crea un nuovo orario (probabilmente inizializzato a 00:00)
 Orario* newOrario();
 
-int getOra(const Orario* orario);
+// === GETTER ===
 
-int getMinuto(const Orario* orario) ;
+// Restituisce l'ora (campo ora) da una struttura Orario
+int getOra(const Orario*);
 
-// Funzione setter per l'ora
+// Restituisce i minuti (campo minuti) da una struttura Orario
+int getMinuto(const Orario*);
+
+// === SETTER ===
+
+// Imposta il campo "ora" in una struttura Orario
 void setOra(Orario*, int);
 
-// Funzione setter per il minuto
+// Imposta il campo "minuto" in una struttura Orario
 void setMinuto(Orario*, int);
 
+// === FUNZIONALITÀ AVANZATE ===
 
-// Funzione che stampa l'orario attuale del sistema in formato HH:MM:SS
+// Stampa l'orario attuale del sistema in formato HH:MM:SS
 void stampaOrarioAttuale();
 
-// Funzione che legge un orario da input utente (richiede ora e minuti)
-// Restituisce una variabile di tipo Orario
+// Legge un orario da input utente (ora e minuti) e restituisce un puntatore a Orario
 Orario* leggiOrario();
 
-// Funzione che confronta due orari
-// Ritorna: -1 se il primo orario è precedente, 0 se sono uguali, 1 se il primo è successivo
+// Confronta due orari:
+// - Ritorna -1 se il primo è prima del secondo
+// - Ritorna  0 se sono uguali
+// - Ritorna  1 se il primo è dopo il secondo
 int confrontaOrari(Orario*, Orario*);
 
-// Funzione che aggiunge un certo numero di minuti a un orario
-// Modifica direttamente l'orario passato tramite puntatore
+// Aggiunge un certo numero di minuti a un orario dato
+// Restituisce un nuovo puntatore a Orario (gestione memoria esterna necessaria)
 Orario* aggiungiMinuti(Orario*, int); 
 
-// Funzione che stampa un orario (in formato HH:MM)
+// Stampa un orario in formato HH:MM
 void stampaOrario(Orario*);
 
 #endif // ORARIO_H

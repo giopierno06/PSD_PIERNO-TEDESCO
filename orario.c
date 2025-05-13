@@ -3,25 +3,27 @@
 #include "orario.h"
 #include <stdlib.h>
 
-
+// Definizioni di colori per output su terminale
 #define VIOLA    "\033[1;35m" 
 #define ROSSO    "\033[1;31m"
 #define VERDE    "\033[1;32m"
 #define GIALLO   "\033[1;33m"
-#define RESET    "\033[0m"     //comandi per stampare a video defini come define per rendere il tutto più ordinato
+#define RESET    "\033[0m" // Reset colore
 
+// ===============================
+// DEFINIZIONE DELLA STRUTTURA
+// ===============================
+struct Orario {
+    short int ora;     // Ora (0–23)
+    short int minuti;  // Minuti (0–59)
+};
 
-
-
-
-
-
-
-// Funzione per creare una nuova istanza di Orario
+// ===============================
+// CREAZIONE DI UN NUOVO ORARIO (inizializzato a 00:00)
+// ===============================
 Orario* newOrario() {
     Orario* orario = (Orario*)malloc(sizeof(Orario));
     if (orario != NULL) {
-        // Imposta valori di default per ora e minuto (ad esempio 0)
         orario->ora = 0;
         orario->minuti = 0;
     } else {
@@ -30,10 +32,16 @@ Orario* newOrario() {
     return orario;
 }
 
+// ===============================
+// GETTER ORA
+// ===============================
 int getOra(const Orario* orario) {
     return orario->ora;
 }
 
+// ===============================
+// CREA UN ORARIO SPECIFICO (con validazione)
+// ===============================
 Orario* creaOrario(int ora, int minuti) {
     if (ora < 0 || ora > 23 || minuti < 0 || minuti > 59) {
         printf("Orario non valido.\n");
@@ -51,13 +59,16 @@ Orario* creaOrario(int ora, int minuti) {
     return nuovo_orario;
 }
 
-
+// ===============================
+// GETTER MINUTI
+// ===============================
 int getMinuto(const Orario* orario) {
     return orario->minuti;
 }
 
-
-// Funzione setter per l'ora
+// ===============================
+// SETTER ORA
+// ===============================
 void setOra(Orario* orario, int ora) {
     if (orario != NULL) {
         orario->ora = ora;
@@ -66,8 +77,9 @@ void setOra(Orario* orario, int ora) {
     }
 }
 
-
-// Funzione setter per il minuto
+// ===============================
+// SETTER MINUTI
+// ===============================
 void setMinuto(Orario* orario, int minuto) {
     if (orario != NULL) {
         orario->minuti = minuto;
@@ -76,38 +88,37 @@ void setMinuto(Orario* orario, int minuto) {
     }
 }
 
-
-
-
+// ===============================
+// STAMPA ORARIO ATTUALE DEL SISTEMA
+// ===============================
 void stampaOrarioAttuale() {
     time_t tempo_attuale;
     struct tm *orario_locale;
 
-    // Ottieni il tempo corrente
-    time(&tempo_attuale);
-
-    // Convertilo in orario locale
-    orario_locale = localtime(&tempo_attuale);
+    time(&tempo_attuale);                 // Ottiene il tempo attuale
+    orario_locale = localtime(&tempo_attuale); // Converte in orario locale
 
     printf(" %02d:%02d\n", 
            orario_locale->tm_hour, 
            orario_locale->tm_min
-);
+    );
 }
 
-
+// ===============================
+// LETTURA DI UN ORARIO DA INPUT UTENTE
+// ===============================
 Orario* leggiOrario() {
     Orario* o = malloc(sizeof(Orario));
     if (o == NULL) {
         printf("Errore di allocazione memoria per Orario.\n");
-        exit(1);  // o gestisci l’errore in altro modo
+        exit(1);
     }
 
     while (1) {
         printf("Inserisci ora di inizio (formato HH MM): ");
         if (scanf("%hd %hd", &o->ora, &o->minuti) != 2 || o->ora < 0 || o->ora > 23 || o->minuti < 0 || o->minuti > 59) {
             printf("%sOrario non valido, riprova.%s\n", ROSSO, RESET);
-            while (getchar() != '\n'); // pulisci buffer
+            while (getchar() != '\n'); // Pulisce il buffer dell'input
         } else {
             break;
         }
@@ -116,8 +127,12 @@ Orario* leggiOrario() {
     return o;
 }
 
-// Funzione per confrontare due orari
-// Ritorna: -1 se o1 < o2, 0 se o1 == o2, 1 se o1 > o2
+// ===============================
+// CONFRONTO TRA DUE ORARI
+// - Ritorna -1 se o1 < o2
+// - Ritorna 0 se o1 == o2
+// - Ritorna 1 se o1 > o2
+// ===============================
 int confrontaOrari(Orario* o1, Orario* o2) {
     if (o1->ora < o2->ora || (o1->ora == o2->ora && o1->minuti < o2->minuti)) {
         return -1;
@@ -128,29 +143,31 @@ int confrontaOrari(Orario* o1, Orario* o2) {
     }
 }
 
+// ===============================
+// AGGIUNGE MINUTI A UN ORARIO
+// - Non modifica l'orario originale
+// - Restituisce un nuovo oggetto Orario
+// ===============================
 Orario* aggiungiMinuti(Orario* o, int minuti) {
-    // Crea un nuovo oggetto Orario per evitare di modificare l'orario di ingresso
     Orario* nuovo_orario = malloc(sizeof(Orario));
     if (nuovo_orario == NULL) {
         printf("Errore di allocazione memoria per nuovo orario.\n");
-        return NULL;  // In caso di errore di allocazione
+        return NULL;
     }
 
-    // Calcola il totale dei minuti per l'orario di fine
     int totaleMinuti = o->ora * 60 + o->minuti + minuti;
+    if (totaleMinuti < 0) totaleMinuti = 0; // Evita valori negativi
 
-    // Gestisce overflow di minuti
-    if (totaleMinuti < 0) totaleMinuti = 0;  // Evita orari negativi
-
-    // Calcola ora e minuti per l'orario di fine
-    nuovo_orario->ora = (totaleMinuti / 60) % 24;  // Modulo 24 per gestire passaggi di giorno
+    // Calcolo nuovo orario
+    nuovo_orario->ora = (totaleMinuti / 60) % 24; // modulo 24 per evitare overflow giorni
     nuovo_orario->minuti = totaleMinuti % 60;
 
-    return nuovo_orario;  // Restituisce il nuovo orario calcolato
+    return nuovo_orario;
 }
 
-// Funzione per stampare un orario (opzionale)
+// ===============================
+// STAMPA UN ORARIO FORMATTATO (HH:MM)
+// ===============================
 void stampaOrario(Orario* o) {
     printf("%02d:%02d\n", o->ora, o->minuti);
 }
-

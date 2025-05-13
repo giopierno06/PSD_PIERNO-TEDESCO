@@ -114,6 +114,13 @@ void setOrarioInizio(lezione*, Orario*);
  */
 void setDurataLezione(lezione*, short int);
 
+
+/*
+ * Stmpa i dettagli della lezione
+*/
+void stampaDettagliLezione(lezione*);
+
+
 /*
  * Restituisce il codice abbonamento più alto
  */

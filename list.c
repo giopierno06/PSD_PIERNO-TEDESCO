@@ -74,6 +74,7 @@ list* tailList(list* l) {
     return NULL;  // Se la lista è vuota, restituisce NULL
 }
 
+//restiutisce l'elemnto in cima
 abbonamento* getFirst(list* l) {
     if (l != NULL) 
         return l->value;  // Restituisce un puntatore al valore del primo nodo (l'abbonamento)

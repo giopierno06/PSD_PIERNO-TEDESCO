@@ -153,7 +153,7 @@ void gestione_abbonamenti() {
         printf("%s   BENVENUTO NELLA GESTIONE ABBONAMENTI   %s\n", GIALLO, RESET);
         printf("%s=============================================%s\n", VIOLA, RESET);
         printf("%s 1.%s AGGIUNGI UN NUOVO ABBONAMENTO\n", VERDE, RESET);
-        printf("%s 2.%s MODIFICA UN ABBONAMENTO\n", VERDE, RESET);
+        printf("%s 2.%s MODIFICA/RINNOVA UN ABBONAMENTO\n", VERDE, RESET);
         printf("%s 3.%s ELIMINA UN ABBONAMENTO\n", VERDE, RESET); 
         printf("%s 4.%s VISUALIZZA LISTA ABBONAMENTI\n", VERDE, RESET);
         printf("%s 0. TORNA AL MENU GESTORE  %s\n", ROSSO, RESET); 

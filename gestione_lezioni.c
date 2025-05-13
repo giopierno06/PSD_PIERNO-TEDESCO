@@ -68,11 +68,11 @@ void gestione_Lezioni() {
                 break;
 
             case 2:
-                // Funzione per modificare una lezione esistente
+                modificaLezione(lezioni);
                 break;
 
             case 3:
-                // Funzione per eliminare una lezione
+                eliminaLezione(lezioni);
                 break;
 
             case 4:
@@ -325,10 +325,260 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
     pulisciSchermo();
 }
 
+
+
+
+listL* modificaLezione(listL* lezioni) {
+    // Cerca una lezione tramite ID
+    int id;
+    printf("Inserisci l'ID della lezione da modificare: ");
+    scanf("%d", &id);
+    getchar();
+
+    listL* temp = lezioni;
+
+    while (temp != NULL) {
+        pulisciSchermo();
+        lezione* l = lezione_getValue(temp);
+        if (l != NULL && getCodiceLezione(l) == id) {
+            printf("%sLezione trovata!%s\n", VERDE, RESET);
+            stampaDettagliLezione(l);  // Funzione che stampa i dettagli della lezione
+
+            int scelta = -1;
+            char extra;
+            printf("%s========================================================\n", GIALLO);
+            printf("            DIGITA COSA VUOI MODIFICARE\n");
+            printf("========================================================%s\n", RESET);
+            printf("1. NOME\n");
+            printf("2. DISCIPLINA\n");
+            printf("3. DATA\n");
+            printf("4. ORARIO INIZIO\n");
+            printf("5. DURATA\n");
+            printf("6. POSTI MASSIMI\n");
+            printf("%s0. TORNA INDIETRO%s\n", ROSSO, RESET);
+            printf("%s========================================================%s\n", GIALLO, RESET);
+
+            while (scelta != 0) {
+                printf("Scelta: ");
+
+                if (scanf("%d%c", &scelta, &extra) != 2 || extra != '\n') {
+                    pulisciSchermo();
+                    printf("%sScelta non valida. Inserisci un numero tra 0 e 6.%s\n", ROSSO, RESET);
+                    while (getchar() != '\n');
+                    continue;
+                }
+
+                switch (scelta) {
+                    case 1: {
+                        char nuovoNome[50];
+                        printf("Inserisci il nuovo nome della lezione: ");
+                        scanf("%s", nuovoNome);
+                        setNomeLezione(l, nuovoNome);
+                        printf("%sNome modificato con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 2: {
+                        char nuovaDisciplina[50];
+                        printf("Inserisci la nuova disciplina: ");
+                        scanf("%s", nuovaDisciplina);
+                        setDisciplinaLezione(l, nuovaDisciplina);
+                        printf("%sDisciplina modificata con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 3: {
+                        Data* nuovaData = leggiData();
+                        setDataLezione(l, nuovaData);
+                        printf("%sData modificata con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 4: {
+                        Orario* nuovoOrario = leggiOrario();
+                        setOrarioInizio(l, nuovoOrario);
+                        printf("%sOrario modificato con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 5: {
+                        int nuovaDurata;
+                        printf("Inserisci la nuova durata (in minuti): ");
+                        scanf("%d", &nuovaDurata);
+                        setDurataLezione(l, nuovaDurata);
+                        printf("%sDurata modificata con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 6: {
+                        int nuoviPosti;
+                        printf("Inserisci il nuovo numero massimo di posti: ");
+                        scanf("%d", &nuoviPosti);
+                        setPostiMax(l, nuoviPosti);
+                        printf("%sPosti massimi modificati con successo!%s\n", VERDE, RESET);
+                        break;
+                    }
+
+                    case 0:
+                        salvaLezioniSuFile(lezioni, "lezioni.txt");
+                        pulisciSchermo();
+                        return lezioni;
+
+                    default:
+                        printf("%sScelta non valida.%s\n", ROSSO, RESET);
+                        break;
+                }
+
+                salvaLezioniSuFile(lezioni, "lezioni.txt");  // Salva dopo ogni modifica
+            }
+        }
+
+        temp = lezione_getNext(temp);
+    }
+
+    // Se la lezione non è stata trovata
+    printf("%sNessuna lezione trovata con ID %d.%s\n", ROSSO, id, RESET);
+    printf("Premi INVIO per tornare...\n");
+    getchar();
+    pulisciSchermo();
+    return lezioni;
+}
+
+void lezione_printByDisciplina(listL* lezioni) {
+    if (lezioni == NULL) {
+        printf("%sLa lista delle lezioni è vuota.%s\n", ROSSO, RESET);
+        printf("Premi INVIO per tornare indietro...\n");
+        getchar();
+        return;
+    }
+
+    char disciplina[50];
+    printf("Inserisci il nome della disciplina da cercare: ");
+    scanf(" %[^\n]", disciplina);  // Legge stringhe con spazi
+
+    pulisciSchermo();
+    printf("\n%sLezioni per la disciplina: %s%s\n", GIALLO, disciplina, RESET);
+    printf("%-15s | %-20s | %-20s | %-15s | %-20s | %-17s\n",  // Aggiunta colonna per la data
+           "Codice", "Nome", "Disciplina", "Orario", "Data", "Posti Rimanenti");
+    printf("-----------------------------------------------------------------------------------------------\n");
+
+    listL* temp = lezioni;
+    int trovato = 0;
+
+    while (temp != NULL) {
+        lezione* l = lezione_getValue(temp);
+
+        if (l != NULL) {
+            // Usa i getter per ottenere i valori
+            const char* disciplina_lezione = getDisciplinaLezione(l);  // Usa il getter per la disciplina
+            if (strcmp(disciplina_lezione, disciplina) == 0) {
+                Orario* orario_inizio = getOrarioLezione(l);
+                int durata = getDurataLezione(l);
+                Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
+
+                char orario_str[20];
+                snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
+                         getOra(orario_inizio), getMinuto(orario_inizio),
+                         getOra(orario_fine), getMinuto(orario_fine));
+
+                int posti_max = getPostiMax(l);
+                int posti_occupati = getPostiOccupati(l);
+                int posti_rimanenti = posti_max - posti_occupati;
+
+                // Ottenere la data della lezione
+                Data* data_lezione = getDataLezione(l);  // Usa il getter per ottenere la data
+                char data_str[20];  // Assumiamo che la funzione stampaData riempi questa stringa
+                snprintf(data_str, sizeof(data_str), "%02d/%02d/%04d", getGiorno(data_lezione), getMese(data_lezione), getAnno(data_lezione));
+
+                // Stampa le informazioni della lezione
+                printf("%-15d | %-20s | %-20s | %-15s | %-20s | %-17d\n",
+                       getCodiceLezione(l), getNomeLezione(l), disciplina_lezione, orario_str, data_str, posti_rimanenti);
+
+                free(orario_fine);  // Solo se aggiungiMinuti fa malloc
+                trovato = 1;
+            }
+        }
+
+        temp = lezione_getNext(temp);
+    }
+
+    if (!trovato) {
+        printf("%sNessuna lezione trovata per la disciplina '%s'.%s\n", ROSSO, disciplina, RESET);
+    }
+
+    printf("\nPremi INVIO per tornare indietro...");
+    getchar();
+    getchar();  // Per consumare l’ultima newline se necessario
+    pulisciSchermo();
+}
+
+void lezione_printByID(listL* lezioni, int id_input) {
+    if (lezioni == NULL) {
+        printf("%sNESSUNA LEZIONE PRESENTE.%s\n", ROSSO, RESET);
+        getchar();
+        printf("Premi INVIO per tornare indietro..........\n");
+        getchar();
+        pulisciSchermo();
+        return;
+    }
+
+    listL* temp = lezioni;
+    int trovato = 0;
+
+    pulisciSchermo();
+    printf("\n%sRicerca lezione con ID: %d%s\n", GIALLO, id_input, RESET);
+    printf("%-15s | %-20s | %-20s | %-15s | %-17s\n",
+           "Codice", "Nome", "Disciplina", "Orario", "Posti Rimanenti");
+    printf("-----------------------------------------------------------------------------------------------\n");
+
+    while (temp != NULL) {
+        lezione* lezione_corrente = lezione_getValue(temp);
+
+        if (lezione_corrente != NULL && getCodiceLezione(lezione_corrente) == id_input) {
+            Data* data_lezione = getDataLezione(lezione_corrente);
+            Orario* orario_inizio = getOrarioLezione(lezione_corrente);
+            int durata = getDurataLezione(lezione_corrente);
+            int posti_max = getPostiMax(lezione_corrente);
+            int prenotati = getPostiOccupati(lezione_corrente);
+            int posti_rimanenti = posti_max - prenotati;
+
+            Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
+
+            char orario_str[20];
+            snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
+                     getOra(orario_inizio), getMinuto(orario_inizio),
+                     getOra(orario_fine), getMinuto(orario_fine));
+
+            printf("%-15d | %-20s | %-20s | %-15s | %-17d\n",
+                   getCodiceLezione(lezione_corrente),
+                   getNomeLezione(lezione_corrente),
+                   getDisciplinaLezione(lezione_corrente),
+                   orario_str,
+                   posti_rimanenti);
+
+            trovato = 1;
+            break;
+        }
+
+        temp = lezione_getNext(temp);
+    }
+
+    if (!trovato) {
+        printf("\n%sNessuna lezione trovata con ID %d.%s\n", ROSSO, id_input, RESET);
+    }
+
+    getchar();
+    printf("\nPremi INVIO per tornare indietro.....");
+    getchar();
+    pulisciSchermo();
+}
+
+
 // Funzione per visualizzare tutte le lezioni
 void visualizzaLezioni(listL* lezioni) {
     int scelta;
     Data* data_input = NULL;
+    int id=0;
 
     while (1) {
         // Mostra il menu per la scelta dell'utente
@@ -337,6 +587,8 @@ void visualizzaLezioni(listL* lezioni) {
         printf("===================================%s\n", RESET);
         printf("1. Visualizza lezioni per un giorno specifico\n");
         printf("2. Visualizza tutte le lezioni\n");
+        printf("3. Cerca una lezione con l'id\n");
+        printf("4. Cerca le lezione di una disciplina\n");
         printf("%s0. Torna indietro%s\n", ROSSO, RESET);
         printf("%s===================================%s\n", GIALLO, RESET);
         printf("Inserisci la tua scelta: ");
@@ -376,6 +628,16 @@ void visualizzaLezioni(listL* lezioni) {
                 getchar();
                 pulisciSchermo();
                 break;
+
+            case 3:
+                 printf("Quale id vuoi cercare?: ");
+                 scanf("%d",&id);
+                 lezione_printByID(lezioni,id);
+                 break;
+            case 4:
+                 lezione_printByDisciplina(lezioni);
+                 break;
+
                 
             case 0:
                 // Torna indietro
@@ -387,4 +649,100 @@ void visualizzaLezioni(listL* lezioni) {
                 break;
         }
     }
+}
+
+// Funzione per eliminare una lezione dalla lista
+// Parametri:
+//   - lezioni: puntatore alla lista di lezioni
+// Restituisce:
+//   - La lista aggiornata con la lezione eliminata
+listL* eliminaLezione(listL* lezioni) {
+    int scelta;
+    pulisciSchermo();
+    if (lezioni == NULL) {
+        pulisciSchermo();
+        printf("%s=============================================================================%s\n", ROSSO, RESET);
+        printf("%sLA LISTA DELLE LEZIONI È VUOTA QUINDI NON È POSSIBILE ELIMINARE ELEMENTI%s\n", ROSSO, RESET);
+        printf("%s=============================================================================%s\n", ROSSO, RESET);
+        printf("Premi invio per continuare......\n");
+        getchar();
+        pulisciSchermo();
+        return lezioni;
+    }
+
+    while (1) {
+        printf("%s=========================================%s\n", GIALLO, RESET);
+        printf("%sEliminazione Lezione:%s\n", GIALLO, RESET);
+        printf("%s1. Elimina per ID%s\n", GIALLO, RESET);
+        printf("%s0. Torna al menu precedente%s\n", ROSSO, RESET);
+        printf("%s=========================================%s\n", GIALLO, RESET);
+        printf("Scelta: ");
+        scanf("%d", &scelta);
+        getchar();
+
+        switch (scelta) {
+            case 0:
+                pulisciSchermo();
+                return lezioni;
+
+            case 1:
+                lezioni = eliminaLezionePerID(lezioni);
+                return lezioni;
+
+            default:
+                printf("%sScelta non valida.%s\n", ROSSO, RESET);
+                break;
+        }
+
+        pulisciSchermo();
+        printf("%sOperazione non eseguita.%s\n", ROSSO, RESET);
+        printf("Premi invio per continuare......\n");
+        getchar();
+        pulisciSchermo();
+    }
+}
+
+// Funzione per eliminare una lezione per ID
+// Parametri:
+//   - lezioni: puntatore alla lista di lezioni
+// Restituisce:
+//   - La lista aggiornata con la lezione eliminata
+listL* eliminaLezionePerID(listL* lezioni) {
+    int id;
+    printf("Inserisci l'ID della lezione da eliminare: ");
+    scanf("%d", &id);
+    getchar();
+
+    listL *curr = lezioni, *prev = NULL;
+
+    while (curr != NULL) {
+        if (getCodiceLezione(lezione_getValue(curr)) == id) {
+            if (prev == NULL) {
+                lezioni = lezione_getNext(curr);
+            } else {
+                lezione_setNext(prev, lezione_getNext(curr));
+            }
+
+            distruggiLezione(lezione_getValue(curr));
+            free(curr);
+
+            pulisciSchermo();
+            salvaLezioniSuFile(lezioni, "lezioni.txt");
+            printf("%sLezione eliminata con successo.%s\n", VERDE, RESET);
+            printf("Premi invio per continuare......\n");
+            getchar();
+            pulisciSchermo();
+            return lezioni;
+        }
+
+        prev = curr;
+        curr = lezione_getNext(curr);
+    }
+
+    pulisciSchermo();
+    printf("%sErrore: nessuna lezione trovata con ID %d.%s\n", ROSSO, id, RESET);
+    printf("Premi invio per continuare......\n");
+    getchar();
+    pulisciSchermo();
+    return lezioni;
 }
