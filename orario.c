@@ -128,17 +128,25 @@ int confrontaOrari(Orario* o1, Orario* o2) {
     }
 }
 
-// Funzione per aggiungere minuti a un orario
-Orario* aggiungiMinuti(Orario*o, int minuti) {
+Orario* aggiungiMinuti(Orario* o, int minuti) {
+    // Crea un nuovo oggetto Orario per evitare di modificare l'orario di ingresso
+    Orario* nuovo_orario = malloc(sizeof(Orario));
+    if (nuovo_orario == NULL) {
+        printf("Errore di allocazione memoria per nuovo orario.\n");
+        return NULL;  // In caso di errore di allocazione
+    }
+
+    // Calcola il totale dei minuti per l'orario di fine
     int totaleMinuti = o->ora * 60 + o->minuti + minuti;
 
     // Gestisce overflow di minuti
     if (totaleMinuti < 0) totaleMinuti = 0;  // Evita orari negativi
 
-    o->ora = (totaleMinuti / 60) % 24;  // Modulo 24 per gestire passaggi di giorno
-    o->minuti = totaleMinuti % 60;
+    // Calcola ora e minuti per l'orario di fine
+    nuovo_orario->ora = (totaleMinuti / 60) % 24;  // Modulo 24 per gestire passaggi di giorno
+    nuovo_orario->minuti = totaleMinuti % 60;
 
-    return o;  // Restituisce una nuova copia dell'orario modificato
+    return nuovo_orario;  // Restituisce il nuovo orario calcolato
 }
 
 // Funzione per stampare un orario (opzionale)

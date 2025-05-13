@@ -11,7 +11,6 @@ extern list* abbonati;
 int main (){
     
     
-    
     int scelta=-1; //variabile usata per la prima scelta del menù
     pulisciSchermo();
     while(1){

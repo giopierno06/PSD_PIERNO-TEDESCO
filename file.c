@@ -98,7 +98,7 @@ void salvaAbbonamentiSuFile(list* l, const char* nome_file) {
 // Carica le lezioni da un file strutturato contenente i dettagli di ogni lezione.
 // Ogni lezione contiene codice, disciplina, nome, numero posti, data, orario e durata.
 // Ogni voce viene convertita in una struttura lezione e inserita nella lista.
-listL* caricaLezioniiDaFile(listL* l, const char* nome_file) {
+listL* caricaLezioniDaFile(listL* l, const char* nome_file) {
     FILE* file = fopen(nome_file, "r");
     if (file == NULL) {
         printf("Errore nell'aprire il file %s\n", nome_file);

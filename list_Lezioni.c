@@ -44,11 +44,20 @@ int lezione_emptyList(listL* l) {
 }
 
 listL* lezione_consList(lezione* l, listL* head) {
+    if (l == NULL) {
+        printf("Errore: la lezione passata è NULL.\n");
+        return head;  // Se la lezione è NULL, non aggiungere nulla alla lista
+    }
+
     listL* nuovo = malloc(sizeof(listL));
-    if (nuovo == NULL) return head;  // Se l'allocazione fallisce, restituisce la testa invariata
+    if (nuovo == NULL) {
+        printf("Errore nell'allocazione della memoria per il nuovo nodo.\n");
+        return head;  // Se l'allocazione fallisce, restituisce la testa invariata
+    }
+
     nuovo->value = l;  // Copia la lezione nella nuova struttura
-    nuovo->next = head;   // Inserisce la nuova lezione all'inizio della lista
-    return nuovo;         // Ritorna il nuovo puntatore alla testa della lista
+    nuovo->next = head; // Inserisce la nuova lezione all'inizio della lista
+    return nuovo;      // Ritorna il nuovo puntatore alla testa della lista
 }
 
 // Restituisce la coda della lista, cioè tutti i nodi tranne il primo
@@ -67,17 +76,17 @@ lezione* lezione_getFirst(listL* l) {
     return l->value;
 }
 
-// Stampa tutte le lezioni nella lista su standard output
 void lezione_printList(listL* l) {
     if (l == NULL) {
         printf("%sLISTA VUOTA%s \n", ROSSO, RESET);
         return;
     }
 
+    int count_corrupt = 0;
+
     while (l != NULL) {
-        if (l->value == NULL) {
-            printf("%sLezione non valida (value is NULL)%s\n", ROSSO, RESET);
-        } else {
+        if (l->value != NULL) {
+            printf("------------------------------------------------\n");
             printf("Codice Lezione: %d\n", getCodiceLezione(l->value));
             printf("Disciplina: %s\n", getDisciplinaLezione(l->value));
             printf("Nome: %s\n", getNomeLezione(l->value));
@@ -90,10 +99,9 @@ void lezione_printList(listL* l) {
             printf("Posti Max: %d\n\n", getPostiMax(l->value));
         }
 
-        l = l->next;
+        l = l->next;  // Passa al nodo successivo
     }
 }
-
 // Libera la memoria occupata da tutti i nodi della lista
 void lezione_freeList(listL* l) {
     while (l != NULL) {

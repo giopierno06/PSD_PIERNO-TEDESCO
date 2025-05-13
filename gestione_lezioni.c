@@ -20,9 +20,10 @@ extern listL* lezioni;  // Modifica: usa un singolo puntatore per la lista delle
 //menu gestione lezioni
 void gestione_Lezioni() {
     
-    if (lezioni == NULL) {
+       if (lezioni == NULL) {
         lezioni = lezione_newList();  // Assicurati che la lista venga inizializzata correttamente
-    }
+        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt");
+                          }
 
     int scelta = -1; // Variabile per memorizzare la scelta dell'utente
 
@@ -87,6 +88,9 @@ void gestione_Lezioni() {
         }
     }
 }
+
+  
+
 
 int aggiungi_lezione(listL** lezioni) {
     lezione* nuova_lezione = creaLezione();
@@ -243,7 +247,6 @@ int aggiungi_lezione(listL** lezioni) {
     return 1;
 }
 
-// Funzione per stampare le lezioni di un giorno specifico (data)
 void lezione_printByDate(listL* lezioni, Data* data_input) {
     if (lezioni == NULL || data_input == NULL) {
         printf("%sNESSUNA LEZIONE IN QUESTA DATA.%s\n", ROSSO, RESET);
@@ -254,47 +257,72 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
         return;
     }
 
-    listL* temp = lezioni;  // Variabile temporanea per scorrere la lista
+    listL* temp = lezioni;
     int trovato = 0;
 
-    // Scorre tutte le lezioni e stampa quelle che corrispondono alla data
+    pulisciSchermo();
+    printf("\n%sVisualizzazione lezioni per la data: ",GIALLO);
+    stampaData(data_input);  // Funzione per stampare la data
+    printf("\n%s",RESET);
+
+    // Intestazione
+    printf("%-15s | %-20s | %-20s | %-15s | %-17s\n",
+           "Codice", "Nome", "Disciplina", "Orario", "Posti Rimanenti");
+    printf("-----------------------------------------------------------------------------------------------\n");
+
     while (temp != NULL) {
         lezione* lezione_corrente = lezione_getValue(temp);
-        
+
         if (lezione_corrente == NULL) {
-            temp = lezione_getNext(temp); // Vai al prossimo elemento
-            continue;  // Ignora la lezione corrente e continua con la successiva
+            temp = lezione_getNext(temp);
+            continue;
         }
 
         Data* data_lezione = getDataLezione(lezione_corrente);
-        
         if (data_lezione == NULL) {
-            printf("Errore: data lezione non valida.\n");
-            temp = lezione_getNext(temp); // Vai al prossimo elemento
-            continue;  // Ignora la lezione corrente e continua con la successiva
+            temp = lezione_getNext(temp);
+            continue;
         }
 
-        // Confronta la data della lezione con la data inserita
         if (confrontaDate(data_input, data_lezione) == 0) {
-            // Se la data corrisponde, stampa i dettagli della lezione
-            printf("Lezione: %s, Disciplina: %s\n", getNomeLezione(lezione_corrente), getDisciplinaLezione(lezione_corrente));
-            stampaData(data_lezione);  // Funzione che stampa la data
-            stampaOrario(getOrarioLezione(lezione_corrente));  // Funzione che stampa l'orario
-            printf("\n");
+            int posti_max = getPostiMax(lezione_corrente);
+            int prenotati = getPostiOccupati(lezione_corrente);
+            int posti_rimanenti = posti_max - prenotati;
+
+            Orario* orario_inizio = getOrarioLezione(lezione_corrente);
+            int durata = getDurataLezione(lezione_corrente);
+
+          // Calcola l'orario di fine con la funzione aggiungiMinuti
+         Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
+
+         // Ora costruiamo la stringa per l'orario di inizio e fine
+        char orario_str[20];
+        snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
+        getOra(orario_inizio), getMinuto(orario_inizio),
+        getOra(orario_fine), getMinuto(orario_fine));
+
+            // Stampa tabella
+            printf("%-15d | %-20s | %-20s | %-15s | %-17d\n",
+                   getCodiceLezione(lezione_corrente),
+                   getNomeLezione(lezione_corrente),
+                   getDisciplinaLezione(lezione_corrente),
+                   orario_str,
+                   posti_rimanenti);
+
             trovato = 1;
         }
-        
-        temp = lezione_getNext(temp); // Passa al prossimo elemento della lista
+
+        temp = lezione_getNext(temp);
     }
 
-    if(!trovato)
-    printf("\n%sNessuna lezione in questa data: %s ",ROSSO,RESET);
+    if (!trovato) {
+        printf("\n%sNessuna lezione in questa data.%s\n", ROSSO, RESET);
+    }
 
     getchar();
     printf("\nPremi INVIO per tornare indietro.....");
     getchar();
     pulisciSchermo();
-
 }
 
 // Funzione per visualizzare tutte le lezioni
@@ -326,8 +354,9 @@ void visualizzaLezioni(listL* lezioni) {
                 // Visualizza lezioni per un giorno specifico
                 data_input = leggiData();  // Funzione per leggere la data dall'utente
                 if (data_input != NULL) {
-                    printf("\nVisualizzazione lezioni per la data: ");
+                    printf("\n%sVisualizzazione lezioni per la data: ",GIALLO);
                     stampaData(data_input);  // Funzione per stampare la data
+                    printf("\n%s",RESET);
                     lezione_printByDate(lezioni, data_input);  // Funzione che stampa le lezioni per la data specificata
                 } else {
                     printf("Errore nell'inserimento della data.\n");

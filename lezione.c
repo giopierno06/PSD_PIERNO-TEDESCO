@@ -37,6 +37,7 @@ lezione* creaLezione() {
     strcpy(l->disciplina, "");
     l->data= creaData(1,1,2000);
     l->ora_di_inizio = creaOrario(0,0);
+    l->posti_occupato = 0;
     l->durata = 0;
     l->postimax = 0;
 }
