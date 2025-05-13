@@ -1,8 +1,560 @@
 Abbonamenti:
 ===========================
-Codice Abbonamento: 11
+Codice Abbonamento: 102
+Nome: Paolo
+Cognome: Fonzini
+Data di inizio: 09-04-2025
+Durata (in mesi): 7
+---------------------------
+Codice Abbonamento: 97
+Nome: Paolo
+Cognome: Fonzini
+Data di inizio: 19-05-2025
+Durata (in mesi): 7
+---------------------------
+Codice Abbonamento: 96
+Nome: Laura
+Cognome: Guerrieri
+Data di inizio: 05-08-2025
+Durata (in mesi): 36
+---------------------------
+Codice Abbonamento: 95
+Nome: Elena
+Cognome: Corsi
+Data di inizio: 04-08-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 94
+Nome: Daniela
+Cognome: Petri
+Data di inizio: 03-08-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 93
+Nome: Matteo
+Cognome: Rosi
+Data di inizio: 02-08-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 92
+Nome: Stefania
+Cognome: Russo
+Data di inizio: 01-08-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 91
+Nome: Michele
+Cognome: Monti
+Data di inizio: 31-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 90
+Nome: Barbara
+Cognome: Ruggiero
+Data di inizio: 30-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 89
+Nome: Francesco
+Cognome: Solari
+Data di inizio: 29-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 88
+Nome: Fabio
+Cognome: Sorrentino
+Data di inizio: 28-07-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 87
+Nome: Andrea
+Cognome: Ferri
+Data di inizio: 27-07-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 86
+Nome: Riccardo
+Cognome: Bellini
+Data di inizio: 26-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 85
+Nome: Paola
+Cognome: Lombardi
+Data di inizio: 25-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 84
+Nome: Andrea
+Cognome: Fiore
+Data di inizio: 24-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 83
+Nome: Laura
+Cognome: Lazzari
+Data di inizio: 23-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 82
+Nome: Giuseppe
+Cognome: Lupo
+Data di inizio: 22-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 81
+Nome: Chiara
+Cognome: Moretti
+Data di inizio: 21-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 80
+Nome: Lorenzo
+Cognome: Gatti
+Data di inizio: 20-07-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 79
+Nome: Marta
+Cognome: Rinaldi
+Data di inizio: 19-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 78
+Nome: Gabriele
+Cognome: Pozzi
+Data di inizio: 18-07-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 77
+Nome: Antonio
+Cognome: Russo
+Data di inizio: 17-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 76
+Nome: Alessandra
+Cognome: Puglia
+Data di inizio: 16-07-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 75
+Nome: Michele
+Cognome: Vitale
+Data di inizio: 15-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 74
+Nome: Roberto
+Cognome: Battaglia
+Data di inizio: 14-07-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 73
+Nome: Martina
+Cognome: Serafini
+Data di inizio: 13-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 72
+Nome: Matteo
+Cognome: Montalto
+Data di inizio: 12-07-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 71
+Nome: Cristiano
+Cognome: D'Alessandro
+Data di inizio: 11-07-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 70
+Nome: Silvia
+Cognome: Leone
+Data di inizio: 10-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 69
 Nome: Franco
-Cognome: Di Maio
+Cognome: Caputo
+Data di inizio: 09-07-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 68
+Nome: Giulia
+Cognome: Costa
+Data di inizio: 08-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 67
+Nome: Matteo
+Cognome: Ferrante
+Data di inizio: 07-07-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 66
+Nome: Stefano
+Cognome: Rossetti
+Data di inizio: 06-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 65
+Nome: Maria
+Cognome: Barbieri
+Data di inizio: 05-07-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 64
+Nome: Alessio
+Cognome: Martino
+Data di inizio: 04-07-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 63
+Nome: Laura
+Cognome: Ruggieri
+Data di inizio: 03-07-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 62
+Nome: Claudio
+Cognome: Pappalardo
+Data di inizio: 02-07-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 61
+Nome: Giovanni
+Cognome: Ferraro
+Data di inizio: 01-07-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 60
+Nome: Giulia
+Cognome: Marconi
+Data di inizio: 30-06-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 59
+Nome: Stefano
+Cognome: Mancini
+Data di inizio: 29-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 58
+Nome: Giorgia
+Cognome: Giordano
+Data di inizio: 28-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 57
+Nome: Simone
+Cognome: De Luca
+Data di inizio: 27-06-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 56
+Nome: Paola
+Cognome: Della Torre
+Data di inizio: 26-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 55
+Nome: Luca
+Cognome: De Angelis
+Data di inizio: 25-06-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 54
+Nome: Andrea
+Cognome: Ferrari
+Data di inizio: 24-06-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 53
+Nome: Beatrice
+Cognome: Romano
+Data di inizio: 23-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 52
+Nome: Fabio
+Cognome: Gatti
+Data di inizio: 22-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 51
+Nome: Alessandra
+Cognome: Rossi
+Data di inizio: 21-06-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 50
+Nome: Davide
+Cognome: Fiore
+Data di inizio: 20-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 49
+Nome: Sara
+Cognome: Di Giacomo
+Data di inizio: 19-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 48
+Nome: Alessio
+Cognome: Romano
+Data di inizio: 18-06-2025
+Durata (in mesi): 36
+---------------------------
+Codice Abbonamento: 47
+Nome: Fabio
+Cognome: Agostini
+Data di inizio: 17-06-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 46
+Nome: Lucia
+Cognome: Gennaro
+Data di inizio: 16-06-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 45
+Nome: Roberto
+Cognome: Di Leo
+Data di inizio: 15-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 44
+Nome: Martina
+Cognome: Ferrara
+Data di inizio: 14-06-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 43
+Nome: Michele
+Cognome: Marini
+Data di inizio: 13-06-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 42
+Nome: Antonio
+Cognome: D'Onofrio
+Data di inizio: 12-06-2025
+Durata (in mesi): 36
+---------------------------
+Codice Abbonamento: 41
+Nome: Carla
+Cognome: D'Angelo
+Data di inizio: 11-06-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 40
+Nome: Giorgio
+Cognome: Mancini
+Data di inizio: 10-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 39
+Nome: Salvatore
+Cognome: Gentile
+Data di inizio: 09-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 38
+Nome: Antonella
+Cognome: Caruso
+Data di inizio: 08-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 37
+Nome: Roberto
+Cognome: Ruggieri
+Data di inizio: 07-06-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 36
+Nome: Simone
+Cognome: Riva
+Data di inizio: 06-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 35
+Nome: Giulia
+Cognome: Bellini
+Data di inizio: 05-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 34
+Nome: Giuseppe
+Cognome: Alviti
+Data di inizio: 04-06-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 33
+Nome: Maria
+Cognome: Corrado
+Data di inizio: 03-06-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 32
+Nome: Paola
+Cognome: Silvestri
+Data di inizio: 02-06-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 31
+Nome: Luca
+Cognome: Di Marco
+Data di inizio: 01-06-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 30
+Nome: Carlo
+Cognome: Lupo
+Data di inizio: 31-05-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 29
+Nome: Sara
+Cognome: Paci
+Data di inizio: 30-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 28
+Nome: Fabio
+Cognome: Di Stefano
+Data di inizio: 29-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 26
+Nome: Roberto
+Cognome: Cattaneo
+Data di inizio: 27-05-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 25
+Nome: Giorgia
+Cognome: Fontana
+Data di inizio: 26-05-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 24
+Nome: Stefano
+Cognome: Bianchi
+Data di inizio: 25-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 23
+Nome: Alessandra
+Cognome: Moretti
+Data di inizio: 24-05-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 22
+Nome: Andrea
+Cognome: Gatti
+Data di inizio: 23-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 21
+Nome: Martina
+Cognome: Pino
+Data di inizio: 22-05-2025
+Durata (in mesi): 9
+---------------------------
+Codice Abbonamento: 20
+Nome: Riccardo
+Cognome: Conte
+Data di inizio: 21-05-2025
+Durata (in mesi): 18
+---------------------------
+Codice Abbonamento: 19
+Nome: Laura
+Cognome: De Luca
+Data di inizio: 20-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 18
+Nome: Michele
+Cognome: Gallo
+Data di inizio: 19-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 17
+Nome: Giuseppe
+Cognome: Neri
+Data di inizio: 18-05-2025
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 16
+Nome: Carla
+Cognome: Verdi
+Data di inizio: 17-05-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 14
+Nome: Paolo
+Cognome: Bianchi
+Data di inizio: 16-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 13
+Nome: Luca
+Cognome: Rossi
+Data di inizio: 15-05-2025
+Durata (in mesi): 6
+---------------------------
+Codice Abbonamento: 15
+Nome: Andrea
+Cognome: Bosco
+Data di inizio: 09-05-2025
+Durata (in mesi): 5
+---------------------------
+Codice Abbonamento: 12
+Nome: Mario
+Cognome: Di Marco
+Data di inizio: 09-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 10
+Nome: Francesco
+Cognome: Mele
+Data di inizio: 07-05-2025
+Durata (in mesi): 3
+---------------------------
+Codice Abbonamento: 8
+Nome: Vittoria
+Cognome: Marrandino
+Data di inizio: 07-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 1
+Nome: Salvatore
+Cognome: Pierno
+Data di inizio: 04-05-2025
+Durata (in mesi): 4
+---------------------------
+Codice Abbonamento: 2
+Nome: Giovanni
+Cognome: Pierno
+Data di inizio: 09-04-2024
+Durata (in mesi): 24
+---------------------------
+Codice Abbonamento: 3
+Nome: Genny
+Cognome: Pierno
+Data di inizio: 02-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 4
+Nome: Elena
+Cognome: Mele
+Data di inizio: 06-05-2025
+Durata (in mesi): 12
+---------------------------
+Codice Abbonamento: 7
+Nome: Simone
+Cognome: Tedesco
 Data di inizio: 12-05-2025
 Durata (in mesi): 3
 ---------------------------
@@ -12,567 +564,15 @@ Cognome: De Polis
 Data di inizio: 08-05-2025
 Durata (in mesi): 12
 ---------------------------
-Codice Abbonamento: 7
-Nome: Simone
-Cognome: Tedesco
+Codice Abbonamento: 11
+Nome: Franco
+Cognome: Di Maio
 Data di inizio: 12-05-2025
 Durata (in mesi): 3
 ---------------------------
-Codice Abbonamento: 5
-Nome: Antonio
-Cognome: Elia
-Data di inizio: 06-05-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 4
-Nome: Elena
-Cognome: Mele
-Data di inizio: 06-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 3
-Nome: Genny
-Cognome: Pierno
-Data di inizio: 02-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 2
-Nome: Giovanni
-Cognome: Pierno
-Data di inizio: 09-04-2024
-Durata (in mesi): 36
----------------------------
-Codice Abbonamento: 1
-Nome: Salvatore
-Cognome: Pierno
-Data di inizio: 04-05-2025
-Durata (in mesi): 4
----------------------------
-Codice Abbonamento: 8
-Nome: Vittoria
-Cognome: Marrandino
-Data di inizio: 07-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 10
-Nome: Francesco
-Cognome: Mele
-Data di inizio: 07-05-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 12
-Nome: Mario
-Cognome: Di Marco
-Data di inizio: 09-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 15
-Nome: Andrea
-Cognome: Bosco
-Data di inizio: 09-05-2025
-Durata (in mesi): 5
----------------------------
-Codice Abbonamento: 13
-Nome: Luca
-Cognome: Rossi
-Data di inizio: 15-05-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 14
-Nome: Paolo
-Cognome: Bianchi
-Data di inizio: 16-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 16
-Nome: Carla
-Cognome: Verdi
-Data di inizio: 17-05-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 17
-Nome: Giuseppe
-Cognome: Neri
-Data di inizio: 18-05-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 18
-Nome: Michele
-Cognome: Gallo
-Data di inizio: 19-05-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 19
-Nome: Laura
-Cognome: De Luca
-Data di inizio: 20-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 20
-Nome: Riccardo
-Cognome: Conte
-Data di inizio: 21-05-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 21
-Nome: Martina
-Cognome: Pino
-Data di inizio: 22-05-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 22
-Nome: Andrea
-Cognome: Gatti
-Data di inizio: 23-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 23
-Nome: Alessandra
-Cognome: Moretti
-Data di inizio: 24-05-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 24
-Nome: Stefano
-Cognome: Bianchi
-Data di inizio: 25-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 25
-Nome: Giorgia
-Cognome: Fontana
-Data di inizio: 26-05-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 26
-Nome: Roberto
-Cognome: Cattaneo
-Data di inizio: 27-05-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 27
+Codice Abbonamento: 101
 Nome: Elisabetta
 Cognome: Rossi
 Data di inizio: 28-05-2025
 Durata (in mesi): 36
----------------------------
-Codice Abbonamento: 28
-Nome: Fabio
-Cognome: Di Stefano
-Data di inizio: 29-05-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 29
-Nome: Sara
-Cognome: Paci
-Data di inizio: 30-05-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 30
-Nome: Carlo
-Cognome: Lupo
-Data di inizio: 31-05-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 31
-Nome: Luca
-Cognome: Di Marco
-Data di inizio: 01-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 32
-Nome: Paola
-Cognome: Silvestri
-Data di inizio: 02-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 33
-Nome: Maria
-Cognome: Corrado
-Data di inizio: 03-06-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 34
-Nome: Giuseppe
-Cognome: Alviti
-Data di inizio: 04-06-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 35
-Nome: Giulia
-Cognome: Bellini
-Data di inizio: 05-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 36
-Nome: Simone
-Cognome: Riva
-Data di inizio: 06-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 37
-Nome: Roberto
-Cognome: Ruggieri
-Data di inizio: 07-06-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 38
-Nome: Antonella
-Cognome: Caruso
-Data di inizio: 08-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 39
-Nome: Salvatore
-Cognome: Gentile
-Data di inizio: 09-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 40
-Nome: Giorgio
-Cognome: Mancini
-Data di inizio: 10-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 41
-Nome: Carla
-Cognome: D'Angelo
-Data di inizio: 11-06-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 42
-Nome: Antonio
-Cognome: D'Onofrio
-Data di inizio: 12-06-2025
-Durata (in mesi): 36
----------------------------
-Codice Abbonamento: 43
-Nome: Michele
-Cognome: Marini
-Data di inizio: 13-06-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 44
-Nome: Martina
-Cognome: Ferrara
-Data di inizio: 14-06-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 45
-Nome: Roberto
-Cognome: Di Leo
-Data di inizio: 15-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 46
-Nome: Lucia
-Cognome: Gennaro
-Data di inizio: 16-06-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 47
-Nome: Fabio
-Cognome: Agostini
-Data di inizio: 17-06-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 48
-Nome: Alessio
-Cognome: Romano
-Data di inizio: 18-06-2025
-Durata (in mesi): 36
----------------------------
-Codice Abbonamento: 49
-Nome: Sara
-Cognome: Di Giacomo
-Data di inizio: 19-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 50
-Nome: Davide
-Cognome: Fiore
-Data di inizio: 20-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 51
-Nome: Alessandra
-Cognome: Rossi
-Data di inizio: 21-06-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 52
-Nome: Fabio
-Cognome: Gatti
-Data di inizio: 22-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 53
-Nome: Beatrice
-Cognome: Romano
-Data di inizio: 23-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 54
-Nome: Andrea
-Cognome: Ferrari
-Data di inizio: 24-06-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 55
-Nome: Luca
-Cognome: De Angelis
-Data di inizio: 25-06-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 56
-Nome: Paola
-Cognome: Della Torre
-Data di inizio: 26-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 57
-Nome: Simone
-Cognome: De Luca
-Data di inizio: 27-06-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 58
-Nome: Giorgia
-Cognome: Giordano
-Data di inizio: 28-06-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 59
-Nome: Stefano
-Cognome: Mancini
-Data di inizio: 29-06-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 60
-Nome: Giulia
-Cognome: Marconi
-Data di inizio: 30-06-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 61
-Nome: Giovanni
-Cognome: Ferraro
-Data di inizio: 01-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 62
-Nome: Claudio
-Cognome: Pappalardo
-Data di inizio: 02-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 63
-Nome: Laura
-Cognome: Ruggieri
-Data di inizio: 03-07-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 64
-Nome: Alessio
-Cognome: Martino
-Data di inizio: 04-07-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 65
-Nome: Maria
-Cognome: Barbieri
-Data di inizio: 05-07-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 66
-Nome: Stefano
-Cognome: Rossetti
-Data di inizio: 06-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 67
-Nome: Matteo
-Cognome: Ferrante
-Data di inizio: 07-07-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 68
-Nome: Giulia
-Cognome: Costa
-Data di inizio: 08-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 69
-Nome: Franco
-Cognome: Caputo
-Data di inizio: 09-07-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 70
-Nome: Silvia
-Cognome: Leone
-Data di inizio: 10-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 71
-Nome: Cristiano
-Cognome: D'Alessandro
-Data di inizio: 11-07-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 72
-Nome: Matteo
-Cognome: Montalto
-Data di inizio: 12-07-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 73
-Nome: Martina
-Cognome: Serafini
-Data di inizio: 13-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 74
-Nome: Roberto
-Cognome: Battaglia
-Data di inizio: 14-07-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 75
-Nome: Michele
-Cognome: Vitale
-Data di inizio: 15-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 76
-Nome: Alessandra
-Cognome: Puglia
-Data di inizio: 16-07-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 77
-Nome: Antonio
-Cognome: Russo
-Data di inizio: 17-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 78
-Nome: Gabriele
-Cognome: Pozzi
-Data di inizio: 18-07-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 79
-Nome: Marta
-Cognome: Rinaldi
-Data di inizio: 19-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 80
-Nome: Lorenzo
-Cognome: Gatti
-Data di inizio: 20-07-2025
-Durata (in mesi): 3
----------------------------
-Codice Abbonamento: 81
-Nome: Chiara
-Cognome: Moretti
-Data di inizio: 21-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 82
-Nome: Giuseppe
-Cognome: Lupo
-Data di inizio: 22-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 83
-Nome: Laura
-Cognome: Lazzari
-Data di inizio: 23-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 84
-Nome: Andrea
-Cognome: Fiore
-Data di inizio: 24-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 85
-Nome: Paola
-Cognome: Lombardi
-Data di inizio: 25-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 86
-Nome: Riccardo
-Cognome: Bellini
-Data di inizio: 26-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 87
-Nome: Andrea
-Cognome: Ferri
-Data di inizio: 27-07-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 88
-Nome: Fabio
-Cognome: Sorrentino
-Data di inizio: 28-07-2025
-Durata (in mesi): 9
----------------------------
-Codice Abbonamento: 89
-Nome: Francesco
-Cognome: Solari
-Data di inizio: 29-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 90
-Nome: Barbara
-Cognome: Ruggiero
-Data di inizio: 30-07-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 91
-Nome: Michele
-Cognome: Monti
-Data di inizio: 31-07-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 92
-Nome: Stefania
-Cognome: Russo
-Data di inizio: 01-08-2025
-Durata (in mesi): 24
----------------------------
-Codice Abbonamento: 93
-Nome: Matteo
-Cognome: Rosi
-Data di inizio: 02-08-2025
-Durata (in mesi): 6
----------------------------
-Codice Abbonamento: 94
-Nome: Daniela
-Cognome: Petri
-Data di inizio: 03-08-2025
-Durata (in mesi): 12
----------------------------
-Codice Abbonamento: 95
-Nome: Elena
-Cognome: Corsi
-Data di inizio: 04-08-2025
-Durata (in mesi): 18
----------------------------
-Codice Abbonamento: 96
-Nome: Laura
-Cognome: Guerrieri
-Data di inizio: 05-08-2025
-Durata (in mesi): 36
----------------------------
-Codice Abbonamento: 97
-Nome: Paolo
-Cognome: Fonzini
-Data di inizio: 19-05-2025
-Durata (in mesi): 5
 ---------------------------

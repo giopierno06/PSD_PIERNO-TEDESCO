@@ -187,15 +187,15 @@ void gestione_abbonamenti() {
                 break;
 
             case 2:
-                // Modifica un abbonamento esistente
-                pulisciSchermo();
-                list* modificata = modificaAbbonamento(abbonati);  // restituisce nuova lista (o NULL)
-                if (modificata != NULL) {
-                    abbonati = modificata;  // aggiorna la lista originale
-                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // salva su file
-                }
-                pulisciSchermo();
-                break;
+           // Modifica un abbonamento esistente (ricerca + modifica)
+            pulisciSchermo();
+
+           // Chiamata alla funzione che gestisce ricerca e modifica
+           abbonati = ricercaEModificaAbbonamento(abbonati);
+
+            // Schermo pulito dopo la modifica
+            pulisciSchermo();
+            break;
 
             case 3:
                 // Elimina un abbonamento
@@ -495,73 +495,96 @@ list* eliminaPerID(list* abbonati) {
 list* eliminaPerNomeCognome(list* abbonati) {
     char nome[50], cognome[50];
 
-    // Ciclo per il nome
+    // Input nome
     while (1) {
         printf("%sInserisci nome cliente: %s", VERDE, RESET);
         if (fgets(nome, sizeof(nome), stdin) != NULL) {
-            nome[strcspn(nome, "\n")] = 0;  // Rimuove '\n' dalla fine
+            nome[strcspn(nome, "\n")] = 0;
             if (strcmp(nome, "exit") == 0) {
                 pulisciSchermo();
-                return abbonati;  // Torna al menu principale
+                return abbonati;
             }
         }
-        if (strlen(nome) > 0 && soloLettere(nome)) {
-            break;  // Nome valido
-        } else {
-            printf("%sERRORE%s Il nome deve contenere solo lettere e non può essere vuoto.\n", ROSSO, RESET);
-        }
+        if (strlen(nome) > 0 && soloLettere(nome)) break;
+        printf("%sERRORE%s Il nome deve contenere solo lettere e non può essere vuoto.\n", ROSSO, RESET);
     }
 
-    // Ciclo per il cognome
+    // Input cognome
     while (1) {
         printf("%sInserisci cognome cliente: %s", VERDE, RESET);
         if (fgets(cognome, sizeof(cognome), stdin) != NULL) {
-            cognome[strcspn(cognome, "\n")] = 0;  // Rimuove '\n' dalla fine
+            cognome[strcspn(cognome, "\n")] = 0;
             if (strcmp(cognome, "exit") == 0) {
                 pulisciSchermo();
-                return abbonati;  // Torna al menu principale
+                return abbonati;
             }
         }
-        if (strlen(cognome) > 0 && soloLettere(cognome)) {
-            break;  // Cognome valido
-        } else {
-            printf("%sERRORE%s Il cognome deve contenere solo lettere e non può essere vuoto.\n", ROSSO, RESET);
-        }
+        if (strlen(cognome) > 0 && soloLettere(cognome)) break;
+        printf("%sERRORE%s Il cognome deve contenere solo lettere e non può essere vuoto.\n", ROSSO, RESET);
     }
 
-    list *curr = abbonati, *prev = NULL;
+    // Trova tutti gli abbonamenti con nome e cognome corrispondenti
+    list* temp = abbonati;
+    int trovati = 0;
 
-    // Scorri la lista per trovare nome e cognome da eliminare
+    printf("\n%sAbbonamenti trovati:%s\n", GIALLO, RESET);
+    while (temp != NULL) {
+        void* val = getValue(temp);
+        if (strcmp(getNome(val), nome) == 0 && strcmp(getCognome(val), cognome) == 0) {
+            stampaDettagliAbbonamento(val); // funzione che stampa un singolo abbonamento
+            trovati++;
+        }
+        temp = getNext(temp);
+    }
+
+    if (trovati == 0) {
+        printf("%sErrore: nessun abbonamento trovato con nome: %s e cognome: %s.%s\n", ROSSO, nome, cognome, RESET);
+        printf("Premi invio per continuare...\n");
+        getchar();
+        pulisciSchermo();
+        return abbonati;
+    }
+
+    // Chiede il codice abbonamento da eliminare
+    int codice;
+    printf("\n%sInserisci il codice abbonamento da eliminare: %s", VERDE, RESET);
+    scanf("%d", &codice);
+    getchar(); // pulisce newline
+
+    // Elimina l'abbonamento con il codice specificato
+    list* curr = abbonati;
+    list* prev = NULL;
+
     while (curr != NULL) {
-        if (strcmp(getNome(getValue(curr)), nome) == 0 && strcmp(getCognome(getValue(curr)), cognome) == 0) {
-            // Se nome e cognome corrispondono, elimina il nodo
+        void* val = getValue(curr);
+        if (strcmp(getNome(val), nome) == 0 &&
+            strcmp(getCognome(val), cognome) == 0 &&
+            getCodiceAbbonamento(val) == codice) {
+
             if (prev == NULL) {
-                abbonati = getNext(curr);  // Nodo da eliminare è la testa
+                abbonati = getNext(curr); // elimina in testa
             } else {
-                setNext(prev, getNext(curr));  // Nodo nel mezzo o in fondo
+                setNext(prev, getNext(curr));
             }
 
-            
             free(curr);
-            pulisciSchermo();
             salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
-            printf("%sAbbonamento eliminato con successo.%s\n", VERDE, RESET);
-            printf("Premi invio per continuare......\n");
+            printf("%sAbbonamento con codice %d eliminato con successo.%s\n", VERDE, codice, RESET);
+            printf("Premi invio per continuare...\n");
             getchar();
             pulisciSchermo();
-            return abbonati;  // Torna al menu principale
+            return abbonati;
         }
         prev = curr;
-        curr = getNext(curr);  // Usa il getter per ottenere il prossimo nodo
+        curr = getNext(curr);
     }
 
-    // Se l'abbonamento non è stato trovato
-    pulisciSchermo();
-    printf("%sErrore: nessun abbonamento trovato con con nome: %s e cognome:%s .%s\n", ROSSO, nome,cognome, RESET);
-    printf("Premi invio per continuare......\n");
+    // Se il codice non è stato trovato
+    printf("%sErrore: nessun abbonamento trovato con codice %d per %s %s.%s\n", ROSSO, codice, nome, cognome, RESET);
+    printf("Premi invio per continuare...\n");
     getchar();
     pulisciSchermo();
-    return abbonati;  // Se non trovato, ritorna la lista invariata
+    return abbonati;
 }
 
 
@@ -641,7 +664,7 @@ list* ricercaAbbonamento(list* abbonati) {
                         trovato = 1;  // Segna che l'abbonamento è stato trovato
                         return curr;  // Esce dalla lista e restituisce l'abbonamento trovato
                     }
-                    curr =getNext(curr);  // Passa al prossimo abbonamento
+                    curr = getNext(curr);  // Passa al prossimo abbonamento
                 }
 
                 // Se non è stato trovato l'abbonamento
@@ -658,34 +681,218 @@ list* ricercaAbbonamento(list* abbonati) {
 
             case 2: {  // Ricerca per nome e cognome
                 char nome[50], cognome[50];
+                int trovato = 0;
 
                 printf("Inserisci nome: ");
-                fgets(nome, sizeof(nome), stdin);  // Legge il nome
-                nome[strcspn(nome, "\n")] = 0;  // Rimuove il newline finale
+                fgets(nome, sizeof(nome), stdin);
+                nome[strcspn(nome, "\n")] = 0;
 
                 printf("Inserisci cognome: ");
-                fgets(cognome, sizeof(cognome), stdin);  // Legge il cognome
-                cognome[strcspn(cognome, "\n")] = 0;  // Rimuove il newline finale
+                fgets(cognome, sizeof(cognome), stdin);
+                cognome[strcspn(cognome, "\n")] = 0;
 
-                // Scorre la lista alla ricerca del nome e cognome
+                pulisciSchermo();
+                printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
+
                 list* curr = abbonati;
                 while (curr != NULL) {
-                    if (strcmp(getNome(getValue(curr)), nome) == 0 &&  // Usa il getter per nome
-                        strcmp(getCognome(getValue(curr)), cognome) == 0) {  // Usa il getter per cognome
-                        pulisciSchermo();
-                        trovato = 1;  // Segna che l'abbonamento è stato trovato
-                        return curr;  // Esce dalla lista e restituisce l'abbonamento trovato
+                    void* abbonamento = getValue(curr);
+                    if (strcmp(getNome(abbonamento), nome) == 0 &&
+                        strcmp(getCognome(abbonamento), cognome) == 0) {
+
+                        stampaDettagliAbbonamento(abbonamento);  // Mostra i dettagli
+                        trovato = 1;
                     }
-                    curr = getNext(curr); // Passa al prossimo abbonamento
+                    curr = getNext(curr);
                 }
 
-                // Se non è stato trovato l'abbonamento
+                if (!trovato) {
+                    printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
+                }
+
+                printf("\nPremi INVIO per continuare...\n");
+                getchar();
+                pulisciSchermo();
+                break;
+            }
+
+            default:  // Caso per scelta non valida
+                pulisciSchermo();
+                printf("%sScelta non valida, riprova.%s\n", ROSSO, RESET);
+                break;  // Ritorna al menu di ricerca
+        }
+    }
+}
+
+
+
+
+// Funzione che gestisce la ricerca e la modifica di un abbonamento.
+// La funzione consente di cercare un abbonamento per ID o per nome e cognome.
+// Se vengono trovati uno o più abbonamenti, l'utente può scegliere di modificarli.
+// L'input dell'utente viene validato prima di proseguire con la ricerca o la modifica.
+// La funzione ritorna la lista aggiornata degli abbonamenti.
+
+// Parametri:
+// - abbonati: puntatore alla lista di abbonamenti da cui partire per la ricerca e modifica.
+// 
+// Restituisce:
+// - Un puntatore alla lista aggiornata degli abbonamenti dopo la modifica.
+list* ricercaEModificaAbbonamento(list* abbonati) {
+    int scelta;  // Variabile che memorizza la scelta dell'utente nel menu
+
+    while (1) {  // Ciclo infinito che continua fino a che l'utente non esce
+        int trovato = 0;  // Flag che indica se un abbonamento è stato trovato
+
+        // Menu di ricerca e modifica
+        printf("%s========================================\n", BLU);
+        printf("Come vuoi cercare l'abbonamento?\n");
+        printf("========================================%s\n", RESET);
+        printf("1. Per ID\n");
+        printf("2. Per nome e cognome\n");
+        printf("%s0. Torna al menu principale%s\n", ROSSO, RESET);
+        printf("%s========================================%s\n", BLU, RESET);
+
+        // Buffer per l'input dell'utente
+        char scelta_input[10];
+        char *endptr;
+
+        // Lettura della scelta dell'utente
+        printf("Scelta: ");
+        fgets(scelta_input, sizeof(scelta_input), stdin);
+        scelta_input[strcspn(scelta_input, "\n")] = 0;  // Rimuove il newline
+
+        // Conversione dell'input in un intero
+        scelta = strtol(scelta_input, &endptr, 10);
+
+        // Verifica se l'input è un numero valido
+        if (endptr == scelta_input || *endptr != '\0') {
+            pulisciSchermo();
+            printf("%sInserisci una scelta valida (solo numeri)!%s\n", ROSSO, RESET);
+            continue;  // Riprende il ciclo per la scelta
+        }
+
+        // Gestisce le diverse opzioni di ricerca e modifica
+        switch (scelta) {
+            case 0:  // Caso per tornare al menu principale
+                return abbonati;  // Ritorna alla lista degli abbonamenti
+
+            case 1: {  // Ricerca per ID
+                char buffer[100];
+                int id;
+
+                // Chiedi l'ID dell'abbonamento da cercare
+                printf("Inserisci l'ID dell'abbonamento da cercare: ");
+                fgets(buffer, sizeof(buffer), stdin);
+                buffer[strcspn(buffer, "\n")] = 0;  // Rimuove il newline
+
+                // Converte l'input in un intero
+                id = strtol(buffer, &endptr, 10);
+
+                // Verifica che l'input sia un numero valido
+                if (endptr == buffer || *endptr != '\0') {
+                    pulisciSchermo();
+                    printf("%sInserisci solo numeri!%s\n", ROSSO, RESET);
+                    break;  // Esce dal case 1
+                }
+
+                // Scorre la lista per trovare l'abbonamento con l'ID specificato
+                list* curr = abbonati;
+                while (curr != NULL) {
+                    if (getCodiceAbbonamento(getValue(curr)) == id) {  // Cerca l'ID
+                        pulisciSchermo();
+                        trovato = 1;  // Segna che l'abbonamento è stato trovato
+                        printf("Abbonamento trovato!\n");
+                        stampaDettagliAbbonamento(getValue(curr));  // Mostra i dettagli dell'abbonamento
+
+                        // Chiamata alla funzione per la modifica dell'abbonamento
+                        abbonati = modificaAbbonamento(curr, abbonati);
+                        return abbonati;  // Ritorna alla lista aggiornata
+                    }
+                    curr = getNext(curr);  // Passa al prossimo abbonamento
+                }
+
+                // Se l'abbonamento non è stato trovato
                 if (!trovato) {
                     printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
                     printf("Premere INVIO per continuare...\n");
                     getchar();
                     pulisciSchermo();
+                }
+                break;  // Esce dal case 1
+            }
+
+            case 2: {  // Ricerca per nome e cognome
+                char nome[50], cognome[50];
+                list* risultati[100];  // Array per memorizzare gli abbonamenti trovati
+                int count = 0;  // Contatore per gli abbonamenti trovati
+
+                // Chiedi il nome e il cognome per la ricerca
+                printf("Inserisci nome: ");
+                fgets(nome, sizeof(nome), stdin);
+                nome[strcspn(nome, "\n")] = 0;  // Rimuove il newline
+
+                printf("Inserisci cognome: ");
+                fgets(cognome, sizeof(cognome), stdin);
+                cognome[strcspn(cognome, "\n")] = 0;  // Rimuove il newline
+
+                pulisciSchermo();
+                printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
+
+                // Scorre la lista per cercare gli abbonamenti con nome e cognome corrispondenti
+                list* curr = abbonati;
+                while (curr != NULL) {
+                    void* abbonamento = getValue(curr);
+                    if (strcmp(getNome(abbonamento), nome) == 0 && strcmp(getCognome(abbonamento), cognome) == 0) {
+                        risultati[count++] = curr;  // Salva gli abbonamenti trovati
+                        stampaDettagliAbbonamento(abbonamento);  // Mostra i dettagli dell'abbonamento
+                    }
+                    curr = getNext(curr);
+                }
+
+                // Se nessun abbonamento è stato trovato
+                if (count == 0) {
+                    printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
+                    printf("Premi INVIO per continuare...\n");
+                    getchar();
+                    pulisciSchermo();
                     break;
+                }
+
+                // Chiedi all'utente di scegliere l'ID dell'abbonamento da modificare
+                int idScelto;
+                char input[100];
+
+                printf("\nInserisci l'ID dell'abbonamento che vuoi modificare: ");
+                fgets(input, sizeof(input), stdin);
+                input[strcspn(input, "\n")] = 0;
+                idScelto = strtol(input, &endptr, 10);
+
+                // Verifica che l'ID sia valido
+                if (endptr == input || *endptr != '\0') {
+                    printf("%sID non valido!%s\n", ROSSO, RESET);
+                    printf("Premi INVIO per continuare...\n");
+                    getchar();
+                    pulisciSchermo();
+                    break;
+                }
+
+                // Verifica che l'ID scelto sia tra quelli trovati
+                int trovatoID = 0;
+                for (int i = 0; i < count; i++) {
+                    if (getCodiceAbbonamento(getValue(risultati[i])) == idScelto) {
+                        trovatoID = 1;
+                        abbonati = modificaAbbonamento(risultati[i], abbonati);  // Modifica l'abbonamento
+                        return abbonati;  // Ritorna alla lista aggiornata
+                    }
+                }
+
+                // Se l'ID scelto non è valido
+                if (!trovatoID) {
+                    printf("%sNessun abbonamento con questo ID trovato tra i risultati.%s\n", ROSSO, RESET);
+                    printf("Premi INVIO per continuare...\n");
+                    getchar();
+                    pulisciSchermo();
                 }
 
                 break;  // Esce dal case 2
@@ -701,31 +908,17 @@ list* ricercaAbbonamento(list* abbonati) {
 
 
 // Funzione che gestisce la modifica di un abbonamento esistente
-// Accetta come parametro un puntatore alla lista di abbonati (list* abbonati)
-// Funzione che gestisce la modifica di un abbonamento esistente
-list* modificaAbbonamento(list* abbonati) {
-    // Ricerca un abbonamento nella lista
-    list* temp = ricercaAbbonamento(abbonati);
-    
-    // Se l'abbonamento non viene trovato (temp è NULL)
-    if (temp == NULL) {
-        // Stampa un messaggio di errore
-        printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
-        printf("Premi INVIO per tornare.........\n");
-        getchar();  // Aspetta che l'utente premi INVIO
-        pulisciSchermo();  // Pulisce lo schermo
-        return NULL;  // Ritorna NULL per indicare che non è stato trovato l'abbonamento
-    }
-
-    // Ciclo infinito per la gestione delle modifiche
-    while (1) {
-        // Se l'abbonamento è stato trovato
-        printf("%sAbbonamento trovato!%s\n", VERDE, RESET);
-        printf("------------------------------------------\n");
-        // Stampa i dettagli dell'abbonamento trovato
-        stampaDettagliAbbonamento(getValue(temp));
-        
-        // Stampa il menu con le opzioni per modificare l'abbonamento
+// La funzione consente di modificare vari dettagli di un abbonamento, come:
+// - Nome
+// - Cognome
+// - Data di inizio
+// - Durata dell'abbonamento
+// Inoltre, consente di tornare indietro al menu principale.
+// La funzione salva le modifiche su file ogni volta che viene effettuata una modifica.
+list* modificaAbbonamento(list* abbonamentoDaModificare, list* abbonati) {
+    int f = -1;  // Variabile di controllo per uscire dal ciclo
+    if (f == -1) {
+        // Stampa il menu con le opzioni di modifica
         printf("%s========================================================\n", GIALLO);
         printf("            DIGITA COSA VUOI MODIFICARE\n");
         printf("==========================================================%s\n", RESET);
@@ -733,97 +926,74 @@ list* modificaAbbonamento(list* abbonati) {
         printf("2. COGNOME\n");
         printf("3. DATA INIZIO (anche in caso di rinnovo abbonamento)\n");
         printf("4. DURATA (anche in caso di rinnovo abbonamento)\n");
-        printf("%s0. TORNA INDIETRO%s\n", ROSSO, RESET);  // Opzione per tornare indietro
+        printf("%s0. TORNA INDIETRO%s\n", ROSSO, RESET);
         printf("%s==========================================================%s\n", GIALLO, RESET);
-        
-        // Variabile per memorizzare la scelta dell'utente
-        int scelta = -1;
-        char extra;
+    }
 
-        // Ciclo per gestire la scelta dell'utente
-        while (scelta != 0) {
-            // Legge la scelta dell'utente
+    // Ciclo principale per gestire le scelte dell'utente
+    while (1) {
+        int scelta;  // Variabile per memorizzare la scelta dell'utente
+        char extra;  // Variabile per catturare caratteri extra (evita errori di input)
+
+        // Ciclo per gestire l'input dell'utente e validare la scelta
+        while (1) {
             printf("Inserisci la tua scelta: ");
             if (scanf("%d%c", &scelta, &extra) != 2 || extra != '\n') {
-                pulisciSchermo();  // Pulisce lo schermo
+                pulisciSchermo();  // Pulisce lo schermo in caso di input non valido
                 printf("%sATTENZIONE!! DEVI IMMETTERE 0, 1, 2, 3 O 4 A SECONDA DELLA TUA SCELTA. RIPROVA:%s\n", ROSSO, RESET);
-                while (getchar() != '\n');  // Pulisce il buffer
-                continue;  // Ritorna all'inizio del ciclo
+                while (getchar() != '\n');  // Rimuove eventuali caratteri in eccesso
+                continue;
             }
 
-            // Gestisce la scelta dell'utente
+            // Gestisce le diverse scelte dell'utente
             switch (scelta) {
-                // Modifica nome
-                case 1:  
-                    {
-                        // Nascondi il nome durante l'inserimento
-                        char nuovoNome[50];
-                        printf("Inserisci il nuovo nome: ");
-                        scanf("%s", nuovoNome);
-                        // Modifica il nome dell'abbonamento tramite il setter
-                        setNome(getValue(temp), nuovoNome);
-                        printf("%sNome modificato con successo!%s\n", VERDE, RESET);
-                        // Salva la lista aggiornata nel file
-                        salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
-                    }
+                case 1: {  // Modifica il nome
+                    char nuovoNome[50];
+                    printf("Inserisci il nuovo nome: ");
+                    scanf("%s", nuovoNome);  // Legge il nuovo nome
+                    setNome(getValue(abbonamentoDaModificare), nuovoNome);  // Imposta il nuovo nome
+                    printf("%sNome modificato con successo!%s\n", VERDE, RESET);
+                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
                     break;
-
-                // Modifica cognome
-                case 2:  
-                    {
-                        // Nascondi il cognome durante l'inserimento
-                        char nuovoCognome[50];
-                        printf("Inserisci il nuovo cognome: ");
-                        scanf("%s", nuovoCognome);
-                        // Modifica il cognome dell'abbonamento tramite il setter
-                        setCognome(getValue(temp), nuovoCognome);
-                        printf("%sCognome modificato con successo!%s\n", VERDE, RESET);
-                        // Salva la lista aggiornata nel file
-                        salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
-                    }
+                }
+                case 2: {  // Modifica il cognome
+                    char nuovoCognome[50];
+                    printf("Inserisci il nuovo cognome: ");
+                    scanf("%s", nuovoCognome);  // Legge il nuovo cognome
+                    setCognome(getValue(abbonamentoDaModificare), nuovoCognome);  // Imposta il nuovo cognome
+                    printf("%sCognome modificato con successo!%s\n", VERDE, RESET);
+                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
                     break;
-
-                // Modifica data di inizio
-                case 3:
-                    {
-                        // Richiede e legge la nuova data di inizio
-                        Data* nuovaDataInizio = leggiData();
-                        // Modifica la data di inizio dell'abbonamento tramite il setter
-                        setDataInizio(getValue(temp), nuovaDataInizio);
-                        printf("%sData di inizio modificata con successo!%s\n", VERDE, RESET);
-                        // Salva la lista aggiornata nel file
-                        salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
-                    }
+                }
+                case 3: {  // Modifica la data di inizio
+                    Data* nuovaDataInizio = leggiData();  // Legge la nuova data di inizio
+                    setDataInizio(getValue(abbonamentoDaModificare), nuovaDataInizio);  // Imposta la nuova data di inizio
+                    printf("%sData di inizio modificata con successo!%s\n", VERDE, RESET);
+                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
                     break;
-
-                // Modifica durata
-                case 4:  
-                    {
-                        // Nascondi la durata durante l'inserimento
-                        int nuovaDurata;
-                        printf("Inserisci la nuova durata (in mesi): ");
-                        scanf("%d", &nuovaDurata);
-                        // Modifica la durata dell'abbonamento tramite il setter
-                        setDurata(getValue(temp), nuovaDurata);
-                        printf("%sDurata modificata con successo!%s\n", VERDE, RESET);
-                        // Salva la lista aggiornata nel file
-                        salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
-                    }
+                }
+                case 4: {  // Modifica la durata dell'abbonamento
+                    int nuovaDurata;
+                    printf("Inserisci la nuova durata (in mesi): ");
+                    scanf("%d", &nuovaDurata);  // Legge la nuova durata
+                    setDurata(getValue(abbonamentoDaModificare), nuovaDurata);  // Imposta la nuova durata
+                    printf("%sDurata modificata con successo!%s\n", VERDE, RESET);
+                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
                     break;
+                }
+                case 0:  // Torna indietro al menu principale
+                    f = 0;  // Imposta f a 0 per uscire dal ciclo
+                    return abbonati;  // Ritorna alla lista di abbonamenti senza modifiche
 
-                // Torna indietro
-                case 0:
-                    return abbonati;
-
-                // Caso in cui l'utente inserisce una scelta non valida
-                default:
+                default:  // Caso per scelta non valida
                     printf("%sScelta non valida, riprova!%s\n", ROSSO, RESET);
                     break;
             }
+
+            // Dopo ogni modifica, esci dal ciclo interno e torna al menu principale
+            break;  // Esce dal ciclo interno dopo ogni modifica
         }
     }
 
-    // Ritorna la lista aggiornata
-    pulisciSchermo();
-    return abbonati;
+    return abbonati;  // Restituisce la lista aggiornata (se ci sono modifiche)
 }

@@ -27,10 +27,13 @@ list* eliminaPerID(list* );
 list* eliminaPerNomeCognome(list* );
 
 // Funzione di ricerca abbonamento
-list* ricercaAbbonamento(list* );
+list* ricercaAbbonamento(list* abbonati);
+
+// Funzione di ricerca abbonamento per modificarlo
+list* ricercaEModificaAbbonamento(list* );
 
 // Funzione per modificare abbonamento
-list* modificaAbbonamento(list*);
+list* modificaAbbonamento(list*,list*);
 
 //interfaccia in cui il clente potrà vedere i propri dati
 void controllo_abbonamento(abbonamento *);
