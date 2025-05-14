@@ -1,345 +1,30 @@
 Lezioni:
 ===========================
-Codice Lezione: 43
-Disciplina: Yoga
-Nome: Yoga per il Benessere
+Codice Lezione: 5
+Disciplina: Aerobica
+Nome: Aerobica (Maestro Rossi)
 Posti massimi: 12
 Posti occupati: 0
-Data: 10-06-2025
-Ora di inizio: 10:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 42
-Disciplina: Spinning
-Nome: Spinning Energico
-Posti massimi: 20
-Posti occupati: 0
-Data: 10-06-2025
-Ora di inizio: 08:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 41
-Disciplina: Pilates
-Nome: Pilates Flex
-Posti massimi: 15
-Posti occupati: 0
-Data: 09-06-2025
-Ora di inizio: 12:30
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 40
-Disciplina: Aerobica
-Nome: Aerobica Cardio
-Posti massimi: 20
-Posti occupati: 0
-Data: 09-06-2025
-Ora di inizio: 10:30
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 39
-Disciplina: Yoga
-Nome: Yoga per la Resistenza
-Posti massimi: 14
-Posti occupati: 0
-Data: 09-06-2025
-Ora di inizio: 08:30
+Data: 28-05-2025
+Ora di inizio: 16:00
 Durata (in minuti): 60
 ---------------------------
-Codice Lezione: 38
-Disciplina: Zumba
-Nome: Zumba Fitness
-Posti massimi: 25
-Posti occupati: 0
-Data: 08-06-2025
-Ora di inizio: 13:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 37
-Disciplina: Pilates
-Nome: Pilates Mat
-Posti massimi: 18
-Posti occupati: 0
-Data: 08-06-2025
-Ora di inizio: 11:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 36
-Disciplina: Aerobica
-Nome: Aerobica Avanzata
-Posti massimi: 22
-Posti occupati: 0
-Data: 08-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 35
-Disciplina: Zumba
-Nome: Zumba Dance
-Posti massimi: 25
-Posti occupati: 0
-Data: 07-06-2025
-Ora di inizio: 12:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 34
-Disciplina: Spinning
-Nome: Spinning Challenge
-Posti massimi: 18
-Posti occupati: 0
-Data: 07-06-2025
-Ora di inizio: 10:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 33
-Disciplina: Yoga
-Nome: Yoga Avanzato
-Posti massimi: 15
-Posti occupati: 0
-Data: 07-06-2025
-Ora di inizio: 08:30
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 32
-Disciplina: Aerobica
-Nome: Aerobica per la Tonificazione
-Posti massimi: 20
-Posti occupati: 0
-Data: 06-06-2025
-Ora di inizio: 12:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 31
-Disciplina: Pilates
-Nome: Pilates Iniziazione
-Posti massimi: 12
-Posti occupati: 0
-Data: 06-06-2025
-Ora di inizio: 10:30
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 30
-Disciplina: Zumba
-Nome: Zumba Power
-Posti massimi: 25
-Posti occupati: 0
-Data: 06-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 29
-Disciplina: Aerobica
-Nome: Aerobica Energetica
-Posti massimi: 18
-Posti occupati: 0
-Data: 05-06-2025
-Ora di inizio: 13:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 28
-Disciplina: Pilates
-Nome: Pilates Stretch
-Posti massimi: 20
-Posti occupati: 0
-Data: 05-06-2025
-Ora di inizio: 11:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 27
-Disciplina: Yoga
-Nome: Yoga per la Flexibilità
-Posti massimi: 14
-Posti occupati: 0
-Data: 05-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 26
-Disciplina: Spinning
-Nome: Spinning Total Body
-Posti massimi: 18
-Posti occupati: 0
-Data: 04-06-2025
-Ora di inizio: 15:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 25
-Disciplina: Pilates
-Nome: Pilates Advanced
-Posti massimi: 20
-Posti occupati: 0
-Data: 04-06-2025
-Ora di inizio: 11:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 24
-Disciplina: Aerobica
-Nome: Aerobica Intermedia
-Posti massimi: 25
-Posti occupati: 0
-Data: 04-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 23
-Disciplina: Zumba
-Nome: Zumba Fun
-Posti massimi: 20
-Posti occupati: 0
-Data: 03-06-2025
-Ora di inizio: 12:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 22
-Disciplina: Yoga
-Nome: Yoga Relaxation
-Posti massimi: 15
-Posti occupati: 0
-Data: 03-06-2025
-Ora di inizio: 10:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 21
-Disciplina: Spinning
-Nome: Spinning Advanced
-Posti massimi: 18
-Posti occupati: 0
-Data: 03-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 20
-Disciplina: Aerobica
-Nome: Aerobica Intensiva
-Posti massimi: 20
-Posti occupati: 0
-Data: 02-06-2025
-Ora di inizio: 12:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 19
-Disciplina: Pilates
-Nome: Pilates Reformer
-Posti massimi: 15
-Posti occupati: 0
-Data: 02-06-2025
-Ora di inizio: 10:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 18
-Disciplina: Zumba
-Nome: Zumba Fitness
-Posti massimi: 30
-Posti occupati: 0
-Data: 02-06-2025
-Ora di inizio: 08:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 17
-Disciplina: Spinning
-Nome: Spinning II
-Posti massimi: 20
-Posti occupati: 0
-Data: 01-06-2025
-Ora di inizio: 15:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 16
-Disciplina: Yoga
-Nome: Yoga Relax
-Posti massimi: 15
-Posti occupati: 0
-Data: 01-06-2025
-Ora di inizio: 11:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 15
-Disciplina: Pilates
-Nome: Pilates
-Posti massimi: 25
-Posti occupati: 0
-Data: 01-06-2025
-Ora di inizio: 09:00
-Durata (in minuti): 90
----------------------------
-Codice Lezione: 14
-Disciplina: Aerobica
-Nome: Aerobica Core
-Posti massimi: 18
-Posti occupati: 0
-Data: 31-05-2025
-Ora di inizio: 12:30
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 13
-Disciplina: Zumba
-Nome: Zumba Party
-Posti massimi: 25
-Posti occupati: 0
-Data: 31-05-2025
-Ora di inizio: 10:30
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 12
-Disciplina: Yoga
-Nome: Yoga Avanzato
-Posti massimi: 15
-Posti occupati: 0
-Data: 31-05-2025
-Ora di inizio: 08:30
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 11
+Codice Lezione: 4
 Disciplina: Pilates
 Nome: Pilates II
-Posti massimi: 20
-Posti occupati: 0
-Data: 30-05-2025
-Ora di inizio: 15:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 10
-Disciplina: Aerobica
-Nome: Aerobica per tutti
-Posti massimi: 22
-Posti occupati: 0
-Data: 30-05-2025
-Ora di inizio: 11:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 9
-Disciplina: Spinning
-Nome: Spinning I
-Posti massimi: 18
-Posti occupati: 0
-Data: 30-05-2025
-Ora di inizio: 09:00
-Durata (in minuti): 45
----------------------------
-Codice Lezione: 8
-Disciplina: Zumba
-Nome: Zumba Fitness
 Posti massimi: 25
 Posti occupati: 0
-Data: 29-05-2025
-Ora di inizio: 12:00
-Durata (in minuti): 60
+Data: 28-05-2025
+Ora di inizio: 18:30
+Durata (in minuti): 30
 ---------------------------
-Codice Lezione: 7
-Disciplina: Pilates
-Nome: Pilates I
+Codice Lezione: 3
+Disciplina: Yoga
+Nome: Yoga Standard
 Posti massimi: 20
 Posti occupati: 0
-Data: 29-05-2025
-Ora di inizio: 10:00
-Durata (in minuti): 60
----------------------------
-Codice Lezione: 6
-Disciplina: Yoga
-Nome: Yoga per principianti
-Posti massimi: 15
-Posti occupati: 0
-Data: 29-05-2025
-Ora di inizio: 08:00
+Data: 28-05-2025
+Ora di inizio: 16:45
 Durata (in minuti): 45
 ---------------------------
 Codice Lezione: 2
@@ -351,30 +36,345 @@ Data: 16-05-2025
 Ora di inizio: 15:35
 Durata (in minuti): 45
 ---------------------------
-Codice Lezione: 3
+Codice Lezione: 6
 Disciplina: Yoga
-Nome: Yoga Standard
-Posti massimi: 20
+Nome: Yoga per principianti
+Posti massimi: 15
 Posti occupati: 0
-Data: 28-05-2025
-Ora di inizio: 16:45
+Data: 29-05-2025
+Ora di inizio: 08:00
 Durata (in minuti): 45
 ---------------------------
-Codice Lezione: 4
+Codice Lezione: 7
 Disciplina: Pilates
-Nome: Pilates II
+Nome: Pilates I
+Posti massimi: 20
+Posti occupati: 0
+Data: 29-05-2025
+Ora di inizio: 10:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 8
+Disciplina: Zumba
+Nome: Zumba Fitness
 Posti massimi: 25
 Posti occupati: 0
-Data: 28-05-2025
-Ora di inizio: 18:30
-Durata (in minuti): 30
+Data: 29-05-2025
+Ora di inizio: 12:00
+Durata (in minuti): 60
 ---------------------------
-Codice Lezione: 5
+Codice Lezione: 9
+Disciplina: Spinning
+Nome: Spinning I
+Posti massimi: 18
+Posti occupati: 0
+Data: 30-05-2025
+Ora di inizio: 09:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 10
 Disciplina: Aerobica
-Nome: Aerobica (Maestro Rossi)
+Nome: Aerobica per tutti
+Posti massimi: 22
+Posti occupati: 0
+Data: 30-05-2025
+Ora di inizio: 11:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 11
+Disciplina: Pilates
+Nome: Pilates II
+Posti massimi: 20
+Posti occupati: 0
+Data: 30-05-2025
+Ora di inizio: 15:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 12
+Disciplina: Yoga
+Nome: Yoga Avanzato
+Posti massimi: 15
+Posti occupati: 0
+Data: 31-05-2025
+Ora di inizio: 08:30
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 13
+Disciplina: Zumba
+Nome: Zumba Party
+Posti massimi: 25
+Posti occupati: 0
+Data: 31-05-2025
+Ora di inizio: 10:30
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 14
+Disciplina: Aerobica
+Nome: Aerobica Core
+Posti massimi: 18
+Posti occupati: 0
+Data: 31-05-2025
+Ora di inizio: 12:30
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 15
+Disciplina: Pilates
+Nome: Pilates
+Posti massimi: 25
+Posti occupati: 0
+Data: 01-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 90
+---------------------------
+Codice Lezione: 16
+Disciplina: Yoga
+Nome: Yoga Relax
+Posti massimi: 15
+Posti occupati: 0
+Data: 01-06-2025
+Ora di inizio: 11:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 17
+Disciplina: Spinning
+Nome: Spinning II
+Posti massimi: 20
+Posti occupati: 0
+Data: 01-06-2025
+Ora di inizio: 15:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 18
+Disciplina: Zumba
+Nome: Zumba Fitness
+Posti massimi: 30
+Posti occupati: 0
+Data: 02-06-2025
+Ora di inizio: 08:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 19
+Disciplina: Pilates
+Nome: Pilates Reformer
+Posti massimi: 15
+Posti occupati: 0
+Data: 02-06-2025
+Ora di inizio: 10:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 20
+Disciplina: Aerobica
+Nome: Aerobica Intensiva
+Posti massimi: 20
+Posti occupati: 0
+Data: 02-06-2025
+Ora di inizio: 12:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 21
+Disciplina: Spinning
+Nome: Spinning Advanced
+Posti massimi: 18
+Posti occupati: 0
+Data: 03-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 22
+Disciplina: Yoga
+Nome: Yoga Relaxation
+Posti massimi: 15
+Posti occupati: 0
+Data: 03-06-2025
+Ora di inizio: 10:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 23
+Disciplina: Zumba
+Nome: Zumba Fun
+Posti massimi: 20
+Posti occupati: 0
+Data: 03-06-2025
+Ora di inizio: 12:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 24
+Disciplina: Aerobica
+Nome: Aerobica Intermedia
+Posti massimi: 25
+Posti occupati: 0
+Data: 04-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 25
+Disciplina: Pilates
+Nome: Pilates Advanced
+Posti massimi: 20
+Posti occupati: 0
+Data: 04-06-2025
+Ora di inizio: 11:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 26
+Disciplina: Spinning
+Nome: Spinning Total Body
+Posti massimi: 18
+Posti occupati: 0
+Data: 04-06-2025
+Ora di inizio: 15:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 27
+Disciplina: Yoga
+Nome: Yoga per la Flexibilità
+Posti massimi: 14
+Posti occupati: 0
+Data: 05-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 28
+Disciplina: Pilates
+Nome: Pilates Stretch
+Posti massimi: 20
+Posti occupati: 0
+Data: 05-06-2025
+Ora di inizio: 11:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 29
+Disciplina: Aerobica
+Nome: Aerobica Energetica
+Posti massimi: 18
+Posti occupati: 0
+Data: 05-06-2025
+Ora di inizio: 13:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 30
+Disciplina: Zumba
+Nome: Zumba Power
+Posti massimi: 25
+Posti occupati: 0
+Data: 06-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 31
+Disciplina: Pilates
+Nome: Pilates Iniziazione
 Posti massimi: 12
 Posti occupati: 0
-Data: 28-05-2025
-Ora di inizio: 16:00
+Data: 06-06-2025
+Ora di inizio: 10:30
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 32
+Disciplina: Aerobica
+Nome: Aerobica per la Tonificazione
+Posti massimi: 20
+Posti occupati: 0
+Data: 06-06-2025
+Ora di inizio: 12:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 33
+Disciplina: Yoga
+Nome: Yoga Avanzato
+Posti massimi: 15
+Posti occupati: 0
+Data: 07-06-2025
+Ora di inizio: 08:30
 Durata (in minuti): 60
+---------------------------
+Codice Lezione: 34
+Disciplina: Spinning
+Nome: Spinning Challenge
+Posti massimi: 18
+Posti occupati: 0
+Data: 07-06-2025
+Ora di inizio: 10:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 35
+Disciplina: Zumba
+Nome: Zumba Dance
+Posti massimi: 25
+Posti occupati: 0
+Data: 07-06-2025
+Ora di inizio: 12:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 36
+Disciplina: Aerobica
+Nome: Aerobica Avanzata
+Posti massimi: 22
+Posti occupati: 0
+Data: 08-06-2025
+Ora di inizio: 09:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 37
+Disciplina: Pilates
+Nome: Pilates Mat
+Posti massimi: 18
+Posti occupati: 0
+Data: 08-06-2025
+Ora di inizio: 11:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 38
+Disciplina: Zumba
+Nome: Zumba Fitness
+Posti massimi: 25
+Posti occupati: 0
+Data: 08-06-2025
+Ora di inizio: 13:00
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 39
+Disciplina: Yoga
+Nome: Yoga per la Resistenza
+Posti massimi: 14
+Posti occupati: 0
+Data: 09-06-2025
+Ora di inizio: 08:30
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 40
+Disciplina: Aerobica
+Nome: Aerobica Cardio
+Posti massimi: 20
+Posti occupati: 0
+Data: 09-06-2025
+Ora di inizio: 10:30
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 41
+Disciplina: Pilates
+Nome: Pilates Flex
+Posti massimi: 15
+Posti occupati: 0
+Data: 09-06-2025
+Ora di inizio: 12:30
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 42
+Disciplina: Spinning
+Nome: Spinning Energico
+Posti massimi: 20
+Posti occupati: 0
+Data: 10-06-2025
+Ora di inizio: 08:00
+Durata (in minuti): 45
+---------------------------
+Codice Lezione: 43
+Disciplina: Yoga
+Nome: Yoga per il Benessere
+Posti massimi: 12
+Posti occupati: 0
+Data: 10-06-2025
+Ora di inizio: 10:00
+Durata (in minuti): 45
 ---------------------------

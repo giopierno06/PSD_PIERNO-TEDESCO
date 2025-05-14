@@ -46,14 +46,17 @@ void init_vuoto() {
 list* abbonati;
 
 
-abbonamento* creaAbbonamento(void) {
+//Creazione di un abbonamneto e allocazione della memoria
+abbonamento* creaAbbonamento() {
     abbonamento* a = malloc(sizeof(abbonamento));
-    if (a != NULL) {
-        a->codice_abbonamento = 0;
-        strcpy(a->nome, "");
-        strcpy(a->cognome, "");
-        a->data_inizio= creaData(1,1,200);
-    }
+    if (a == NULL) return NULL;
+
+    a->codice_abbonamento = 0;
+    strcpy(a->nome, "");
+    strcpy(a->cognome, "");
+    a->data_inizio = NULL;
+    a->durata = 0;
+
     return a;
 }
 

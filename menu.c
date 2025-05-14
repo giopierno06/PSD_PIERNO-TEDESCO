@@ -6,6 +6,7 @@
 #include "util.h"
 #include "data.h"
 #include "list.h"
+#include "gestione_prenotazioni.h"
 #include "lezione.h"
 #include "gestione_lezioni.h"
 #include "file.h"
@@ -69,10 +70,13 @@ void menu_gestore() {
                 pulisciSchermo();
                 gestione_abbonamenti(); // Funzione per gestire gli abbonamenti
                 break;
-            /* case 2:*/
+            case 2:
+                 pulisciSchermo();
+                 gestione_prenotazioni();
+                 break;
             case 3:
-            pulisciSchermo();
-            gestione_Lezioni();
+                 pulisciSchermo();
+                 gestione_Lezioni();
             break;
             /*case 4: */
             default:

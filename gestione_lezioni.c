@@ -19,7 +19,7 @@ extern listL* lezioni;  // Modifica: usa un singolo puntatore per la lista delle
 
 //menu gestione lezioni
 void gestione_Lezioni() {
-    
+       pulisciSchermo();
        if (lezioni == NULL) {
         lezioni = lezione_newList();  // Assicurati che la lista venga inizializzata correttamente
         lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt");
@@ -260,7 +260,6 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
     listL* temp = lezioni;
     int trovato = 0;
 
-    pulisciSchermo();
     printf("\n%sVisualizzazione lezioni per la data: ",GIALLO);
     stampaData(data_input);  // Funzione per stampare la data
     printf("\n%s",RESET);
@@ -320,9 +319,9 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
     }
 
     getchar();
-    printf("\nPremi INVIO per tornare indietro.....");
+    printf("\nPremi INVIO per tornare continuare.....");
     getchar();
-    pulisciSchermo();
+
 }
 
 
@@ -535,7 +534,6 @@ void lezione_printByID(listL* lezioni, int id_input) {
         lezione* lezione_corrente = lezione_getValue(temp);
 
         if (lezione_corrente != NULL && getCodiceLezione(lezione_corrente) == id_input) {
-            Data* data_lezione = getDataLezione(lezione_corrente);
             Orario* orario_inizio = getOrarioLezione(lezione_corrente);
             int durata = getDurataLezione(lezione_corrente);
             int posti_max = getPostiMax(lezione_corrente);
@@ -573,6 +571,39 @@ void lezione_printByID(listL* lezioni, int id_input) {
     pulisciSchermo();
 }
 
+int lezione_checkByID(listL* lezioni, int id_input, Data* data_input) {
+    if (lezioni == NULL) {
+        printf("%sNESSUNA LEZIONE PRESENTE.%s\n", ROSSO, RESET);
+        getchar();
+        printf("Premi INVIO per tornare indietro..........\n");
+        getchar();
+        pulisciSchermo();
+        return 0;
+    }
+
+    listL* temp = lezioni;
+    int trovato = 0;
+
+    while (temp != NULL) {
+        lezione* lezione_corrente = lezione_getValue(temp);
+
+        if (lezione_corrente != NULL &&
+            getCodiceLezione(lezione_corrente) == id_input &&
+            confrontaDate(getDataLezione(lezione_corrente), data_input) == 0) {
+
+            trovato = 1;
+            break;
+        }
+
+        temp = lezione_getNext(temp);
+    }
+
+    if (!trovato) {
+        printf("\n%sNessuna lezione trovata con ID %d nella data specificata.%s\n", ROSSO, id_input, RESET);
+    }
+
+    return trovato;
+}
 
 // Funzione per visualizzare tutte le lezioni
 void visualizzaLezioni(listL* lezioni) {
@@ -581,6 +612,7 @@ void visualizzaLezioni(listL* lezioni) {
     int id=0;
 
     while (1) {
+        pulisciSchermo();
         // Mostra il menu per la scelta dell'utente
         printf("\n%s===================================\n", GIALLO);
         printf("          Scegli un'opzione:\n");

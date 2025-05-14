@@ -18,6 +18,8 @@ void lezione_printByID(listL*, int);
 // Funzione per stampare le lezioni di un giorno specifico (data)
 void lezione_printByDate(listL*, Data* );
 
+int lezione_checkByID(listL*, int, Data*) ;
+
 listL* modificaLezione(listL* );
 
 // Funzione per eliminare una lezione dalla lista

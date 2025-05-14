@@ -5,6 +5,7 @@
 #include "data.h"
 #include "orario.h"
 #include "util.h"
+#include "prenotazioni.h"  
 #include "list_Lezioni.h"
 
 // Definizione di colori per output formattato nel terminale

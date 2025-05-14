@@ -662,6 +662,7 @@ list* ricercaAbbonamento(list* abbonati) {
                     if (getCodiceAbbonamento(getValue(curr)) == id) {  // Usa il getter per l'ID
                         pulisciSchermo();
                         trovato = 1;  // Segna che l'abbonamento è stato trovato
+                        stampaDettagliAbbonamento(getValue(curr));  // Stampa il dettaglio
                         return curr;  // Esce dalla lista e restituisce l'abbonamento trovato
                     }
                     curr = getNext(curr);  // Passa al prossimo abbonamento
@@ -680,41 +681,71 @@ list* ricercaAbbonamento(list* abbonati) {
             }
 
             case 2: {  // Ricerca per nome e cognome
-                char nome[50], cognome[50];
-                int trovato = 0;
+    char nome[50], cognome[50];
+    list* risultati[100];  // Array di puntatori ai nodi trovati
+    int count = 0;
 
-                printf("Inserisci nome: ");
-                fgets(nome, sizeof(nome), stdin);
-                nome[strcspn(nome, "\n")] = 0;
+    printf("Inserisci nome: ");
+    fgets(nome, sizeof(nome), stdin);
+    nome[strcspn(nome, "\n")] = 0;
 
-                printf("Inserisci cognome: ");
-                fgets(cognome, sizeof(cognome), stdin);
-                cognome[strcspn(cognome, "\n")] = 0;
+    printf("Inserisci cognome: ");
+    fgets(cognome, sizeof(cognome), stdin);
+    cognome[strcspn(cognome, "\n")] = 0;
 
-                pulisciSchermo();
-                printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
+    pulisciSchermo();
+    printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
 
-                list* curr = abbonati;
-                while (curr != NULL) {
-                    void* abbonamento = getValue(curr);
-                    if (strcmp(getNome(abbonamento), nome) == 0 &&
-                        strcmp(getCognome(abbonamento), cognome) == 0) {
+    list* curr = abbonati;
+    while (curr != NULL) {
+        void* abbonamento = getValue(curr);
+        if (strcmp(getNome(abbonamento), nome) == 0 &&
+            strcmp(getCognome(abbonamento), cognome) == 0) {
+            
+            stampaDettagliAbbonamento(abbonamento);  // Stampa il dettaglio
+            risultati[count++] = curr;  // Salva il nodo
+        }
+        curr = getNext(curr);
+    }
 
-                        stampaDettagliAbbonamento(abbonamento);  // Mostra i dettagli
-                        trovato = 1;
-                    }
-                    curr = getNext(curr);
-                }
+    if (count == 0) {
+        printf("%sNessun abbonamento trovato!%s\n", ROSSO, RESET);
+        printf("Premi INVIO per continuare...\n");
+        getchar();
+        pulisciSchermo();
+        break;
+    }
 
-                if (!trovato) {
-                    printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
-                }
+    // Se è stato trovato almeno un abbonamento
+    printf("\nInserisci l'ID dell'abbonamento da selezionare (0 se stai solo cercando o vuoi tornare indietro): ");
+    char buffer[100];
+    fgets(buffer, sizeof(buffer), stdin);
+    buffer[strcspn(buffer, "\n")] = 0;
+    char* endptr;
+    int id_scelto = strtol(buffer, &endptr, 10);
 
-                printf("\nPremi INVIO per continuare...\n");
-                getchar();
-                pulisciSchermo();
-                break;
-            }
+    if (endptr == buffer || *endptr != '\0') {
+        printf("%sID non valido!%s\n", ROSSO, RESET);
+        printf("Premi INVIO per continuare...\n");
+        getchar();
+        pulisciSchermo();
+        break;
+    }
+
+    for (int i = 0; i < count; i++) {
+        void* abbonamento = getValue(risultati[i]);
+        if (getCodiceAbbonamento(abbonamento) == id_scelto) {
+            return risultati[i];  // Nodo selezionato
+        }
+    }
+
+    // ID non trovato nei risultati
+    printf("%sID non trovato tra i risultati!%s\n", ROSSO, RESET);
+    printf("Premi INVIO per continuare...\n");
+    getchar();
+    pulisciSchermo();
+    break;
+}
 
             default:  // Caso per scelta non valida
                 pulisciSchermo();

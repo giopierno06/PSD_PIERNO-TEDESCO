@@ -65,6 +65,8 @@
     "list.h": "c",
     "gestione_lezioni.h": "c",
     "gestione_abbonamenti.h": "c",
-    "list_lezioni.h": "c"
+    "list_lezioni.h": "c",
+    "gestione_prenotazioni.h": "c",
+    "list_prenotazioni.h": "c"
   }
 }

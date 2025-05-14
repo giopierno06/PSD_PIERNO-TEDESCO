@@ -82,7 +82,7 @@ void lezione_printList(listL* l) {
         return;
     }
 
-    int count_corrupt = 0;
+   
 
     while (l != NULL) {
         if (l->value != NULL) {

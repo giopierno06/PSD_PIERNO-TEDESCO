@@ -223,9 +223,6 @@ void visualizzaListaOrdinata(list* abbonati) {
         if(temp==NULL){
         pulisciSchermo();
         break;}
-        printf("%sAbbonamento trovato!%s\n", VERDE, RESET);
-        printf("------------------------------------------\n");
-        stampaDettagliAbbonamento(temp->value);
         printf("Premere INVIO per continuare...\n");
         getchar();  // Attende che l'utente premi INVIO
         pulisciSchermo(); 
