@@ -23,14 +23,18 @@
 #define RESET    "\033[0m"
 #define BLU      "\033[1;34m"   
 
-extern listP* prenotazioni;
+extern listP* lista_prenotazioni;
 extern list* abbonati;
 extern listL* lezioni;
 
 
 void gestione_prenotazioni() {
-    if (prenotazioni == NULL)
-        prenotazioni = prenotazione_newList();
+    
+    if (lista_prenotazioni == NULL)
+    lista_prenotazioni = caricaPrenotazioniDaFile(lista_prenotazioni, "prenotazioni.txt");
+    
+    if (lista_prenotazioni == NULL)
+        lista_prenotazioni = prenotazione_newList();
     
     
     // Se gli abbonati non sono stati ancora caricati, li carica dal file
@@ -85,7 +89,7 @@ void gestione_prenotazioni() {
 
             case 1:
                 pulisciSchermo();
-                aggiungi_prenotazione(&prenotazioni,abbonati,lezioni);
+                aggiungi_prenotazione();
                 break;
 
             case 2:
@@ -94,7 +98,7 @@ void gestione_prenotazioni() {
              break;
 
             case 4:
-                prenotazione_printList(prenotazioni);
+                visualizzaPrenotazioni( lista_prenotazioni,abbonati);
                 getchar();
                 break;
 
@@ -106,54 +110,211 @@ void gestione_prenotazioni() {
     }
 }
 
-void aggiungi_prenotazione(listP** lista, list* abbonati, listL* lezioni) {
+void aggiungi_prenotazione() {
+    extern listP* lista_prenotazioni;
+    extern list* abbonati;
+    extern listL* lezioni;
+
     // Creazione di una nuova prenotazione
-    prenotazione *nuova_prenotazione = creaPrenotazione();
+    prenotazione* nuova_prenotazione = creaPrenotazione();
     if (!nuova_prenotazione) {
         printf("Errore allocazione memoria per prenotazione\n");
         return;
     }
 
-    // Recupera il massimo codice di prenotazione esistente e incrementalo
-    int max_id = getMaxCodicePrenotazione(*lista);
+    // Assegna un nuovo codice prenotazione
+    int max_id = getMaxCodicePrenotazione(lista_prenotazioni);
     prenotazione_setCodicePrenotazione(nuova_prenotazione, max_id + 1);
 
-    // Cerca l'abbonamento (utilizzando la funzione che restituisce un nodo)
-    list* nodo_abbonamento = ricercaAbbonamento(abbonati);  // Restituisce list*
+    // Selezione abbonamento
+    list* nodo_abbonamento = ricercaAbbonamento(abbonati);
     if (nodo_abbonamento == NULL) {
         printf("Abbonamento non trovato.\n");
-         free(nuova_prenotazione);
+        free(nuova_prenotazione);
         return;
     }
 
-    abbonamento* abbonamento_prenotazione = (abbonamento*) getValue(nodo_abbonamento);  // Estrae il valore
+    abbonamento* abbonamento_prenotazione = (abbonamento*) getValue(nodo_abbonamento);
 
-    // Imposta il codice abbonamento nella prenotazione
+    // Controllo scadenza abbonamento
+    if (abbonamento_isScaduto(abbonamento_prenotazione)) {
+        printf("%sErrore: L'abbonamento è scaduto. Non puoi prenotare.%s\n",ROSSO,RESET);
+        printf("Premi INVIO per tornare indietro..........");
+        getchar();
+        free(nuova_prenotazione);
+        return;
+    }
+
     prenotazione_setCodiceAbbonamento(nuova_prenotazione, getCodiceAbbonamento(abbonamento_prenotazione));
 
-    // Chiedi all'utente di inserire la data della lezione
+    // Inserisci data della lezione
     printf("Data della lezione che vuoi prenotare: ");
     Data* data_prenotazione = leggiData();
 
-    // Mostra le lezioni disponibili per quella data
+    // Mostra lezioni disponibili
     lezione_printByDate(lezioni, data_prenotazione);
-    
-    // Chiedi all'utente di inserire l'ID della lezione da prenotare
+
     printf("Inserisci il codice della lezione che vuoi prenotare (0 per annullare): ");
     int codice_lezione;
     scanf("%d", &codice_lezione);
 
-    // Verifica se la lezione esiste per quel codice e data
-    int esito = lezione_checkByID(lezioni,codice_lezione,data_prenotazione);
-    if (esito == 1) {
-        prenotazione_setCodiceLezione(nuova_prenotazione, codice_lezione);
-    } else {
+    if (codice_lezione == 0) {
+        free(nuova_prenotazione);
+        return;
+    }
+
+    // Controllo prenotazione duplicata (modificato: aggiunto parametro lezioni)
+    if (prenotazione_esistePerAbbonamentoELezione(lista_prenotazioni, lezioni,
+            getCodiceAbbonamento(abbonamento_prenotazione), codice_lezione, data_prenotazione)) {
+        printf("%sErrore: Hai già una prenotazione per questa lezione in questa data.%s\n",ROSSO,RESET);
+        getchar();
+        printf("Premi INVIO per tornare indietro.......");
+        getchar();
+        free(nuova_prenotazione);
+        return;
+    }
+
+    // Controlla esistenza lezione e posti disponibili
+    int esito = lezione_checkByID(lezioni, codice_lezione, data_prenotazione);
+    if (esito != 1) {
         printf("Errore: Lezione non trovata.\n");
         free(nuova_prenotazione);
         return;
-        
     }
 
+    // Ottieni la lezione e controlla disponibilità
+    lezione* l = getLezioneByID(lezioni, codice_lezione);
+    if (l == NULL) {
+        printf("Errore interno: lezione non accessibile.\n");
+        free(nuova_prenotazione);
+        return;
+    }
+
+    if (getPostiOccupati(l) >= getPostiMax(l)) {
+        printf("Errore: la lezione è già piena (%d/%d).\n", getPostiOccupati(l), getPostiMax(l));
+        free(nuova_prenotazione);
+        return;
+    }
+
+    // Incrementa i posti occupati
+    addPostiOccupati(l);
+
+    // Imposta la lezione sulla prenotazione
+    prenotazione_setCodiceLezione(nuova_prenotazione, codice_lezione);
+
+    // Conferma prenotazione
+    printf("\n%s==================PRENOTAZIONE====================", VERDE);
+    printf("\nConfermiamo la tua prenotazione con codice: %d\n", getCodicePrenotazione(nuova_prenotazione));
+    abbonamento* temp = getAbbonamentoByID(abbonati, prenotazione_getCodiceAbbonamento(nuova_prenotazione));
+    printf("A nome di %s %s ", getNome(temp), getCognome(temp));
+    printf("Codice Abbonamento: %d\n", prenotazione_getCodiceAbbonamento(nuova_prenotazione));
+    lezione* templ = getLezioneByID(lezioni, prenotazione_getCodiceLezione(nuova_prenotazione));
+    printf("Alla lezione con codice: %d di %s in data : \n", prenotazione_getCodiceLezione(nuova_prenotazione), getNomeLezione(templ));
+    stampaData(getDataLezione(templ));
+    printf(" Alle ore: ");
+    stampaOrario(getOrarioLezione(templ));
+    printf("\n==================================================%s\n", RESET);
+
+    getchar();
+    printf("Premi INVIO per tornare indietro.....");
+    getchar();
+    pulisciSchermo();
+
     // Inserisci la prenotazione nella lista
-    *lista = prenotazione_consList(nuova_prenotazione, *lista);
+    lista_prenotazioni = prenotazione_consList(nuova_prenotazione, lista_prenotazioni);
+
+     salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
+}
+
+void visualizzaPrenotazioni(listP* lista_prenotazioni, list* lista_abbonati) {
+    int scelta = -1;
+    pulisciSchermo();
+    printf("\n%s--- Visualizzazione Prenotazioni --- %s\n", BLU, RESET);
+    printf("%s1.%s Visualizza %sTUTTE%s le prenotazioni\n", GIALLO, RESET, BLU, RESET);
+    printf("%s2.%s Visualizza prenotazioni %sper lezione%s\n", GIALLO, RESET, BLU, RESET);
+    printf("%s0.%s Torna indietro\n", GIALLO, RESET);
+
+    while (1) {
+        printf("%sScelta:%s ", BLU, RESET);
+        if (scanf("%d", &scelta) != 1) {
+            while(getchar() != '\n');  // pulizia buffer input non valido
+            printf("%sInput non valido. Riprova.%s\n", ROSSO, RESET);
+            continue;
+        }
+        // NON pulire qui il newline!
+
+        switch (scelta) {
+            case 1:
+                pulisciSchermo();
+                prenotazione_printList(lista_prenotazioni);
+                printf("Premi INVIO per tornare indietro...");
+                getchar();
+                return;    // esce dalla funzione
+
+            case 2: {
+                int codice_lezione;
+                printf("Inserisci il codice della lezione (0 per tornare indietro): ");
+                if (scanf("%d", &codice_lezione) != 1) {
+                    while(getchar() != '\n'); // pulizia buffer input non valido
+                    printf("Input non valido.\n");
+                    return;
+                }
+                while(getchar() != '\n'); // pulizia newline rimasto da scanf
+
+                if (codice_lezione == 0) return;
+                pulisciSchermo();
+                visualizzaPrenotazioniLezione(codice_lezione, lista_prenotazioni, lista_abbonati);
+                return;
+            }
+
+            case 0:
+                return;
+
+            default:
+                printf("%sInput non valido. Riprova.%s\n", ROSSO, RESET);
+                break;
+        }
+    }
+}
+
+void visualizzaPrenotazioniLezione(int codice_lezione, listP* lista_prenotazioni, list* lista_abbonati) {
+    listP* corrente = lista_prenotazioni;
+    int trovate = 0;
+
+    // Recupera la lezione
+    lezione* l = getLezioneByID(lezioni,codice_lezione);
+    if (l == NULL) {
+        printf("Lezione con codice %d non trovata.\n", codice_lezione);
+        printf("Premi INVIO per tornare indietro...");
+        return;
+    }
+
+    // Stampa dati della lezione
+    stampaDettagliLezione(l);
+
+    printf("%-20s %-10s %-15s %-15s\n", "Codice Prenotazione", "ID Utente", "Nome", "Cognome");
+    printf("--------------------------------------------------------%s\n", RESET);
+
+    while (corrente != NULL) {
+        prenotazione* p = prenotazione_getValue(corrente);
+        if (p != NULL && prenotazione_getCodiceLezione(p) == codice_lezione) {
+            abbonamento* a = getAbbonamentoByID(lista_abbonati, prenotazione_getCodiceAbbonamento(p));
+            if (a != NULL) {
+                printf("%-20d %-10d %-15s %-15s\n",
+                       getCodicePrenotazione(p),
+                       prenotazione_getCodiceAbbonamento(p),
+                       getNome(a),
+                       getCognome(a));
+                trovate++;
+            }
+        }
+        corrente = prenotazione_getNext(corrente);
+    }
+
+    if (trovate == 0) {
+        printf("Nessuna prenotazione trovata per questa lezione.\n");
+    }
+
+    printf("--------------------------------------------------------\n");
+    printf("Premi INVIO per tornare indietro.....");
 }

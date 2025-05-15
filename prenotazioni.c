@@ -2,10 +2,13 @@
 #include <string.h>
 #include <stdio.h>
 #include "prenotazioni.h"
+#include "abbonamento.h"
 #include "lezione.h"
 #include "data.h"
 #include "orario.h"
 #include "util.h"
+#include "file.h"
+#include "list.h"
 #include "list_Lezioni.h"
 #include "list_prenotazioni.h"
 
@@ -28,7 +31,9 @@ struct prenotazione {
     int codice_lezione;       // Codice identificativo della lezione
 };
 
-listL* prenotazioni;
+listP* lista_prenotazioni=NULL;
+extern list* abbonati;
+extern listL* lezioni;
 
 
 /**
@@ -125,13 +130,13 @@ void prenotazione_distruggi(prenotazione* p) {
 //   - prenotazioni: puntatore alla lista di prenotazioni
 // Restituisce:
 //   - Il valore massimo del campo 'codice_prenotazione' trovato nella lista
-int getMaxCodicePrenotazione(listP* prenotazioni) {
+int getMaxCodicePrenotazione(listP* prenotazionii) {
     int max = 0;  // Inizializza il massimo a 0 (presuppone codici positivi)
 
     // Itera finché la lista non è vuota
-    while (!prenotazione_emptyList(prenotazioni)) {
+    while (!prenotazione_emptyList(prenotazionii)) {
         // Ottiene il primo elemento della lista (senza modificarla)
-        prenotazione *p = prenotazione_getFirst(prenotazioni);
+        prenotazione *p = prenotazione_getFirst(prenotazionii);
 
         // Usa il getter per accedere al codice prenotazione
         int codice = getCodicePrenotazione(p);
@@ -142,7 +147,7 @@ int getMaxCodicePrenotazione(listP* prenotazioni) {
         }
 
         // Passa al resto della lista (esclude il primo elemento)
-        prenotazioni = prenotazione_tailList(prenotazioni);
+        prenotazionii = prenotazione_tailList(prenotazionii);
     }
 
     // Ritorna il massimo codice trovato
@@ -150,14 +155,64 @@ int getMaxCodicePrenotazione(listP* prenotazioni) {
 }
 
 
-void stampaDettagliPrenotazione(prenotazione *p) {
+void stampaDettagliPrenotazione(prenotazione* p) {
     if (p == NULL) {
         printf("Prenotazione non disponibile.\n");
         return;
     }
-   // printf("========PRENOTAZIONE====================")
-    printf("Codice Prenotazione: %d\n", p->codice_prenotazione);
 
-    printf("Codice Abbonamento: %d\n", p->codice_abbonamento);
-    printf("Codice Lezione: %d\n", p->codice_lezione);
+    abbonamento* a = getAbbonamentoByID(abbonati, p->codice_abbonamento);
+    lezione* l = getLezioneByID(lezioni, p->codice_lezione);
+
+    if (a == NULL || l == NULL) {
+        printf("Errore: dati abbonamento o lezione mancanti.\n");
+       return;
+    }
+
+    // Stampa una sola riga con tutti i dati
+    printf("%-20d %-10d %-15s %-15s %-10d %-15s ",
+           p->codice_prenotazione,
+           p->codice_abbonamento,
+           getNome(a),
+           getCognome(a),
+           p->codice_lezione,
+           getDisciplinaLezione(l));
+
+    // Stampa la data in formato gg/mm/aaaa
+    stampaData(getDataLezione(l));
+    printf(" ");
+
+    // Stampa l’orario in formato hh:mm
+    stampaOrario(getOrarioLezione(l));
+
+    printf("\n-------------------------------------------------------------------------------------------------------------\n");
+}
+
+int prenotazione_esistePerAbbonamentoELezione(listP* lista, listL* lezioni, int codice_abbonamento, int codice_lezione, Data* data) {
+    if (!lista || !data || !lezioni) return 0;
+
+    listP* nodo = lista;
+
+    while (nodo != NULL) {
+        prenotazione* p = (prenotazione*) prenotazione_getValue(nodo); 
+
+        if (p != NULL) {
+            int codice_ab = p->codice_abbonamento;
+            int codice_lez = p->codice_lezione;
+
+            if (codice_ab == codice_abbonamento && codice_lez == codice_lezione) {
+                lezione* l = getLezioneByID(lezioni, codice_lez);
+                if (l != NULL) {
+                    Data* data_lezione = getDataLezione(l);
+                    if (confrontaDate(data_lezione, data) == 0) {
+                        return 1; // prenotazione già esiste
+                    }
+                }
+            }
+        }
+
+        nodo = prenotazione_getNext(nodo);
+    }
+
+    return 0; // non trovato
 }

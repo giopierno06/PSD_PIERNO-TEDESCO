@@ -212,6 +212,57 @@ void stampaDettagliAbbonamento(abbonamento* a) {
     printf("\n--------------------------------------------\n");
 }
 
+// Funzione che restituisce un puntatore a un abbonamento dato il suo codice identificativo
+// Parametri:
+//   - abbonati: lista degli abbonamenti (list*)
+//   - codice: codice identificativo dell'abbonamento da cercare
+// Ritorna:
+//   - Puntatore all'abbonamento trovato (abbonamento*), oppure NULL se non esiste
+abbonamento* getAbbonamentoByID(list* abbonati, int codice) {
+    list* curr = abbonati;  // Inizializza il puntatore al primo nodo della lista
+
+    // Cicla attraverso la lista fino alla fine
+    while (curr != NULL) {
+        abbonamento* abb = (abbonamento*) getValue(curr);  // Estrae l'abbonamento dal nodo corrente
+
+        // Controlla se il codice dell'abbonamento corrisponde a quello cercato
+        if (getCodiceAbbonamento(abb) == codice) {
+            return abb;  // Ritorna il puntatore all'abbonamento trovato
+        }
+
+        curr = getNext(curr);  // Passa al nodo successivo
+    }
+
+    return NULL;  // Nessun abbonamento con il codice specificato trovato
+}
+
+
+int abbonamento_isScaduto(abbonamento* ab) {
+    if (!ab) return 1; // consideriamo scaduto se abbonamento nullo
+
+    Data* data_scadenza = aggiungiMesi(ab->data_inizio,ab->durata); // funzione che ti restituisce la data di scadenza
+
+    Data* data_oggi = oggi();
+    if (!data_oggi) {
+        // se non riesci a ottenere la data odierna, per sicurezza consideriamo scaduto
+        return 1;
+    }
+
+    int confronto = confrontaDate(data_oggi, data_scadenza);
+
+    free(data_oggi);
+
+    // Se data odierna > data scadenza, l'abbonamento è scaduto
+    if (confronto == 1) {
+        return 1;
+    }
+
+    return 0;
+}
+
+
+
+
 
 // Funzione per distruggere un abbonamento
 void distruggiAbbonamento(abbonamento* a) {

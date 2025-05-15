@@ -5,6 +5,8 @@
 #include "abbonamento.h"
 #include "lezione.h"
 #include "data.h"
+#include "prenotazioni.h"
+#include "list_prenotazioni.h"
 
 
 // Carica gli abbonamenti da un file di testo formattato.
@@ -228,4 +230,82 @@ void salvaLezioniSuFile(listL* l, const char* nome_file) {
 
     fclose(file);
     printf("Lezioni salvate con successo nel file %s\n", nome_file);
+}
+
+
+listP* caricaPrenotazioniDaFile(listP* lista, const char* nome_file) {
+    FILE* file = fopen(nome_file, "r");
+    if (file == NULL) {
+        printf("Errore nell'aprire il file %s\n", nome_file);
+        return lista;
+    }
+
+    char buffer[100];
+    fgets(buffer, sizeof(buffer), file);  // "Prenotazioni:\n"
+    fgets(buffer, sizeof(buffer), file);  // "===========================\n"
+
+    int codice_prenotazione_temp;
+    int codice_abbonamento_temp;
+    int codice_lezione_temp;
+
+    while (fscanf(file, "Codice Prenotazione: %d\n", &codice_prenotazione_temp) == 1) {
+        prenotazione* nuova_prenotazione = creaPrenotazione();
+        if (nuova_prenotazione == NULL) {
+            printf("Errore nell'allocazione della prenotazione.\n");
+            fclose(file);
+            return lista;
+        }
+
+        prenotazione_setCodicePrenotazione(nuova_prenotazione, codice_prenotazione_temp);
+
+        fscanf(file, "Codice Abbonamento: %d\n", &codice_abbonamento_temp);
+        prenotazione_setCodiceAbbonamento(nuova_prenotazione, codice_abbonamento_temp);
+
+        fscanf(file, "Codice Lezione: %d\n", &codice_lezione_temp);
+        prenotazione_setCodiceLezione(nuova_prenotazione, codice_lezione_temp);
+
+        fgets(buffer, sizeof(buffer), file);  // separatore o newline
+
+        lista = prenotazione_consList(nuova_prenotazione, lista);
+    }
+
+    fclose(file);
+    return lista;
+}
+
+
+
+void salvaPrenotazioniSuFile(listP* lista, const char* nome_file) {
+    FILE* file = fopen(nome_file, "w");
+    if (file == NULL) {
+        printf("Errore nell'aprire il file %s\n", nome_file);
+        return;
+    }
+
+    fprintf(file, "Prenotazioni:\n");
+    fprintf(file, "===========================\n");
+
+    while (lista != NULL) {
+        prenotazione* p = prenotazione_getValue(lista);
+
+        if (p == NULL) {
+            lista = prenotazione_getNext(lista);
+            continue;
+        }
+
+        int codice_prenotazione = getCodicePrenotazione(p);
+        int codice_abbonamento = prenotazione_getCodiceAbbonamento(p);
+        int codice_lezione = prenotazione_getCodiceLezione(p);
+
+        fprintf(file, "Codice Prenotazione: %d\n", codice_prenotazione);
+        fprintf(file, "Codice Abbonamento: %d\n", codice_abbonamento);
+        fprintf(file, "Codice Lezione: %d\n", codice_lezione);
+
+        fprintf(file, "---------------------------\n");
+
+        lista = prenotazione_getNext(lista);
+    }
+
+    fclose(file);
+    printf("Prenotazioni salvate con successo nel file %s\n", nome_file);
 }

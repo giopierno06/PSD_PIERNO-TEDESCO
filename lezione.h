@@ -120,6 +120,10 @@ void setDurataLezione(lezione*, short int);
 */
 void stampaDettagliLezione(lezione*);
 
+/*
+* Funzione che restituisce un puntatore alla lezione dato il suo codice identificativo
+*/
+lezione* getLezioneByID(listL* , int);
 
 /*
  * Restituisce il codice abbonamento più alto

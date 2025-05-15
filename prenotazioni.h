@@ -3,6 +3,7 @@
 
 typedef struct prenotazione prenotazione;
 #include "list_prenotazioni.h"
+#include "list_lezioni.h"
 
 //==============================//
 //     PROTOTIPI FUNZIONI GET   //
@@ -15,7 +16,7 @@ prenotazione* creaPrenotazione(void);
  *   p Puntatore alla prenotazione
  *  Il codice della prenotazione, oppure -1 in caso di errore
  */
-int prenotazione_getCodicePrenotazione(prenotazione*);
+int getCodicePrenotazione(prenotazione*);
 
 /**
  * Restituisce il codice dell'abbonamento.
@@ -71,5 +72,7 @@ int getMaxCodicePrenotazione(listP* );
 
 void stampaDettagliPrenotazione(prenotazione *);
 
+
+int prenotazione_esistePerAbbonamentoELezione(listP*, listL* , int, int , Data*);
 
 #endif // PRENOTAZIONE_H

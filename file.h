@@ -3,6 +3,7 @@
 
 #include "list.h"
 #include "list_Lezioni.h"
+#include "list_prenotazioni.h"
 
 
 // Funzione per caricare gli abbonamenti da un file
@@ -18,5 +19,9 @@ listL* caricaLezioniDaFile(listL* l, const char* nome_file);
 // Funzione per salvare le lezioni su un file
 void salvaLezioniSuFile(listL* l, const char* nome_file);
 
+
+listP* caricaPrenotazioniDaFile(listP* lista, const char* nome_file);
+
+void salvaPrenotazioniSuFile(listP* lista, const char* nome_file);
 
 #endif

@@ -91,7 +91,11 @@ void prenotazione_printList(listP* l) {
         printf("%sLa lista delle prenotazioni è vuota.%s\n",ROSSO,RESET);
         return;  // Esce dalla funzione se la lista è vuota
     }
-
+     printf("\n%sElenco completo delle prenotazioni:\n",BLU);
+    printf("-------------------------------------------------------------------------------------------------------------\n");
+    printf("%-20s %-10s %-15s %-15s %-10s %-15s %-10s %-10s\n",
+           "Codice Prenotazione", "ID Utente", "Nome", "Cognome", "Lezione", "Disciplina", "Data", "Orario");
+    printf("-------------------------------------------------------------------------------------------------------------%s\n",RESET);
     // Altrimenti, stampa tutti gli abbonamenti
     while (l != NULL) {
         // Stampa dei dettagli della prenotazione

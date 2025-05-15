@@ -8,8 +8,10 @@
 
 
 void gestione_prenotazioni();
-void aggiungi_prenotazione(listP** , list*, listL*);
+void aggiungi_prenotazione();
 
+void visualizzaPrenotazioni(listP*, list*);
 
+void visualizzaPrenotazioniLezione(int, listP* , list*);
 
 #endif

@@ -80,10 +80,12 @@ void stampaDettagliAbbonamento(abbonamento* );
 void distruggiAbbonamento(abbonamento*);
 
 
+// Funzione che restituisce un puntatore a un abbonamento dato il suo codice identificativo
+abbonamento* getAbbonamentoByID(list* , int );
 
-// =========================
-// COSTANTE DI ABBONAMENTO NULLO
-// =========================
+
+//
+int abbonamento_isScaduto(abbonamento*);
 
 
 #endif  // Fine della guardia di inclusione

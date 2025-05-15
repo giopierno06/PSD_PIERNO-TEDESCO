@@ -2,6 +2,7 @@
 #define LIST_PRENOTAZIONI_H
 
 typedef struct listP listP;
+#include "prenotazioni.h"
 
 // ===========================
 // PROTOTIPI DELLE FUNZIONI

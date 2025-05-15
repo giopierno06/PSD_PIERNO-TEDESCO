@@ -27,7 +27,7 @@ list* eliminaPerID(list* );
 list* eliminaPerNomeCognome(list* );
 
 // Funzione di ricerca abbonamento
-list* ricercaAbbonamento(list* abbonati);
+list* ricercaAbbonamento(list* );
 
 // Funzione di ricerca abbonamento per modificarlo
 list* ricercaEModificaAbbonamento(list* );

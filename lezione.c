@@ -91,6 +91,8 @@ Orario* getOrarioLezione(const lezione* l) {
     return l->ora_di_inizio;
 }
 
+
+
 // Durata della lezione
 short int getDurataLezione(const lezione* l) {
     return l->durata;
@@ -178,6 +180,33 @@ void stampaDettagliLezione(lezione* l) {
 
     free(orario_fine); // Dealloca orario creato dinamicamente
 }
+
+
+
+// Funzione che restituisce un puntatore alla lezione dato il suo codice identificativo
+// Parametri:
+//   - lezioni: lista delle lezioni (listL*)
+//   - codice: codice identificativo della lezione da cercare
+// Ritorna:
+//   - Puntatore alla lezione trovata (lezione*), oppure NULL se non esiste
+lezione* getLezioneByID(listL* lezioni, int codice) {
+    listL* curr = lezioni;  // Inizializza il puntatore al primo nodo della lista
+
+    // Cicla attraverso la lista fino alla fine
+    while (curr != NULL) {
+        lezione* l = (lezione*) lezione_getValue(curr);  // Estrae la lezione dal nodo corrente
+
+        // Controlla se il codice della lezione corrisponde a quello cercato
+        if (getCodiceLezione(l) == codice) {
+            return l;  // Ritorna il puntatore alla lezione trovata
+        }
+
+        curr = lezione_getNext(curr);  // Passa al nodo successivo
+    }
+
+    return NULL;  // Nessuna lezione con il codice specificato trovata
+}
+
 
 // Funzione: getMaxCodiceLezione
 // ------------------------------
