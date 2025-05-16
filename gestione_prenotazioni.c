@@ -224,6 +224,7 @@ void aggiungi_prenotazione() {
     lista_prenotazioni = prenotazione_consList(nuova_prenotazione, lista_prenotazioni);
 
      salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
+     salvaLezioniSuFile(lezioni, "lezioni.txt"); //Salva l'implementazione dei posti occupati
 }
 
 void visualizzaPrenotazioni(listP* lista_prenotazioni, list* lista_abbonati) {
