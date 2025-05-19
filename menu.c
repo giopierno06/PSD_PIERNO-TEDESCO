@@ -19,8 +19,9 @@
 #define RESET    "\033[0m"
 #define BLU      "\033[1;34m"   
 
-
+extern listP* lista_prenotazioni;
 extern list* abbonati;
+extern listL* lezioni;
 
 // Funzione che mostra il menu iniziale (menu principale)
 void menu_iniziale() {
@@ -77,8 +78,12 @@ void menu_gestore() {
             case 3:
                  pulisciSchermo();
                  gestione_Lezioni();
-            break;
-            /*case 4: */
+                 break;
+            case 4:
+                 reportGestore(lista_prenotazioni,lezioni);
+                 pulisciSchermo();
+                 break;
+            
             default:
                 pulisciSchermo();
                 messaggio_errore(); // Se la scelta non è valida
@@ -167,7 +172,35 @@ list* controlloCliente() {
 
 // Funzione che mostra il menu clienti
 void menu_cliente() {
+     
+
+     if (lista_prenotazioni == NULL)
+    lista_prenotazioni = caricaPrenotazioniDaFile(lista_prenotazioni, "prenotazioni.txt");
     
+    if (lista_prenotazioni == NULL)
+        lista_prenotazioni = prenotazione_newList();
+    
+    
+    // Se gli abbonati non sono stati ancora caricati, li carica dal file
+    if (abbonati == NULL)
+        abbonati = caricaAbbonamentiDaFile(abbonati, "abbonamenti.txt");
+
+    // Se la lista è ancora vuota (file vuoto o non esistente), inizializza una lista nuova
+    if (abbonati == NULL)
+        abbonati = newList();
+
+    
+    // Se gli lezioni non sono stati ancora caricati, li carica dal file
+    if (lezioni == NULL)
+        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt");
+
+      // Se la lista è ancora vuota (file vuoto o non esistente), inizializza una lista nuova
+    if (lezioni == NULL)
+        lezioni = lezione_newList();
+
+
+
+
     list* nodo = controlloCliente();
     if (nodo == NULL) {
          return;
@@ -187,7 +220,7 @@ void menu_cliente() {
         printf("%s 1.%s Controlla Validità Abbonamento \n", VERDE, RESET);
         printf("%s 2.%s Prenota Lezione\n", VERDE, RESET);
         printf("%s 3.%s Visualizza report mensile\n", VERDE, RESET);
-        printf("%s 4.%s Gestisci le tue prenotazioni\n", VERDE, RESET); // 3 e 4 aggiungere allo switch e al progetto
+        printf("%s 4.%s Visualizza e gestisci le tue prenotazioni\n", VERDE, RESET); // 3 e 4 aggiungere allo switch e al progetto
         printf("%s 0. TORNA AL MENU PRINCIPALE\n %s", ROSSO, RESET);
         printf("%s------------------------------%s\n", BLU, RESET);
         printf("%s  Inserisci la tua scelta: %s", GIALLO, RESET);
@@ -211,11 +244,17 @@ void menu_cliente() {
             case 1:
                 controllo_abbonamento(abbonato_corrente); // Funzione per controllare validità abbonamento
                 break;
-            /*
+            
             case 2:
-                prenota_lezione(); // Funzione per prenotare una lezione
+                aggiungi_prenotazioneCliente(abbonato_corrente);// Funzione per prenotare una lezione
                 break;
-            */
+            case 3:
+                reportLezioniUltimoMeseCliente(getCodiceAbbonamento(abbonato_corrente),lista_prenotazioni , lezioni);
+                break;
+            case 4:
+                visualizzaPrenotazioniCliente(getCodiceAbbonamento(abbonato_corrente),  lista_prenotazioni, lezioni);
+                 break;
+            
             default:
                 pulisciSchermo();
                 printf("\n\n");

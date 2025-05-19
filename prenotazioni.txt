@@ -1,22 +1,58 @@
 Prenotazioni:
 ===========================
-Codice Prenotazione: 5
-Codice Abbonamento: 101
+Codice Prenotazione: 11
+Codice Abbonamento: 2
+Codice Lezione: 47
+---------------------------
+Codice Prenotazione: 10
+Codice Abbonamento: 36
+Codice Lezione: 18
+---------------------------
+Codice Prenotazione: 8
+Codice Abbonamento: 2
+Codice Lezione: 7
+---------------------------
+Codice Prenotazione: 7
+Codice Abbonamento: 2
+Codice Lezione: 42
+---------------------------
+Codice Prenotazione: 6
+Codice Abbonamento: 2
+Codice Lezione: 44
+---------------------------
+Codice Prenotazione: 4
+Codice Abbonamento: 36
+Codice Lezione: 20
+---------------------------
+Codice Prenotazione: 3
+Codice Abbonamento: 85
+Codice Lezione: 5
+---------------------------
+Codice Prenotazione: 1
+Codice Abbonamento: 25
 Codice Lezione: 44
 ---------------------------
 Codice Prenotazione: 2
 Codice Abbonamento: 56
 Codice Lezione: 44
 ---------------------------
-Codice Prenotazione: 1
-Codice Abbonamento: 25
+Codice Prenotazione: 5
+Codice Abbonamento: 101
 Codice Lezione: 44
 ---------------------------
-Codice Prenotazione: 3
-Codice Abbonamento: 85
-Codice Lezione: 5
+Codice Prenotazione: 9
+Codice Abbonamento: 2
+Codice Lezione: 6
 ---------------------------
-Codice Prenotazione: 4
+Codice Prenotazione: 12
+Codice Abbonamento: 58
+Codice Lezione: 37
+---------------------------
+Codice Prenotazione: 13
+Codice Abbonamento: 2
+Codice Lezione: 37
+---------------------------
+Codice Prenotazione: 14
 Codice Abbonamento: 36
-Codice Lezione: 20
+Codice Lezione: 37
 ---------------------------

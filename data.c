@@ -251,3 +251,35 @@ Data* oggi() {
     return d;
 }
 
+/**
+ * Sottrae un numero di giorni da una data e restituisce la nuova data.
+ *
+ *  data La data di partenza.
+ *  giorni Il numero di giorni da sottrarre.
+ * return Una nuova struttura Data con la data risultante.
+ */
+Data* sottraiGiorni(Data*data, int giorni) {
+    Data* risultato = data;
+
+    while (giorni > 0) {
+        risultato->giorno--;
+
+        // Se il giorno scende sotto 1, si passa al mese precedente
+        if (risultato->giorno < 1) {
+            risultato->mese--;
+
+            // Se il mese scende sotto 1, si passa all'anno precedente
+            if (risultato->mese < 1) {
+                risultato->mese = 12;
+                risultato->anno--;
+            }
+
+            // Aggiorna il giorno all'ultimo del mese precedente
+            risultato->giorno = giorniNelMese(risultato->mese, risultato->anno);
+        }
+
+        giorni--;
+    }
+
+    return risultato;
+}

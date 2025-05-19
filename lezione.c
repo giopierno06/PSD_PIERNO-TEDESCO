@@ -133,6 +133,19 @@ void addPostiOccupati(lezione* l) {
     l->posti_occupato++;
 }
 
+
+// Diminuisce di 1 il numero di posti occupati quan viene disdetta una prenotazione
+void removePostiOccupati(lezione* l) {
+    if (l == NULL) return;
+
+    if (l->posti_occupato > 0) {
+        l->posti_occupato--;
+    } else {
+        // Protezione contro numeri negativi
+        l->posti_occupato = 0;
+    }
+}
+
 // Imposta la data della lezione
 void setDataLezione(lezione* l, Data* data) {
     l->data = data;

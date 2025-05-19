@@ -8,10 +8,23 @@
 
 
 void gestione_prenotazioni();
+
 void aggiungi_prenotazione();
+
+void disdici_prenotazione();
 
 void visualizzaPrenotazioni(listP*, list*);
 
 void visualizzaPrenotazioniLezione(int, listP* , list*);
+
+void aggiungi_prenotazioneCliente(abbonamento*); 
+
+void visualizzaPrenotazioniCliente(int, listP*, listL*);
+
+void reportLezioniUltimoMeseCliente(int ,listP* , listL*);
+
+void reportDisciplineUltimoMese(listP* , listL* );
+
+void reportGestore(listP*, listL*);
 
 #endif

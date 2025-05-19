@@ -100,6 +100,11 @@ void setPostiMax(lezione*, short int);
 void addPostiOccupati(lezione*);
 
 /*
+ *Diminuisce di 1 il numero di posti occupati quan viene disdetta una prenotazione
+*/
+void removePostiOccupati(lezione* );
+
+/*
  * Imposta la data della lezione.
  */
 void setDataLezione(lezione*, Data*);

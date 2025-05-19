@@ -103,6 +103,9 @@ Data* aggiungiMesi(Data*d, int mesi);
  */
 Data* oggi();
 
+//Sottrae un numero di giorni da una data e restituisce la nuova data.
+Data* sottraiGiorni(Data*, int);
+
 
 
 #endif // DATA_H
