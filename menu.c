@@ -45,9 +45,8 @@ void menu_gestore() {
         printf("%s   BENVENUTO NEL MENU GESTIONALE   %s\n", GIALLO, RESET);
         printf("%s===================================%s\n", VIOLA, RESET);
         printf("%s 1.%s Gestisci gli Abbonamenti\n", VERDE, RESET);
-        printf("%s 2.%s Gestisci le Prenotazioni\n", VERDE, RESET);
+        printf("%s 2.%s Gestisci le Prenotazioni e Report\n", VERDE, RESET);
         printf("%s 3.%s Gestisci le Lezioni\n", VERDE, RESET);
-        printf("%s 4.%s Visualizza il Report Mensile\n", VERDE, RESET);
         printf("%s 0. TORNA AL MENU PRINCIPALE %s\n", ROSSO, RESET);
         printf("%s------------------------------%s\n", VIOLA, RESET);
         printf("%s  Inserisci la tua scelta: %s", GIALLO, RESET);
@@ -78,10 +77,6 @@ void menu_gestore() {
             case 3:
                  pulisciSchermo();
                  gestione_Lezioni();
-                 break;
-            case 4:
-                 reportGestore(lista_prenotazioni,lezioni);
-                 pulisciSchermo();
                  break;
             
             default:
@@ -220,7 +215,8 @@ void menu_cliente() {
         printf("%s 1.%s Controlla Validità Abbonamento \n", VERDE, RESET);
         printf("%s 2.%s Prenota Lezione\n", VERDE, RESET);
         printf("%s 3.%s Visualizza report mensile\n", VERDE, RESET);
-        printf("%s 4.%s Visualizza e gestisci le tue prenotazioni\n", VERDE, RESET); // 3 e 4 aggiungere allo switch e al progetto
+        printf("%s 4.%s Visualizza tue prenotazioni\n", VERDE, RESET); // 3 e 4 aggiungere allo switch e al progetto
+        printf("%s 5.%s Disdici una prenotazione\n", VERDE, RESET);
         printf("%s 0. TORNA AL MENU PRINCIPALE\n %s", ROSSO, RESET);
         printf("%s------------------------------%s\n", BLU, RESET);
         printf("%s  Inserisci la tua scelta: %s", GIALLO, RESET);
@@ -254,7 +250,9 @@ void menu_cliente() {
             case 4:
                 visualizzaPrenotazioniCliente(getCodiceAbbonamento(abbonato_corrente),  lista_prenotazioni, lezioni);
                  break;
-            
+            case 5:
+                disdici_prenotazioneCliente(abbonato_corrente);
+                break;            
             default:
                 pulisciSchermo();
                 printf("\n\n");

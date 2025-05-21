@@ -88,21 +88,6 @@ void setMinuto(Orario* orario, int minuto) {
     }
 }
 
-// ===============================
-// STAMPA ORARIO ATTUALE DEL SISTEMA
-// ===============================
-void stampaOrarioAttuale() {
-    time_t tempo_attuale;
-    struct tm *orario_locale;
-
-    time(&tempo_attuale);                 // Ottiene il tempo attuale
-    orario_locale = localtime(&tempo_attuale); // Converte in orario locale
-
-    printf(" %02d:%02d\n", 
-           orario_locale->tm_hour, 
-           orario_locale->tm_min
-    );
-}
 
 // ===============================
 // LETTURA DI UN ORARIO DA INPUT UTENTE

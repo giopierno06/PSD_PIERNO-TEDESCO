@@ -38,8 +38,7 @@ void pulisciSchermo() {
     printf("%sDATA ODIERNA:  %s", BLU, RESET);
     
     // Chiama la funzione oggi() per ottenere la data odierna e la passa alla funzione stampaData() per mostrarla
-    stampaData(oggi());  // stampaData() mostra la data odierna formattata
-    stampaOrarioAttuale(); //stampa orario attuale
+    stampaData(oggi());  // stampaData() mostra la data odierna formattato
     printf("\n");
 }
 
@@ -57,8 +56,7 @@ void pulisciSchermoCliente(const char nome[50],const char cognome[50]){
     printf("%sDATA ODIERNA:  %s", BLU, RESET);
     
     // Chiama la funzione oggi() per ottenere la data odierna e la passa alla funzione stampaData() per mostrarla
-    stampaData(oggi());  // stampaData() mostra la data odierna formattata
-    stampaOrarioAttuale(); //stampa orario attuale
+    stampaData(oggi());  // stampaData() mostra la data odierna formattat
     printf("\n");
  
     printf("%sBENVENUTO NELLA TUA AREA PERSONALE: %s %s %s",VERDE,nome,cognome, RESET);

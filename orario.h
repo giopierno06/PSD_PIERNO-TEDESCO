@@ -30,8 +30,6 @@ void setMinuto(Orario*, int);
 
 // === FUNZIONALITÀ AVANZATE ===
 
-// Stampa l'orario attuale del sistema in formato HH:MM:SS
-void stampaOrarioAttuale();
 
 // Legge un orario da input utente (ora e minuti) e restituisce un puntatore a Orario
 Orario* leggiOrario();
