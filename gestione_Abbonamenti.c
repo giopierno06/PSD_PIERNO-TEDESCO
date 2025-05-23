@@ -296,7 +296,7 @@ int aggiungi_abbonamento(list** abbonati) {
     // Inserimento della data di inizio
     // ==============================
     while (1) {
-        printf("Data dell'inizio dell'abbonamento di %s %s: \n",
+        printf("Data dell'inizio dell'abbonamento di %s %s (non deve essere più vecchia di un mese): \n",
                getNome(nuovo_abbonamento), getCognome(nuovo_abbonamento));
 
         Data* data_inizio = leggiData();  // Lettura e validazione

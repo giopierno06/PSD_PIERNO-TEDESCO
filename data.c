@@ -143,7 +143,7 @@ void distruggiData(Data* d) {
  * Legge una data da input standard finché non è valida.
  */
 Data* leggiData() {
-    Data* d = malloc(sizeof(Data));  // Alloca dinamicamente la memoria per Data
+    Data* d = malloc(sizeof(Data));
     if (d == NULL) {
         printf("Errore nell'allocazione della memoria.\n");
         return NULL;
@@ -162,9 +162,10 @@ Data* leggiData() {
         if (!dataValida(*d)) {
             printf("Data non valida. Riprova.\n");
         } else {
-            break;
+            break;  // Data valida, esce dal ciclo
         }
     }
+
     return d;
 }
 
