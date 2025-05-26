@@ -734,6 +734,27 @@ listL* eliminaLezione(listL* lezioni) {
     }
 }
 
+
+/**
+ * Cerca nella lista delle lezioni una lezione con l'ID specificato.
+ * 
+ * param lezioni  Lista delle lezioni (listL*).
+ * param id       ID della lezione da cercare.
+ * return         Puntatore alla lezione trovata (lezione*), oppure NULL se non trovata.
+ */
+lezione* trovaLezionePerID(listL* lezioni, int id) {
+    listL* curr = lezioni;
+    while (curr != NULL) {
+        lezione* l = lezione_getValue(curr);
+        if (getCodiceLezione(l) == id) {
+            return l;  // trovato, ritorna la lezione
+        }
+        curr = lezione_getNext(curr);
+    }
+    return NULL;  // non trovato
+}
+
+
 // Funzione per eliminare una lezione per ID
 // Parametri:
 //   - lezioni: puntatore alla lista di lezioni

@@ -605,7 +605,7 @@ list* ricercaAbbonamento(list* abbonati) {
     while (1) {  // Ciclo infinito che continua fino a che l'utente non esce
         int trovato = 0;  // Flag per sapere se un abbonamento è stato trovato
 
-        // Menu di ricerca
+        // Stampa del menu per scegliere il tipo di ricerca
         printf("%s========================================\n", BLU);
         printf("Come vuoi cercare l'abbonamento?\n");
         printf("========================================%s\n", RESET);
@@ -614,61 +614,60 @@ list* ricercaAbbonamento(list* abbonati) {
         printf("%s0. Torna al menu principale%s\n", ROSSO, RESET);
         printf("%s========================================%s\n", BLU, RESET);
 
-        char scelta_input[10];  // Buffer per l'input della scelta
-        char *endptr;
+        char scelta_input[10];  // Buffer per leggere l'input della scelta da tastiera
+        char *endptr;           // Puntatore usato per verificare la conversione da stringa a intero
 
-        // Leggi l'input dell'utente
+        // Leggi la scelta dell'utente come stringa
         printf("Scelta: ");
         fgets(scelta_input, sizeof(scelta_input), stdin);
-        scelta_input[strcspn(scelta_input, "\n")] = 0;  // Rimuove il newline
+        scelta_input[strcspn(scelta_input, "\n")] = 0;  // Rimuove il carattere newline finale
 
-        // Converte l'input in un intero
-        scelta = strtol(scelta_input, &endptr, 10);  
+        // Converte la stringa in un numero intero e controlla che sia valido
+        scelta = strtol(scelta_input, &endptr, 10);
 
-        // Se la conversione non è valida, mostra errore e ritorna al menu
+        // Se la conversione non è valida (input non numerico)
         if (endptr == scelta_input || *endptr != '\0') {
             pulisciSchermo();
             printf("%sInserisci una scelta valida (solo numeri)!%s\n", ROSSO, RESET);
-            continue;  // Riprende il ciclo
+            continue;  // Ricomincia il ciclo del menu
         }
 
+        // Gestione delle scelte tramite switch
         switch (scelta) {
-            case 0:  // Caso per tornare al menu principale
-                return NULL;  // Uscita dalla funzione
+            case 0:  // Uscita dalla funzione, torna al menu principale
+                return NULL;
 
             case 1: {  // Ricerca per ID
-                char buffer[100];
-                char *endptr;
-                int id;
+                char buffer[100];  // Buffer per leggere l'ID
+                int id;            // Variabile per memorizzare l'ID inserito
 
                 printf("Inserisci l'ID dell'abbonamento da cercare: ");
-                fgets(buffer, sizeof(buffer), stdin);  // Legge l'input dell'ID
+                fgets(buffer, sizeof(buffer), stdin);
+                buffer[strcspn(buffer, "\n")] = 0;  // Rimuove newline
 
-                // Rimuove il newline se presente
-                buffer[strcspn(buffer, "\n")] = 0;
+                // Conversione stringa -> intero per l'ID
+                id = strtol(buffer, &endptr, 10);
 
-                id = strtol(buffer, &endptr, 10);  // Converte la stringa a intero
-
-                // Controlla che l'input sia un numero valido
+                // Verifica se l'input è un numero valido
                 if (endptr == buffer || *endptr != '\0') {
                     pulisciSchermo();
                     printf("%sInserisci solo numeri!%s\n", ROSSO, RESET);
-                    break;  // Esce dalla ricerca
+                    break;  // Torna al menu di ricerca
                 }
 
-                // Scorre la lista alla ricerca dell'abbonamento con l'ID specificato
+                // Scorri la lista degli abbonati per trovare l'ID corrispondente
                 list* curr = abbonati;
                 while (curr != NULL) {
-                    if (getCodiceAbbonamento(getValue(curr)) == id) {  // Usa il getter per l'ID
+                    if (getCodiceAbbonamento(getValue(curr)) == id) {  // Controlla se l'ID corrisponde
                         pulisciSchermo();
-                        trovato = 1;  // Segna che l'abbonamento è stato trovato
-                        stampaDettagliAbbonamento(getValue(curr));  // Stampa il dettaglio
-                        return curr;  // Esce dalla lista e restituisce l'abbonamento trovato
+                        trovato = 1;  // Abbonamento trovato
+                        stampaDettagliAbbonamento(getValue(curr));  // Mostra i dettagli
+                        return curr;  // Ritorna il nodo trovato
                     }
-                    curr = getNext(curr);  // Passa al prossimo abbonamento
+                    curr = getNext(curr);  // Passa al prossimo elemento della lista
                 }
 
-                // Se non è stato trovato l'abbonamento
+                // Se non è stato trovato nulla
                 if (!trovato) {
                     printf("%sAbbonamento NON trovato!%s\n", ROSSO, RESET);
                     printf("Premere INVIO per continuare...\n");
@@ -677,84 +676,87 @@ list* ricercaAbbonamento(list* abbonati) {
                     break;
                 }
 
-                break;  // Esce dal case 1
+                break;  // Fine del case 1
             }
 
             case 2: {  // Ricerca per nome e cognome
-    char nome[50], cognome[50];
-    list* risultati[100];  // Array di puntatori ai nodi trovati
-    int count = 0;
+                char nome[50], cognome[50];
+                list* risultati[100];  // Array per memorizzare i risultati trovati
+                int count = 0;         // Contatore dei risultati trovati
 
-    printf("Inserisci nome: ");
-    fgets(nome, sizeof(nome), stdin);
-    nome[strcspn(nome, "\n")] = 0;
+                // Lettura nome e cognome da input
+                printf("Inserisci nome: ");
+                fgets(nome, sizeof(nome), stdin);
+                nome[strcspn(nome, "\n")] = 0;
 
-    printf("Inserisci cognome: ");
-    fgets(cognome, sizeof(cognome), stdin);
-    cognome[strcspn(cognome, "\n")] = 0;
+                printf("Inserisci cognome: ");
+                fgets(cognome, sizeof(cognome), stdin);
+                cognome[strcspn(cognome, "\n")] = 0;
 
-    pulisciSchermo();
-    printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
+                pulisciSchermo();
+                printf("%sAbbonamenti trovati per %s %s:%s\n", GIALLO, nome, cognome, RESET);
 
-    list* curr = abbonati;
-    while (curr != NULL) {
-        void* abbonamento = getValue(curr);
-        if (strcmp(getNome(abbonamento), nome) == 0 &&
-            strcmp(getCognome(abbonamento), cognome) == 0) {
-            
-            stampaDettagliAbbonamento(abbonamento);  // Stampa il dettaglio
-            risultati[count++] = curr;  // Salva il nodo
-        }
-        curr = getNext(curr);
-    }
+                // Scorri la lista degli abbonati e confronta nome e cognome
+                list* curr = abbonati;
+                while (curr != NULL) {
+                    void* abbonamento = getValue(curr);
+                    if (strcmp(getNome(abbonamento), nome) == 0 &&
+                        strcmp(getCognome(abbonamento), cognome) == 0) {
+                        
+                        stampaDettagliAbbonamento(abbonamento);  // Stampa dettagli abbonamento trovato
+                        risultati[count++] = curr;  // Salva il nodo nel vettore risultati
+                    }
+                    curr = getNext(curr);
+                }
 
-    if (count == 0) {
-        printf("%sNessun abbonamento trovato!%s\n", ROSSO, RESET);
-        printf("Premi INVIO per continuare...\n");
-        getchar();
-        pulisciSchermo();
-        break;
-    }
+                // Se nessun risultato trovato
+                if (count == 0) {
+                    printf("%sNessun abbonamento trovato!%s\n", ROSSO, RESET);
+                    printf("Premi INVIO per continuare...\n");
+                    getchar();
+                    pulisciSchermo();
+                    break;
+                }
 
-    // Se è stato trovato almeno un abbonamento
-    printf("\nInserisci l'ID dell'abbonamento da selezionare (0 se stai solo cercando o vuoi tornare indietro): ");
-    char buffer[100];
-    fgets(buffer, sizeof(buffer), stdin);
-    buffer[strcspn(buffer, "\n")] = 0;
-    char* endptr;
-    int id_scelto = strtol(buffer, &endptr, 10);
+                // Se almeno un risultato trovato, chiedi di selezionare uno specifico ID
+                printf("\nInserisci l'ID dell'abbonamento da selezionare (0 per tornare indietro): ");
+                char buffer[100];
+                fgets(buffer, sizeof(buffer), stdin);
+                buffer[strcspn(buffer, "\n")] = 0;
+                int id_scelto = strtol(buffer, &endptr, 10);
 
-    if (endptr == buffer || *endptr != '\0') {
-        printf("%sID non valido!%s\n", ROSSO, RESET);
-        printf("Premi INVIO per continuare...\n");
-        getchar();
-        pulisciSchermo();
-        break;
-    }
+                // Verifica che l'input sia valido
+                if (endptr == buffer || *endptr != '\0') {
+                    printf("%sID non valido!%s\n", ROSSO, RESET);
+                    printf("Premi INVIO per continuare...\n");
+                    getchar();
+                    pulisciSchermo();
+                    break;
+                }
 
-    for (int i = 0; i < count; i++) {
-        void* abbonamento = getValue(risultati[i]);
-        if (getCodiceAbbonamento(abbonamento) == id_scelto) {
-            return risultati[i];  // Nodo selezionato
-        }
-    }
+                // Cerca l'ID scelto tra i risultati trovati
+                for (int i = 0; i < count; i++) {
+                    void* abbonamento = getValue(risultati[i]);
+                    if (getCodiceAbbonamento(abbonamento) == id_scelto) {
+                        return risultati[i];  // Ritorna il nodo selezionato
+                    }
+                }
 
-    // ID non trovato nei risultati
-    printf("%sID non trovato tra i risultati!%s\n", ROSSO, RESET);
-    printf("Premi INVIO per continuare...\n");
-    getchar();
-    pulisciSchermo();
-    break;
-}
+                // Se l'ID non è tra quelli trovati, mostra messaggio di errore
+                printf("%sID non trovato tra i risultati!%s\n", ROSSO, RESET);
+                printf("Premi INVIO per continuare...\n");
+                getchar();
+                pulisciSchermo();
+                break;
+            }
 
-            default:  // Caso per scelta non valida
+            default:  // Scelta non valida nel menu principale di ricerca
                 pulisciSchermo();
                 printf("%sScelta non valida, riprova.%s\n", ROSSO, RESET);
-                break;  // Ritorna al menu di ricerca
+                break;  // Torna a mostrare il menu di ricerca
         }
     }
 }
-
 
 
 

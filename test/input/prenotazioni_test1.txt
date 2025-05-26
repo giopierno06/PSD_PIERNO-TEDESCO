@@ -1,0 +1,3 @@
+# Test prenotazione semplice
+CODICE_ABBONAMENTO=4
+CODICE_LEZIONE=25

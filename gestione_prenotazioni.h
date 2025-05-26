@@ -10,7 +10,7 @@
 void gestione_prenotazioni();
 
 // Aggiunge una nuova prenotazione, interagendo con l'utente o dati di input
-void aggiungi_prenotazione();
+void aggiungi_prenotazione(int,int);
 
 // Disdice (cancella) una prenotazione esistente
 void disdici_prenotazione();

@@ -36,55 +36,82 @@ void menu_iniziale() {
     printf("    %sSeleziona un'opzione (1, 2, 0): %s", BLU, RESET);
 }
 
-// Funzione che mostra il menu gestionale (per amministratori della palestra)
+#include <stdio.h>
+#include <stdlib.h>
+#include <ctype.h>
+#include <string.h>
+
+// Prototipi delle funzioni richiamate
+void gestione_abbonamenti();
+void gestione_prenotazioni();
+void gestione_Lezioni();
+void messaggio_errore();
+void pulisciSchermo();
+
+// Colori ANSI (assumendo siano definiti in qualche header)
+#define VIOLA  "\033[1;35m"
+#define VERDE  "\033[1;32m"
+#define GIALLO "\033[1;33m"
+#define ROSSO  "\033[1;31m"
+#define RESET  "\033[0m"
+
 void menu_gestore() {
-    int scelta = -1; // Variabile per memorizzare la scelta dell'utente
-    while (1) { // Ciclo infinito, si esce solo con "return"
-        // Stampa il menu
+    char input[10]; // buffer per l'input dell'utente
+    int scelta;
+
+    while (1) {
+        // Stampa del menu
         printf("\n%s=================================%s\n", VIOLA, RESET);
         printf("%s   BENVENUTO NEL MENU GESTIONALE   %s\n", GIALLO, RESET);
         printf("%s===================================%s\n", VIOLA, RESET);
         printf("%s 1.%s Gestisci gli Abbonamenti\n", VERDE, RESET);
         printf("%s 2.%s Gestisci le Prenotazioni e Report\n", VERDE, RESET);
         printf("%s 3.%s Gestisci le Lezioni\n", VERDE, RESET);
-        printf("%s 0. TORNA AL MENU PRINCIPALE %s\n", ROSSO, RESET);
+        printf("%s 0.%s TORNA AL MENU PRINCIPALE\n", ROSSO, RESET);
         printf("%s------------------------------%s\n", VIOLA, RESET);
         printf("%s  Inserisci la tua scelta: %s", GIALLO, RESET);
 
-        char extra; // Carattere usato per controllare input "sporco"
-
-        // Legge la scelta e controlla che sia un numero valido senza altri caratteri
-        if (scanf("%d%c", &scelta, &extra) != 2 || extra != '\n') {
-            pulisciSchermo();        // Funzione per pulire lo schermo
-            messaggio_errore();       // Funzione che stampa messaggio di errore
-            while (getchar() != '\n'); // Pulisce eventuali caratteri residui nel buffer
+        // Prende l'intera riga di input
+        if (!fgets(input, sizeof(input), stdin)) {
+            // Errore nella lettura input
+            messaggio_errore();
             continue;
         }
 
-        // Gestione delle scelte tramite switch
+        // Rimuove newline finale, se presente
+        input[strcspn(input, "\n")] = 0;
+
+        // Controlla se è un numero valido
+        if (sscanf(input, "%d", &scelta) != 1) {
+            pulisciSchermo();
+            messaggio_errore();
+            continue;
+        }
+
+        // Azioni in base alla scelta
         switch (scelta) {
             case 0:
                 pulisciSchermo();
-                return; // Esce dal menu gestionale e torna al menu principale
+                return;
             case 1:
                 pulisciSchermo();
-                gestione_abbonamenti(); // Funzione per gestire gli abbonamenti
+                gestione_abbonamenti();
                 break;
             case 2:
-                 pulisciSchermo();
-                 gestione_prenotazioni();
-                 break;
+                pulisciSchermo();
+                gestione_prenotazioni();
+                break;
             case 3:
-                 pulisciSchermo();
-                 gestione_Lezioni();
-                 break;
-            
+                pulisciSchermo();
+                gestione_Lezioni();
+                break;
             default:
                 pulisciSchermo();
-                messaggio_errore(); // Se la scelta non è valida
+                messaggio_errore();
         }
     }
 }
+
 
 
 list* controlloCliente() {

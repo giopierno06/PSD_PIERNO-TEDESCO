@@ -1,5 +1,21 @@
 Prenotazioni:
 ===========================
+Codice Prenotazione: 22
+Codice Abbonamento: 4
+Codice Lezione: 22
+---------------------------
+Codice Prenotazione: 20
+Codice Abbonamento: 45
+Codice Lezione: 9
+---------------------------
+Codice Prenotazione: 19
+Codice Abbonamento: 69
+Codice Lezione: 38
+---------------------------
+Codice Prenotazione: 16
+Codice Abbonamento: 2
+Codice Lezione: 27
+---------------------------
 Codice Prenotazione: 15
 Codice Abbonamento: 2
 Codice Lezione: 44
@@ -55,4 +71,16 @@ Codice Lezione: 18
 Codice Prenotazione: 11
 Codice Abbonamento: 2
 Codice Lezione: 47
+---------------------------
+Codice Prenotazione: 17
+Codice Abbonamento: 25
+Codice Lezione: 3
+---------------------------
+Codice Prenotazione: 18
+Codice Abbonamento: 4
+Codice Lezione: 5
+---------------------------
+Codice Prenotazione: 21
+Codice Abbonamento: 35
+Codice Lezione: 22
 ---------------------------
