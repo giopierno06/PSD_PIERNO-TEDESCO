@@ -121,7 +121,7 @@ Codice Lezione: 31
 Disciplina: Pilates
 Nome: Pilates Iniziazione
 Posti massimi: 12
-Posti occupati: 0
+Posti occupati: 1
 Data: 06-06-2025
 Ora di inizio: 10:30
 Durata (in minuti): 45
@@ -130,7 +130,7 @@ Codice Lezione: 30
 Disciplina: Zumba
 Nome: Zumba Power
 Posti massimi: 25
-Posti occupati: 0
+Posti occupati: 1
 Data: 06-06-2025
 Ora di inizio: 09:00
 Durata (in minuti): 45
@@ -211,7 +211,7 @@ Codice Lezione: 21
 Disciplina: Spinning
 Nome: Spinning Advanced
 Posti massimi: 18
-Posti occupati: 0
+Posti occupati: 1
 Data: 03-06-2025
 Ora di inizio: 09:00
 Durata (in minuti): 45
@@ -337,7 +337,7 @@ Codice Lezione: 7
 Disciplina: Pilates
 Nome: Pilates I
 Posti massimi: 20
-Posti occupati: 1
+Posti occupati: 0
 Data: 29-05-2025
 Ora di inizio: 10:00
 Durata (in minuti): 60
@@ -364,7 +364,7 @@ Codice Lezione: 3
 Disciplina: Yoga
 Nome: Yoga Standard
 Posti massimi: 20
-Posti occupati: 1
+Posti occupati: 2
 Data: 28-05-2025
 Ora di inizio: 16:45
 Durata (in minuti): 45

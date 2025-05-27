@@ -1,0 +1,30 @@
+Lezioni:
+===========================
+Codice Lezione: 201
+Disciplina: Aerobica
+Nome: Aerobica test
+Posti massimi: 12
+Posti occupati: 2
+Data: 18-05-2025
+Ora di inizio: 15:00
+Durata (in minuti): 25
+---------------------------
+Codice Lezione: 202
+Disciplina: Yoga
+Nome: "Respira e Rilassati"
+Posti massimi: 15
+Posti occupati: 3
+Data: 15-05-2025
+Ora di inizio: 08:30
+Durata (in minuti): 60
+---------------------------
+Codice Lezione: 203
+Disciplina: Yoga
+Nome: Yoga II
+Posti massimi: 15
+Posti occupati: 1
+Data: 10-05-2025
+Ora di inizio: 08:30
+Durata (in minuti): 45
+---------------------------
+

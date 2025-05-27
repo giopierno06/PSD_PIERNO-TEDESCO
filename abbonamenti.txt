@@ -57,8 +57,8 @@ Durata (in mesi): 6
 Codice Abbonamento: 89
 Nome: Francesco
 Cognome: Solari
-Data di inizio: 29-07-2025
-Durata (in mesi): 12
+Data di inizio: 28-04-2025
+Durata (in mesi): 1
 ---------------------------
 Codice Abbonamento: 88
 Nome: Fabio

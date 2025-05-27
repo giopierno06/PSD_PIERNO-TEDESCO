@@ -31,7 +31,7 @@ void visualizzaPrenotazioniCliente(int, listP*, listL*);
 void reportLezioniUltimoMeseCliente(int, listP*, listL*);
 
 // Genera un report delle discipline frequentate nell’ultimo mese, usando le liste di prenotazioni e lezioni
-void reportDisciplineUltimoMese(listP*, listL*);
+void reportDisciplineUltimoMese(listP*, listL*,FILE*);
 
 // Genera un report generale per il gestore (amministratore) con dati aggregati di prenotazioni e lezioni
 void reportGestore(listP*, listL*);

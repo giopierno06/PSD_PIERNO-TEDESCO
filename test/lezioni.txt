@@ -40,7 +40,7 @@ Codice Lezione: 3
 Disciplina: Yoga
 Nome: Yoga Standard
 Posti massimi: 20
-Posti occupati: 1
+Posti occupati: 2
 Data: 28-05-2025
 Ora di inizio: 16:45
 Durata (in minuti): 45
@@ -283,7 +283,7 @@ Codice Lezione: 31
 Disciplina: Pilates
 Nome: Pilates Iniziazione
 Posti massimi: 12
-Posti occupati: 0
+Posti occupati: 1
 Data: 06-06-2025
 Ora di inizio: 10:30
 Durata (in minuti): 45

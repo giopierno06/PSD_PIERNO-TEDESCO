@@ -113,12 +113,46 @@ void test_aggiungiPrenotazione(const char* input_file, const char* output_file) 
     fclose(fout);
 }
 
+void test_reportDiscipline(const char* file_output) {
+    // Carica le liste da file
+    listP* lista_prenotazioni = caricaPrenotazioniDaFile(NULL, "input/test3/prenotazioni_test3.txt");
+    listL* lista_lezioni = caricaLezioniDaFile(NULL, "input/test3/lezioni_test3.txt");
+
+    if (!lista_prenotazioni || !lista_lezioni) {
+        printf("Errore caricamento dati da file\n");
+        return;
+    }
+
+    FILE* fout = fopen(file_output, "w");
+    if (!fout) {
+        printf("Errore apertura file output %s\n", file_output);
+        // libera memoria se serve
+        return;
+    }
+
+    // Chiama la funzione che genera il report nel file
+    reportDisciplineUltimoMese(lista_prenotazioni, lista_lezioni, fout);
+
+    fclose(fout);
+
+    // Qui puoi liberare memoria delle liste se necessario
+}
+
 int main() {
+    // Test aggiungiPrenotazione abbonamento scaduto
+    const char *input2 = "input/prenotazioni_test2.txt";
+    const char *output2 = "output/prenotazioni_test2.txt.out";
+    const char *oracle2 = "oracle/prenotazioni_test2.txt.out";
+
+    printf("Eseguo test aggiungiPrenotazione abbonamento scaduto...\n");
+    test_aggiungiPrenotazione(input2, output2);
+
+    // Test aggiungiPrenotazione caso valido
     const char *input = "input/prenotazioni_test1.txt";
     const char *output = "output/prenotazioni_test1.txt.out";
     const char *oracle = "oracle/prenotazioni_test1.txt.out";
 
-    printf("Eseguo test aggiungiPrenotazione...\n");
+    printf("Eseguo test aggiungiPrenotazione in caso valido...\n");
     test_aggiungiPrenotazione(input, output);
 
     if (file_equal(output, oracle)) {
@@ -126,6 +160,27 @@ int main() {
     } else {
         printf("TEST aggiungiPrenotazione: FAIL\n");
         printf("Controlla:\n - Output: %s\n - Oracle: %s\n", output, oracle);
+    }
+
+    if (file_equal(output2, oracle2)) {
+        printf("TEST aggiungiPrenotazione abbonamento scaduto: PASS\n");
+    } else {
+        printf("TEST aggiungiPrenotazione abbonamento scaduto: FAIL\n");
+        printf("Controlla:\n - Output: %s\n - Oracle: %s\n", output2, oracle2);
+    }
+
+    // --- Test report discipline ---
+    const char *output_report = "output/test3/output_test3.txt.out";
+    const char *oracle_report = "oracle/test3/oracle_test3.txt.out";
+
+    printf("Eseguo test report discipline ultimo mese...\n");
+    test_reportDiscipline(output_report);
+
+    if (file_equal(output_report, oracle_report)) {
+        printf("TEST report discipline: PASS\n");
+    } else {
+        printf("TEST report discipline: FAIL\n");
+        printf("Controlla:\n - Output: %s\n - Oracle: %s\n", output_report, oracle_report);
     }
 
     return 0;

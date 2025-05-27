@@ -1,0 +1,26 @@
+Prenotazioni:
+===========================
+Codice Prenotazione: 301
+Codice Abbonamento: 35
+Codice Lezione: 201
+---------------------------
+Codice Prenotazione: 302
+Codice Abbonamento: 4
+Codice Lezione: 201
+---------------------------
+Codice Prenotazione: 303
+Codice Abbonamento: 4
+Codice Lezione: 202
+---------------------------
+Codice Prenotazione: 304
+Codice Abbonamento: 4
+Codice Lezione: 202
+---------------------------
+Codice Prenotazione: 305
+Codice Abbonamento: 4
+Codice Lezione: 202
+---------------------------
+Codice Prenotazione: 306
+Codice Abbonamento: 4
+Codice Lezione: 203
+---------------------------
