@@ -17,13 +17,24 @@
 
 extern listL* lezioni;  // Modifica: usa un singolo puntatore per la lista delle lezioni
 
-//menu gestione lezioni
+/*---------------------------------------------------------------
+ * Funzione: gestione_Lezioni
+ * Scopo:    Gestisce un menu interattivo per la gestione delle
+ *           lezioni, permettendo all'utente di aggiungere,
+ *           modificare, eliminare e visualizzare lezioni.
+ * Parametri: Nessuno
+ * Ritorna:   Nessun valore (void)
+ * Note:      Utilizza una lista di lezioni che viene inizializzata
+ *            e caricata da file se non già presente.
+ *---------------------------------------------------------------*/
 void gestione_Lezioni() {
-       pulisciSchermo();
-       if (lezioni == NULL) {
-        lezioni = lezione_newList();  // Assicurati che la lista venga inizializzata correttamente
-        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt");
-                          }
+    pulisciSchermo(); // Pulisce lo schermo all'avvio della funzione
+
+    // Se la lista delle lezioni non è stata inizializzata
+    if (lezioni == NULL) {
+        lezioni = lezione_newList();  // Inizializza una nuova lista di lezioni
+        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt"); // Carica le lezioni da file
+    }
 
     int scelta = -1; // Variabile per memorizzare la scelta dell'utente
 
@@ -68,17 +79,20 @@ void gestione_Lezioni() {
                 break;
 
             case 2:
+                // Funzione per modificare una lezione esistente
                 modificaLezione(lezioni);
                 break;
 
             case 3:
+                // Funzione per eliminare una lezione esistente
                 eliminaLezione(lezioni);
                 break;
 
             case 4:
+                // Funzione per visualizzare tutte le lezioni
                 pulisciSchermo();
                 visualizzaLezioni(lezioni);  // Passa direttamente il puntatore alla lista
-                getchar();
+                getchar(); // Attende un input per continuare
                 pulisciSchermo();
                 break;
 
@@ -89,22 +103,34 @@ void gestione_Lezioni() {
     }
 }
 
-  
-
-
+/*---------------------------------------------------------------
+ * Funzione: aggiungi_lezione
+ * Scopo:    Crea e aggiunge una nuova lezione alla lista delle lezioni.
+ * Parametri:
+ *    - listL** lezioni: puntatore al puntatore della lista delle lezioni
+ * Ritorna:
+ *    - 1 se la lezione è stata aggiunta correttamente
+ *    - 0 in caso di errore o annullamento da parte dell'utente
+ * Note:
+ *    - Chiede all’utente di inserire i dati relativi alla nuova lezione
+ *    - Controlla la validità di ogni input
+ *    - Salva le modifiche su file
+ *---------------------------------------------------------------*/
 int aggiungi_lezione(listL** lezioni) {
-    lezione* nuova_lezione = creaLezione();
+    lezione* nuova_lezione = creaLezione(); // Crea una nuova struttura lezione
     
     if (nuova_lezione == NULL) {
         printf("Errore nella creazione della lezione!\n");
         return 0;
     }
 
-    int max_id=0;
-    max_id = getMaxCodiceLezione(*lezioni);
+    // Imposta un codice univoco per la nuova lezione
+    int max_id = getMaxCodiceLezione(*lezioni);
     setCodiceLezione(nuova_lezione, max_id + 1);
-    
-    // Scelta disciplina
+
+    /*----------------------------
+     * SCELTA DELLA DISCIPLINA
+     *----------------------------*/
     while (1) {
         printf("\n========================================================================================================\n");
         printf("                                     Aggiungi Nuova Lezione\n");
@@ -112,11 +138,10 @@ int aggiungi_lezione(listL** lezioni) {
         printf("Se vuoi annullare e tornare al menu gestore digitare 'exit' nel campo 'nome'\n");
         printf("========================================================================================================\n");
 
-
-
         int scelta;
         char buffer_nome[50];
 
+        // Menu per selezionare una disciplina predefinita o personalizzata
         printf("%sScegli una disciplina:\n", VERDE);
         printf("1: Yoga\n2: Pilates\n3: Zumba\n4: Spinning\n5: Aerobica\n6: Altro\n0: Torna al menu%s\n> ", RESET);
         if (scanf("%d", &scelta) != 1) {
@@ -134,9 +159,10 @@ int aggiungi_lezione(listL** lezioni) {
             case 4: setDisciplinaLezione(nuova_lezione, "Spinning"); break;
             case 5: setDisciplinaLezione(nuova_lezione, "Aerobica"); break;
             case 6:
+                // Inserimento manuale del nome della disciplina
                 printf("%sInserisci manualmente la disciplina: %s", VERDE, RESET);
                 if (fgets(buffer_nome, sizeof(buffer_nome), stdin) != NULL) {
-                    buffer_nome[strcspn(buffer_nome, "\n")] = '\0';
+                    buffer_nome[strcspn(buffer_nome, "\n")] = '\0'; // Rimuove newline
                     if (strlen(buffer_nome) == 0) {
                         printf("%sERRORE%s Il nome non può essere vuoto.\n", ROSSO, RESET);
                         continue;
@@ -148,6 +174,7 @@ int aggiungi_lezione(listL** lezioni) {
                 }
                 break;
             case 0:
+                // Annulla l’operazione e libera la memoria
                 pulisciSchermo();
                 distruggiLezione(nuova_lezione);
                 return 0;
@@ -159,12 +186,14 @@ int aggiungi_lezione(listL** lezioni) {
         break;
     }
 
-    // Inserimento nome lezione
+    /*----------------------------
+     * INSERIMENTO NOME LEZIONE
+     *----------------------------*/
     while (1) {
         char buffer_nome[50];
         printf("%sInserisci nome lezione: %s", VERDE, RESET);
         if (fgets(buffer_nome, sizeof(buffer_nome), stdin) != NULL) {
-            buffer_nome[strcspn(buffer_nome, "\n")] = '\0';
+            buffer_nome[strcspn(buffer_nome, "\n")] = '\0'; // Rimuove newline
             if (strcmp(buffer_nome, "exit") == 0) {
                 pulisciSchermo();
                 distruggiLezione(nuova_lezione);
@@ -179,7 +208,9 @@ int aggiungi_lezione(listL** lezioni) {
         }
     }
 
-    // Numero massimo posti
+    /*----------------------------
+     * INSERIMENTO NUMERO POSTI
+     *----------------------------*/
     short int posti_max;
     while (1) {
         printf("%sInserisci numero massimo di posti: %s", VERDE, RESET);
@@ -192,7 +223,9 @@ int aggiungi_lezione(listL** lezioni) {
         }
     }
 
-    // Data
+    /*----------------------------
+     * INSERIMENTO DATA LEZIONE
+     *----------------------------*/
     while (1) {
         printf("%sData della lezione (deve essere almeno domani):%s\n", VERDE, RESET);
         Data* data_input = leggiData();
@@ -202,13 +235,18 @@ int aggiungi_lezione(listL** lezioni) {
             setDataLezione(nuova_lezione, data_input);
             break;
         }
-
     }
-    // Orario
+
+    /*----------------------------
+     * INSERIMENTO ORARIO LEZIONE
+     *----------------------------*/
     printf("%sOrario della lezione: %s\n", VERDE, RESET);
     Orario* orario_inizio = leggiOrario();
     setOrarioInizio(nuova_lezione, orario_inizio);
-    // Durata
+
+    /*----------------------------
+     * INSERIMENTO DURATA LEZIONE
+     *----------------------------*/
     short int durata;
     while (1) {
         printf("%sInserisci durata in minuti (max 360): %s", VERDE, RESET);
@@ -221,10 +259,13 @@ int aggiungi_lezione(listL** lezioni) {
         }
     }
 
+    // Calcola l'orario di fine lezione
     pulisciSchermo();
     Orario* orario_fine = aggiungiMinuti(getOrarioLezione(nuova_lezione), getDurataLezione(nuova_lezione));
 
-    // Riepilogo
+    /*----------------------------
+     * RIEPILOGO LEZIONE INSERITA
+     *----------------------------*/
     printf("\n%s================ LEZIONE INSERITA =================%s\n", VERDE, RESET);
     printf("Lezione '%s' (%s), codice %d, data ",
            getNomeLezione(nuova_lezione),
@@ -236,18 +277,32 @@ int aggiungi_lezione(listL** lezioni) {
     printf(", termina alle ");
     stampaOrario(orario_fine);
     printf("\n===================================================\n");
-    
-    *lezioni = lezione_consList(nuova_lezione, *lezioni);
-    salvaLezioniSuFile(*lezioni,"lezioni.txt");
-    getchar();
+
+    /*----------------------------
+     * AGGIUNTA IN LISTA E SALVATAGGIO
+     *----------------------------*/
+    *lezioni = lezione_consList(nuova_lezione, *lezioni); // Inserisce in testa alla lista
+    salvaLezioniSuFile(*lezioni, "lezioni.txt"); // Salva su file
+
+    getchar(); // attende invio
     printf("\nPremi INVIO per continuare...\n");
     getchar();
     pulisciSchermo();
 
     return 1;
 }
-
+/*---------------------------------------------------------------
+ * Funzione: lezione_printByDate
+ * Scopo:    Visualizza tutte le lezioni presenti in una data specifica.
+ * Parametri:
+ *    - listL* lezioni: lista delle lezioni
+ *    - Data* data_input: data da confrontare per filtrare le lezioni
+ * Note:
+ *    - Se non ci sono lezioni o la data non è valida, viene mostrato un messaggio.
+ *    - Per ogni lezione trovata, stampa codice, nome, disciplina, orario e posti rimanenti.
+ *---------------------------------------------------------------*/
 void lezione_printByDate(listL* lezioni, Data* data_input) {
+    // Controllo parametri nulli
     if (lezioni == NULL || data_input == NULL) {
         printf("%sNESSUNA LEZIONE IN QUESTA DATA.%s\n", ROSSO, RESET);
         getchar();
@@ -260,15 +315,17 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
     listL* temp = lezioni;
     int trovato = 0;
 
-    printf("\n%sVisualizzazione lezioni per la data: ",GIALLO);
+    // Stampa intestazione con data selezionata
+    printf("\n%sVisualizzazione lezioni per la data: ", GIALLO);
     stampaData(data_input);  // Funzione per stampare la data
-    printf("\n%s",RESET);
+    printf("\n%s", RESET);
 
-    // Intestazione
+    // Stampa intestazione tabella
     printf("%-15s | %-20s | %-20s | %-15s | %-17s\n",
            "Codice", "Nome", "Disciplina", "Orario", "Posti Rimanenti");
     printf("-----------------------------------------------------------------------------------------------\n");
 
+    // Scorri la lista delle lezioni
     while (temp != NULL) {
         lezione* lezione_corrente = lezione_getValue(temp);
 
@@ -277,30 +334,31 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
             continue;
         }
 
+        // Ottieni e controlla la data della lezione
         Data* data_lezione = getDataLezione(lezione_corrente);
         if (data_lezione == NULL) {
             temp = lezione_getNext(temp);
             continue;
         }
 
+        // Se la data coincide, stampa le informazioni della lezione
         if (confrontaDate(data_input, data_lezione) == 0) {
             int posti_max = getPostiMax(lezione_corrente);
             int prenotati = getPostiOccupati(lezione_corrente);
             int posti_rimanenti = posti_max - prenotati;
 
+            // Orario inizio e calcolo orario fine
             Orario* orario_inizio = getOrarioLezione(lezione_corrente);
             int durata = getDurataLezione(lezione_corrente);
+            Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
 
-          // Calcola l'orario di fine con la funzione aggiungiMinuti
-         Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
+            // Formattazione stringa orario
+            char orario_str[20];
+            snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
+                     getOra(orario_inizio), getMinuto(orario_inizio),
+                     getOra(orario_fine), getMinuto(orario_fine));
 
-         // Ora costruiamo la stringa per l'orario di inizio e fine
-        char orario_str[20];
-        snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
-        getOra(orario_inizio), getMinuto(orario_inizio),
-        getOra(orario_fine), getMinuto(orario_fine));
-
-            // Stampa tabella
+            // Stampa una riga della tabella
             printf("%-15d | %-20s | %-20s | %-15s | %-17d\n",
                    getCodiceLezione(lezione_corrente),
                    getNomeLezione(lezione_corrente),
@@ -311,24 +369,36 @@ void lezione_printByDate(listL* lezioni, Data* data_input) {
             trovato = 1;
         }
 
+        // Passa alla lezione successiva
         temp = lezione_getNext(temp);
     }
 
+    // Se nessuna lezione è stata trovata per quella data
     if (!trovato) {
         printf("\n%sNessuna lezione in questa data.%s\n", ROSSO, RESET);
     }
 
+    // Attende input per tornare indietro
     getchar();
     printf("\nPremi INVIO per tornare continuare.....");
     getchar();
-
 }
 
 
 
 
+
+/*---------------------------------------------------------------
+ * Funzione: modificaLezione
+ * Scopo:    Permette di modificare i dettagli di una lezione esistente
+ *           cercandola tramite il suo codice identificativo (ID).
+ * Parametri:
+ *    - listL* lezioni: lista delle lezioni esistenti
+ * Ritorna:
+ *    - listL*: lista aggiornata con la lezione modificata
+ *---------------------------------------------------------------*/
 listL* modificaLezione(listL* lezioni) {
-    // Cerca una lezione tramite ID
+    // Richiede l'ID della lezione da modificare
     int id;
     printf("Inserisci l'ID della lezione da modificare: ");
     scanf("%d", &id);
@@ -336,15 +406,18 @@ listL* modificaLezione(listL* lezioni) {
 
     listL* temp = lezioni;
 
+    // Scorre la lista per cercare la lezione con l'ID inserito
     while (temp != NULL) {
         pulisciSchermo();
         lezione* l = lezione_getValue(temp);
         if (l != NULL && getCodiceLezione(l) == id) {
             printf("%sLezione trovata!%s\n", VERDE, RESET);
-            stampaDettagliLezione(l);  // Funzione che stampa i dettagli della lezione
+            stampaDettagliLezione(l);  // Mostra i dettagli attuali della lezione
 
             int scelta = -1;
             char extra;
+            
+            // Menu delle modifiche disponibili
             printf("%s========================================================\n", GIALLO);
             printf("            DIGITA COSA VUOI MODIFICARE\n");
             printf("========================================================%s\n", RESET);
@@ -357,9 +430,11 @@ listL* modificaLezione(listL* lezioni) {
             printf("%s0. TORNA INDIETRO%s\n", ROSSO, RESET);
             printf("%s========================================================%s\n", GIALLO, RESET);
 
+            // Gestione modifiche fino a scelta 0
             while (scelta != 0) {
                 printf("Scelta: ");
 
+                // Controlla che l'input sia un intero seguito da newline
                 if (scanf("%d%c", &scelta, &extra) != 2 || extra != '\n') {
                     pulisciSchermo();
                     printf("%sScelta non valida. Inserisci un numero tra 0 e 6.%s\n", ROSSO, RESET);
@@ -369,6 +444,7 @@ listL* modificaLezione(listL* lezioni) {
 
                 switch (scelta) {
                     case 1: {
+                        // Modifica nome
                         char nuovoNome[50];
                         printf("Inserisci il nuovo nome della lezione: ");
                         scanf("%s", nuovoNome);
@@ -378,6 +454,7 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 2: {
+                        // Modifica disciplina
                         char nuovaDisciplina[50];
                         printf("Inserisci la nuova disciplina: ");
                         scanf("%s", nuovaDisciplina);
@@ -387,6 +464,7 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 3: {
+                        // Modifica data
                         Data* nuovaData = leggiData();
                         setDataLezione(l, nuovaData);
                         printf("%sData modificata con successo!%s\n", VERDE, RESET);
@@ -394,6 +472,7 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 4: {
+                        // Modifica orario di inizio
                         Orario* nuovoOrario = leggiOrario();
                         setOrarioInizio(l, nuovoOrario);
                         printf("%sOrario modificato con successo!%s\n", VERDE, RESET);
@@ -401,6 +480,7 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 5: {
+                        // Modifica durata
                         int nuovaDurata;
                         printf("Inserisci la nuova durata (in minuti): ");
                         scanf("%d", &nuovaDurata);
@@ -410,6 +490,7 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 6: {
+                        // Modifica posti massimi
                         int nuoviPosti;
                         printf("Inserisci il nuovo numero massimo di posti: ");
                         scanf("%d", &nuoviPosti);
@@ -419,19 +500,23 @@ listL* modificaLezione(listL* lezioni) {
                     }
 
                     case 0:
+                        // Salva e torna indietro
                         salvaLezioniSuFile(lezioni, "lezioni.txt");
                         pulisciSchermo();
                         return lezioni;
 
                     default:
+                        // Scelta non valida
                         printf("%sScelta non valida.%s\n", ROSSO, RESET);
                         break;
                 }
 
-                salvaLezioniSuFile(lezioni, "lezioni.txt");  // Salva dopo ogni modifica
+                // Salva su file dopo ogni modifica
+                salvaLezioniSuFile(lezioni, "lezioni.txt");
             }
         }
 
+        // Continua con la lezione successiva
         temp = lezione_getNext(temp);
     }
 
@@ -443,7 +528,17 @@ listL* modificaLezione(listL* lezioni) {
     return lezioni;
 }
 
+/*
+ * Funzione: lezione_printByDisciplina
+ * Scopo:    Visualizza tutte le lezioni appartenenti a una determinata disciplina.
+ * Parametri:
+ *   - lezioni: puntatore alla lista delle lezioni.
+ * Note:
+ *   - Stampa una tabella con le informazioni delle lezioni trovate.
+ *   - Richiede all'utente il nome della disciplina.
+ */
 void lezione_printByDisciplina(listL* lezioni) {
+    // Controlla se la lista delle lezioni è vuota
     if (lezioni == NULL) {
         printf("%sLa lista delle lezioni è vuota.%s\n", ROSSO, RESET);
         printf("Premi INVIO per tornare indietro...\n");
@@ -451,67 +546,94 @@ void lezione_printByDisciplina(listL* lezioni) {
         return;
     }
 
+    // Acquisisce la disciplina da cercare
     char disciplina[50];
     printf("Inserisci il nome della disciplina da cercare: ");
-    scanf(" %[^\n]", disciplina);  // Legge stringhe con spazi
+    scanf(" %[^\n]", disciplina);  // Legge stringhe con spazi inclusi
 
     pulisciSchermo();
+
+    // Stampa intestazione della tabella
     printf("\n%sLezioni per la disciplina: %s%s\n", GIALLO, disciplina, RESET);
-    printf("%-15s | %-20s | %-20s | %-15s | %-20s | %-17s\n",  // Aggiunta colonna per la data
+    printf("%-15s | %-20s | %-20s | %-15s | %-20s | %-17s\n",
            "Codice", "Nome", "Disciplina", "Orario", "Data", "Posti Rimanenti");
     printf("-----------------------------------------------------------------------------------------------\n");
 
     listL* temp = lezioni;
     int trovato = 0;
 
+    // Scorre tutta la lista delle lezioni
     while (temp != NULL) {
         lezione* l = lezione_getValue(temp);
 
         if (l != NULL) {
-            // Usa i getter per ottenere i valori
-            const char* disciplina_lezione = getDisciplinaLezione(l);  // Usa il getter per la disciplina
+            // Ottiene la disciplina della lezione
+            const char* disciplina_lezione = getDisciplinaLezione(l);
+
+            // Confronta con la disciplina cercata
             if (strcmp(disciplina_lezione, disciplina) == 0) {
+                // Calcolo orario inizio e fine
                 Orario* orario_inizio = getOrarioLezione(l);
                 int durata = getDurataLezione(l);
-                Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
+                Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);  // Alloca nuova struttura orario
 
+                // Costruisce stringa dell'orario
                 char orario_str[20];
                 snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
                          getOra(orario_inizio), getMinuto(orario_inizio),
                          getOra(orario_fine), getMinuto(orario_fine));
 
+                // Calcolo posti rimanenti
                 int posti_max = getPostiMax(l);
                 int posti_occupati = getPostiOccupati(l);
                 int posti_rimanenti = posti_max - posti_occupati;
 
-                // Ottenere la data della lezione
-                Data* data_lezione = getDataLezione(l);  // Usa il getter per ottenere la data
-                char data_str[20];  // Assumiamo che la funzione stampaData riempi questa stringa
-                snprintf(data_str, sizeof(data_str), "%02d/%02d/%04d", getGiorno(data_lezione), getMese(data_lezione), getAnno(data_lezione));
+                // Ottiene e formatta la data della lezione
+                Data* data_lezione = getDataLezione(l);
+                char data_str[20];
+                snprintf(data_str, sizeof(data_str), "%02d/%02d/%04d",
+                         getGiorno(data_lezione), getMese(data_lezione), getAnno(data_lezione));
 
-                // Stampa le informazioni della lezione
+                // Stampa le informazioni in formato tabellare
                 printf("%-15d | %-20s | %-20s | %-15s | %-20s | %-17d\n",
-                       getCodiceLezione(l), getNomeLezione(l), disciplina_lezione, orario_str, data_str, posti_rimanenti);
+                       getCodiceLezione(l),
+                       getNomeLezione(l),
+                       disciplina_lezione,
+                       orario_str,
+                       data_str,
+                       posti_rimanenti);
 
-                free(orario_fine);  // Solo se aggiungiMinuti fa malloc
+                // Libera la memoria dell'orario di fine (se allocato dinamicamente)
+                free(orario_fine);
+
                 trovato = 1;
             }
         }
 
+        // Passa alla lezione successiva nella lista
         temp = lezione_getNext(temp);
     }
 
+    // Se nessuna lezione è stata trovata con quella disciplina
     if (!trovato) {
         printf("%sNessuna lezione trovata per la disciplina '%s'.%s\n", ROSSO, disciplina, RESET);
     }
 
+    // Pausa prima di tornare al menu precedente
     printf("\nPremi INVIO per tornare indietro...");
     getchar();
-    getchar();  // Per consumare l’ultima newline se necessario
+    getchar();  // Consuma newline rimasta nel buffer
     pulisciSchermo();
 }
-
+/*
+ * Funzione: lezione_printByID
+ * Scopo:    Visualizza le informazioni dettagliate di una lezione dato il suo ID (codice).
+ * Parametri:
+ *   - lezioni: puntatore alla lista delle lezioni
+ *   - id_input: ID della lezione da cercare
+ */
 void lezione_printByID(listL* lezioni, int id_input) {
+    // Se la lista è vuota, avvisa l'utente e ritorna
     if (lezioni == NULL) {
         printf("%sNESSUNA LEZIONE PRESENTE.%s\n", ROSSO, RESET);
         getchar();
@@ -525,28 +647,36 @@ void lezione_printByID(listL* lezioni, int id_input) {
     int trovato = 0;
 
     pulisciSchermo();
+
+    // Intestazione della ricerca
     printf("\n%sRicerca lezione con ID: %d%s\n", GIALLO, id_input, RESET);
     printf("%-15s | %-20s | %-20s | %-15s | %-17s\n",
            "Codice", "Nome", "Disciplina", "Orario", "Posti Rimanenti");
     printf("-----------------------------------------------------------------------------------------------\n");
 
+    // Scorre la lista alla ricerca dell'ID
     while (temp != NULL) {
         lezione* lezione_corrente = lezione_getValue(temp);
 
+        // Controlla se la lezione è valida e ha l'ID cercato
         if (lezione_corrente != NULL && getCodiceLezione(lezione_corrente) == id_input) {
+            // Ottiene dati rilevanti
             Orario* orario_inizio = getOrarioLezione(lezione_corrente);
             int durata = getDurataLezione(lezione_corrente);
             int posti_max = getPostiMax(lezione_corrente);
             int prenotati = getPostiOccupati(lezione_corrente);
             int posti_rimanenti = posti_max - prenotati;
 
+            // Calcola orario di fine
             Orario* orario_fine = aggiungiMinuti(orario_inizio, durata);
 
+            // Costruisce stringa orario "inizio - fine"
             char orario_str[20];
             snprintf(orario_str, sizeof(orario_str), "%02d:%02d - %02d:%02d",
                      getOra(orario_inizio), getMinuto(orario_inizio),
                      getOra(orario_fine), getMinuto(orario_fine));
 
+            // Stampa lezione trovata
             printf("%-15d | %-20s | %-20s | %-15s | %-17d\n",
                    getCodiceLezione(lezione_corrente),
                    getNomeLezione(lezione_corrente),
@@ -555,23 +685,37 @@ void lezione_printByID(listL* lezioni, int id_input) {
                    posti_rimanenti);
 
             trovato = 1;
-            break;
+            break;  // Interrompe la ricerca una volta trovata
         }
 
+        // Passa alla prossima lezione
         temp = lezione_getNext(temp);
     }
 
+    // Se non è stata trovata alcuna lezione con quell'ID
     if (!trovato) {
         printf("\n%sNessuna lezione trovata con ID %d.%s\n", ROSSO, id_input, RESET);
     }
 
+    // Pausa finale
     getchar();
     printf("\nPremi INVIO per tornare indietro.....");
     getchar();
     pulisciSchermo();
 }
-
+/*
+ * Funzione: lezione_checkByID
+ * Scopo:    Verifica se esiste una lezione con uno specifico ID e in una data specifica.
+ * Parametri:
+ *   - lezioni: puntatore alla lista delle lezioni
+ *   - id_input: ID della lezione da cercare
+ *   - data_input: puntatore alla data in cui cercare la lezione
+ * Ritorna:
+ *   - 1 se la lezione è stata trovata nella data specificata
+ *   - 0 altrimenti
+ */
 int lezione_checkByID(listL* lezioni, int id_input, Data* data_input) {
+    // Controllo se la lista delle lezioni è vuota
     if (lezioni == NULL) {
         printf("%sNESSUNA LEZIONE PRESENTE.%s\n", ROSSO, RESET);
         getchar();
@@ -584,25 +728,28 @@ int lezione_checkByID(listL* lezioni, int id_input, Data* data_input) {
     listL* temp = lezioni;
     int trovato = 0;
 
+    // Scorre tutta la lista alla ricerca della lezione con ID e data corrispondenti
     while (temp != NULL) {
         lezione* lezione_corrente = lezione_getValue(temp);
 
+        // Verifica che la lezione esista, che l'ID corrisponda e che la data sia uguale
         if (lezione_corrente != NULL &&
             getCodiceLezione(lezione_corrente) == id_input &&
             confrontaDate(getDataLezione(lezione_corrente), data_input) == 0) {
 
-            trovato = 1;
-            break;
+            trovato = 1; // Lezione trovata
+            break;       // Esce dal ciclo
         }
 
-        temp = lezione_getNext(temp);
+        temp = lezione_getNext(temp); // Passa alla lezione successiva
     }
 
+    // Se nessuna lezione è stata trovata, avvisa l’utente
     if (!trovato) {
         printf("\n%sNessuna lezione trovata con ID %d nella data specificata.%s\n", ROSSO, id_input, RESET);
     }
 
-    return trovato;
+    return trovato; // Ritorna 1 se trovata, altrimenti 0
 }
 
 // Funzione per visualizzare tutte le lezioni

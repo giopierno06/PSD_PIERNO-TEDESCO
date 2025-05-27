@@ -3,33 +3,41 @@
 
 #include "list_Lezioni.h"
 
-
-
+// Funzione principale per gestire il menu e le operazioni sulle lezioni
 void gestione_Lezioni();
 
-int aggiungi_lezione(listL**);//nella funzione verranno inseirti da tastiera i dati della lezione e verranno aggiunti alla lista passata come parametro.Tornera 0 se verrà tutto ben eseguito 1 sen trova anomalie
+// Aggiunge una nuova lezione alla lista puntata da listL**
+// Ritorna 0 se l'inserimento è andato a buon fine, 1 in caso di anomalie o errori
+int aggiungi_lezione(listL**);
 
-// Funzione per visualizzare le lezioni di un giorno specifico (data)
+// Funzione per visualizzare le lezioni, menu interattivo che permette di scegliere
+// se visualizzare per data, tutte, per ID o per disciplina
 void visualizzaLezioni(listL*);
 
-void lezione_printByDisciplina(listL* );
+// Stampa tutte le lezioni di una data disciplina inserita dall'utente
+void lezione_printByDisciplina(listL*);
 
-void lezione_printByID(listL*, int); 
+// Stampa la lezione che corrisponde all'ID passato come parametro
+void lezione_printByID(listL*, int);
 
-// Funzione per stampare le lezioni di un giorno specifico (data)
-void lezione_printByDate(listL*, Data* );
+// Stampa le lezioni per una data specifica passata come parametro
+void lezione_printByDate(listL*, Data*);
 
-int lezione_checkByID(listL*, int, Data*) ;
+// Verifica se nella lista esiste una lezione con un certo ID e data
+// Ritorna 1 se trovata, 0 altrimenti
+int lezione_checkByID(listL*, int, Data*);
 
-//  Cerca nella lista delle lezioni una lezione con l'ID specificato
-lezione* trovaLezionePerID(listL* , int);
+// Cerca e ritorna un puntatore alla lezione con l'ID specificato nella lista
+// Ritorna NULL se non trovata
+lezione* trovaLezionePerID(listL*, int);
 
-listL* modificaLezione(listL* );
+// Modifica una lezione trovata nella lista, richiede interazione con l'utente
+listL* modificaLezione(listL*);
 
-// Funzione per eliminare una lezione dalla lista
-listL* eliminaLezione(listL* );
+// Elimina una lezione dalla lista (probabilmente interattivo o su base criteri)
+listL* eliminaLezione(listL*);
 
-// Funzione per eliminare una lezione per ID
+// Elimina una lezione dalla lista tramite ID (interattivo)
 listL* eliminaLezionePerID(listL*);
 
 #endif
