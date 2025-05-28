@@ -251,7 +251,7 @@ void aggiungi_prenotazione(int codice_abbonamento_param, int codice_lezione_para
         if (codice_abbonamento_param == -1 || codice_lezione_param == -1)
         getchar();
         printf("%sErrore: Abbonamento scaduto alla data scelta.%s\n", ROSSO, RESET);
-        printf("Premi INVIO tornare indietro");
+        printf("Premi INVIO .......");
         getchar();
         prenotazione_distruggi(nuova_prenotazione);
         return;

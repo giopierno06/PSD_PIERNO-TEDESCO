@@ -155,6 +155,23 @@ int getMaxCodicePrenotazione(listP* prenotazionii) {
 }
 
 
+/**
+ * brief Stampa i dettagli di una prenotazione, inclusi dati dell'abbonato e della lezione.
+ *
+ * param p Puntatore alla struttura prenotazione da stampare.
+ *
+ * pre
+ * - Il puntatore `p` può essere NULL. In tal caso, la funzione stampa un messaggio e termina.
+ * - Le strutture globali `abbonati` e `lezioni` devono essere inizializzate e contenere gli elementi corrispondenti agli ID presenti in `p`.
+ *
+ * post
+ * - Se `p` è valido e le strutture `abbonati` e `lezioni` contengono gli elementi richiesti, stampa una riga con i dettagli della prenotazione.
+ * - Se `p` è NULL o i dati associati non sono trovati, stampa un messaggio di errore.
+ *
+ * note
+ * - La funzione non modifica alcuna struttura dati.
+ * - Utilizza le funzioni ausiliarie `getAbbonamentoByID`, `getLezioneByID`, `getNome`, `getCognome`, `getDisciplinaLezione`, `getDataLezione`, `getOrarioLezione`, `stampaData` e `stampaOrario`.
+ */
 void stampaDettagliPrenotazione(prenotazione* p) {
     if (p == NULL) {
         printf("Prenotazione non disponibile.\n");
@@ -166,7 +183,7 @@ void stampaDettagliPrenotazione(prenotazione* p) {
 
     if (a == NULL || l == NULL) {
         printf("Errore: dati abbonamento o lezione mancanti.\n");
-       return;
+        return;
     }
 
     // Stampa una sola riga con tutti i dati
@@ -188,6 +205,18 @@ void stampaDettagliPrenotazione(prenotazione* p) {
     printf("\n-------------------------------------------------------------------------------------------------------------\n");
 }
 
+/**
+ * Verifica se esiste già una prenotazione per uno specifico abbonamento, lezione e data.
+ *
+ * param lista Lista delle prenotazioni.
+ * param lezioni Lista delle lezioni.
+ * param codice_abbonamento Codice dell’abbonamento da cercare.
+ * param codice_lezione Codice della lezione da cercare.
+ * param data Data da confrontare con quella della lezione.
+ *
+ * pre lista, lezioni e data devono essere validi (non NULL).
+ * post Restituisce 1 se esiste una prenotazione corrispondente, altrimenti 0.
+ */
 int prenotazione_esistePerAbbonamentoELezione(listP* lista, listL* lezioni, int codice_abbonamento, int codice_lezione, Data* data) {
     if (!lista || !data || !lezioni) return 0;
 
@@ -205,7 +234,7 @@ int prenotazione_esistePerAbbonamentoELezione(listP* lista, listL* lezioni, int 
                 if (l != NULL) {
                     Data* data_lezione = getDataLezione(l);
                     if (confrontaDate(data_lezione, data) == 0) {
-                        return 1; // prenotazione già esiste
+                        return 1; // Prenotazione già esistente
                     }
                 }
             }
@@ -214,5 +243,5 @@ int prenotazione_esistePerAbbonamentoELezione(listP* lista, listL* lezioni, int 
         nodo = prenotazione_getNext(nodo);
     }
 
-    return 0; // non trovato
+    return 0; // Nessuna prenotazione trovata
 }
