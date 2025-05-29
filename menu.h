@@ -1,12 +1,19 @@
 #ifndef MENU_H
 #define MENU_H
 
-void menu_iniziale();                // Mostra il menu iniziale dell'applicazione
+#include "list.h"
 
-void menu_gestore();                 // Mostra il menu per l'utente gestore
+// Mostra il menu iniziale dell'applicazione, da cui si può scegliere tra menu gestore o cliente
+void menu_iniziale();
 
-void menu_cliente();                 // Mostra il menu per l'utente cliente
+// Mostra il menu destinato all'utente gestore per la gestione abbonamenti, lezioni e prenotazioni
+void menu_gestore();
 
-void schermata_arrivederci();       // Mostra la schermata di uscita/arrivederci
+// Mostra il menu destinato all'utente cliente, che consente di gestire il proprio abbonamento e prenotazioni
+void menu_cliente();
+
+// Funzione che controlla l'identità del cliente richiedendo nome, cognome e codice abbonamento,
+// e restituisce un puntatore al nodo della lista clienti se riconosciuto, altrimenti NULL.
+list* controlloCliente();
 
 #endif // MENU_H

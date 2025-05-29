@@ -4,6 +4,8 @@
 - **Input:** Codice abbonamento valido, codice lezione disponibile.
 - **Output atteso:** Prenotazione aggiunta con successo.
 - **Risultato:** PASS
+- può essere effettuato solo una volta, dal secondo caso in poi si verrà restituito fail poiche la prenotazione già esiste 
+  quindi può "essere considerato" un test sulle prenotazioni duplicate
 
 ### 2. Prenotazione con abbonamento scaduto
 - **Input:** Codice abbonamento scaduto, codice lezione disponibile.

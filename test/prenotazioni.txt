@@ -1,9 +1,5 @@
 Prenotazioni:
 ===========================
-Codice Prenotazione: 37
-Codice Abbonamento: 4
-Codice Lezione: 25
----------------------------
 Codice Prenotazione: 26
 Codice Abbonamento: 2
 Codice Lezione: 30

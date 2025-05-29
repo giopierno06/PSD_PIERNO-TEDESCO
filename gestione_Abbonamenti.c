@@ -138,7 +138,7 @@ void controllo_abbonamento(abbonamento *a) {
 void gestione_abbonamenti() {
     // Se gli abbonati non sono stati ancora caricati, li carica dal file
     if (abbonati == NULL)
-        abbonati = caricaAbbonamentiDaFile(abbonati, "abbonamenti.txt");
+        abbonati = caricaAbbonamentiDaFile(abbonati, "programma/abbonamenti.txt");
 
     // Se la lista è ancora vuota (file vuoto o non esistente), inizializza una lista nuova
     if (abbonati == NULL)
@@ -357,7 +357,7 @@ int aggiungi_abbonamento(list** abbonati) {
     // Aggiunta alla lista e salvataggio
     // ==============================
     *abbonati = consList(nuovo_abbonamento, *abbonati);  // Inserisce in testa
-    salvaAbbonamentiSuFile(*abbonati, "abbonamenti.txt");  // Salva su file
+    salvaAbbonamentiSuFile(*abbonati, "programma/abbonamenti.txt");  // Salva su file
 
     // ==============================
     // Pausa prima di tornare al menu
@@ -464,7 +464,7 @@ list* eliminaPerID(list* abbonati) {
             free(curr);  // Libera il nodo della lista
 
             pulisciSchermo();
-            salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
+            salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");
             printf("%sAbbonamento eliminato con successo.%s\n", VERDE, RESET);
             getchar();
             printf("Premi invio per continuare......\n");
@@ -568,7 +568,7 @@ list* eliminaPerNomeCognome(list* abbonati) {
             }
 
             free(curr);
-            salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");
+            salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");
             printf("%sAbbonamento con codice %d eliminato con successo.%s\n", VERDE, codice, RESET);
             printf("Premi invio per continuare...\n");
             getchar();
@@ -988,7 +988,7 @@ list* modificaAbbonamento(list* abbonamentoDaModificare, list* abbonati) {
                     scanf("%s", nuovoNome);  // Legge il nuovo nome
                     setNome(getValue(abbonamentoDaModificare), nuovoNome);  // Imposta il nuovo nome
                     printf("%sNome modificato con successo!%s\n", VERDE, RESET);
-                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
+                    salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");  // Salva le modifiche su file
                     break;
                 }
                 case 2: {  // Modifica il cognome
@@ -997,14 +997,14 @@ list* modificaAbbonamento(list* abbonamentoDaModificare, list* abbonati) {
                     scanf("%s", nuovoCognome);  // Legge il nuovo cognome
                     setCognome(getValue(abbonamentoDaModificare), nuovoCognome);  // Imposta il nuovo cognome
                     printf("%sCognome modificato con successo!%s\n", VERDE, RESET);
-                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
+                    salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");  // Salva le modifiche su file
                     break;
                 }
                 case 3: {  // Modifica la data di inizio
                     Data* nuovaDataInizio = leggiData();  // Legge la nuova data di inizio
                     setDataInizio(getValue(abbonamentoDaModificare), nuovaDataInizio);  // Imposta la nuova data di inizio
                     printf("%sData di inizio modificata con successo!%s\n", VERDE, RESET);
-                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
+                    salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");  // Salva le modifiche su file
                     break;
                 }
                 case 4: {  // Modifica la durata dell'abbonamento
@@ -1013,7 +1013,7 @@ list* modificaAbbonamento(list* abbonamentoDaModificare, list* abbonati) {
                     scanf("%d", &nuovaDurata);  // Legge la nuova durata
                     setDurata(getValue(abbonamentoDaModificare), nuovaDurata);  // Imposta la nuova durata
                     printf("%sDurata modificata con successo!%s\n", VERDE, RESET);
-                    salvaAbbonamentiSuFile(abbonati, "abbonamenti.txt");  // Salva le modifiche su file
+                    salvaAbbonamentiSuFile(abbonati, "programma/abbonamenti.txt");  // Salva le modifiche su file
                     break;
                 }
                 case 0:  // Torna indietro al menu principale

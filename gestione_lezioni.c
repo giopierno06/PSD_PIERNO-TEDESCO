@@ -33,7 +33,7 @@ void gestione_Lezioni() {
     // Se la lista delle lezioni non è stata inizializzata
     if (lezioni == NULL) {
         lezioni = lezione_newList();  // Inizializza una nuova lista di lezioni
-        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt"); // Carica le lezioni da file
+        lezioni = caricaLezioniDaFile(lezioni, "programma/lezioni.txt"); // Carica le lezioni da file
     }
 
     int scelta = -1; // Variabile per memorizzare la scelta dell'utente
@@ -282,7 +282,7 @@ int aggiungi_lezione(listL** lezioni) {
      * AGGIUNTA IN LISTA E SALVATAGGIO
      *----------------------------*/
     *lezioni = lezione_consList(nuova_lezione, *lezioni); // Inserisce in testa alla lista
-    salvaLezioniSuFile(*lezioni, "lezioni.txt"); // Salva su file
+    salvaLezioniSuFile(*lezioni, "programma/lezioni.txt"); // Salva su file
 
     getchar(); // attende invio
     printf("\nPremi INVIO per continuare...\n");
@@ -501,7 +501,7 @@ listL* modificaLezione(listL* lezioni) {
 
                     case 0:
                         // Salva e torna indietro
-                        salvaLezioniSuFile(lezioni, "lezioni.txt");
+                        salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
                         pulisciSchermo();
                         return lezioni;
 
@@ -512,7 +512,7 @@ listL* modificaLezione(listL* lezioni) {
                 }
 
                 // Salva su file dopo ogni modifica
-                salvaLezioniSuFile(lezioni, "lezioni.txt");
+                salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
             }
         }
 
@@ -927,7 +927,7 @@ listL* eliminaLezionePerID(listL* lezioni) {
             free(curr);
 
             pulisciSchermo();
-            salvaLezioniSuFile(lezioni, "lezioni.txt");
+            salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
             printf("%sLezione eliminata con successo.%s\n", VERDE, RESET);
             printf("Premi invio per continuare......\n");
             getchar();

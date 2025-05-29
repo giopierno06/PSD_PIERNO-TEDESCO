@@ -2,12 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 
-// Inclusione delle dichiarazioni delle funzioni e strutture dei moduli del progetto
-#include "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/prenotazioni.h"
-#include "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/lezione.h"
-#include "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/file.h"
-#include "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/gestione_prenotazioni.h"
-#include "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/gestione_lezioni.h"
+#include "prenotazioni.h"
+#include "lezione.h"
+#include "file.h"
+#include "gestione_prenotazioni.h"
+#include "gestione_lezioni.h"
 
 // Variabili globali dichiarate come extern poiché definite altrove
 extern listP* lista_prenotazioni;
@@ -87,9 +86,9 @@ void test_aggiungiPrenotazione(const char* input_file, const char* output_file) 
     }
     
     // Carica i dati da file
-    lista_prenotazioni = caricaPrenotazioniDaFile(NULL, "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/prenotazioni.txt");
-    lezioni = caricaLezioniDaFile(NULL, "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/lezioni.txt");
-    abbonati = caricaAbbonamentiDaFile(NULL, "/mnt/c/users/giova/OneDrive/Desktop/PROGETTO_PSD/programma/abbonamenti.txt");
+    lista_prenotazioni = caricaPrenotazioniDaFile(NULL, "programma/prenotazioni.txt");
+    lezioni = caricaLezioniDaFile(NULL, "programma/lezioni.txt");
+    abbonati = caricaAbbonamentiDaFile(NULL, "programma/abbonamenti.txt");
 
     if (!lista_prenotazioni || !lezioni || !abbonati) {
         printf("Errore caricamento dati da file\n");
@@ -165,19 +164,19 @@ void test_reportDiscipline(const char* file_output) {
  */
 int main() {
     // Test 1: abbonamento scaduto
-    const char *input2 = "input/prenotazioni_test2.txt";
-    const char *output2 = "output/prenotazioni_test2.txt.out";
-    const char *oracle2 = "oracle/prenotazioni_test2.txt.out";
+    const char *input2 = "programma/test/input/prenotazioni_test2.txt";
+    const char *output2 = "programma/test/output/prenotazioni_test2.txt.out";
+    const char *oracle2 = "programma/test/oracle/prenotazioni_test2.txt.out";
 
     
     // Test 2: prenotazione valida
-    const char *input = "input/prenotazioni_test1.txt";
-    const char *output = "output/prenotazioni_test1.txt.out";
-    const char *oracle = "oracle/prenotazioni_test1.txt.out";
+    const char *input = "programma/test/input/prenotazioni_test1.txt";
+    const char *output = "programma/test/output/prenotazioni_test1.txt.out";
+    const char *oracle = "programma/test/oracle/prenotazioni_test1.txt.out";
     
     // Test 3: report delle discipline
-    const char *output_report = "output/test3/output_test3.txt.out";
-    const char *oracle_report = "oracle/test3/oracle_test3.txt.out";
+    const char *output_report = "programma/test/output/test3/output_test3.txt.out";
+    const char *oracle_report = "programma/test/oracle/test3/oracle_test3.txt.out";
     
      printf("%s==============================TEST 1============================%s\n",GIALLO,RESET);
 
@@ -226,6 +225,9 @@ int main() {
         printf("TEST report discipline: FAIL\n");
         printf("Controlla:\n - Output: %s\n - Oracle: %s\n", output_report, oracle_report);
     }
+    
+    printf("\nPremi INVIO per uscire.....");
+    getchar();
 
     return 0;
 }

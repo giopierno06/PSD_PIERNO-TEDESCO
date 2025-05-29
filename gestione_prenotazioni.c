@@ -44,7 +44,7 @@ void gestione_prenotazioni() {
     
     // Carica la lista delle prenotazioni da file se non è già stata caricata
     if (lista_prenotazioni == NULL)
-        lista_prenotazioni = caricaPrenotazioniDaFile(lista_prenotazioni, "prenotazioni.txt");
+        lista_prenotazioni = caricaPrenotazioniDaFile(lista_prenotazioni, "programma/prenotazioni.txt");
 
     // Se il file era vuoto o inesistente, crea una nuova lista vuota
     if (lista_prenotazioni == NULL)
@@ -52,7 +52,7 @@ void gestione_prenotazioni() {
 
     // Carica la lista degli abbonati da file se non è ancora caricata
     if (abbonati == NULL)
-        abbonati = caricaAbbonamentiDaFile(abbonati, "abbonamenti.txt");
+        abbonati = caricaAbbonamentiDaFile(abbonati, "programma/abbonamenti.txt");
 
     // Se il file era vuoto o inesistente, crea una nuova lista vuota per gli abbonati
     if (abbonati == NULL)
@@ -60,7 +60,7 @@ void gestione_prenotazioni() {
 
     // Carica la lista delle lezioni da file se non è ancora caricata
     if (lezioni == NULL)
-        lezioni = caricaLezioniDaFile(lezioni, "lezioni.txt");
+        lezioni = caricaLezioniDaFile(lezioni, "programma/lezioni.txt");
 
     // Se il file era vuoto o inesistente, crea una nuova lista vuota per le lezioni
     if (lezioni == NULL)
@@ -341,8 +341,8 @@ void aggiungi_prenotazione(int codice_abbonamento_param, int codice_lezione_para
 
     // Aggiungo la prenotazione alla lista e salvo i dati su file
     lista_prenotazioni = prenotazione_consList(nuova_prenotazione, lista_prenotazioni);
-    salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
-    salvaLezioniSuFile(lezioni, "lezioni.txt");
+    salvaPrenotazioniSuFile(lista_prenotazioni, "programma/prenotazioni.txt");
+    salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
 }
 
 
@@ -444,8 +444,8 @@ void disdici_prenotazione() {
             printf("\n%s[SUCCESSO]%s Prenotazione annullata correttamente.\n", VERDE, RESET);
 
             // Salva modifiche su file
-            salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
-            salvaLezioniSuFile(lezioni, "lezioni.txt");
+            salvaPrenotazioniSuFile(lista_prenotazioni, "programma/prenotazioni.txt");
+            salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
 
             printf("Premi INVIO per tornare indietro...");
             getchar();
@@ -979,8 +979,8 @@ void aggiungi_prenotazioneCliente(abbonamento* abbonamento_prenotazione) {
     lista_prenotazioni = prenotazione_consList(nuova_prenotazione, lista_prenotazioni);
 
     // Salva i dati aggiornati su file
-    salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
-    salvaLezioniSuFile(lezioni, "lezioni.txt");
+    salvaPrenotazioniSuFile(lista_prenotazioni, "programma/prenotazioni.txt");
+    salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
 }
 
 /**
@@ -1068,8 +1068,8 @@ void disdici_prenotazioneCliente(abbonamento* abbonamento_prenotazione) {
 
             printf("\n%s[SUCCESSO]%s Prenotazione annullata correttamente.\n", VERDE, RESET);
 
-            salvaPrenotazioniSuFile(lista_prenotazioni, "prenotazioni.txt");
-            salvaLezioniSuFile(lezioni, "lezioni.txt");
+            salvaPrenotazioniSuFile(lista_prenotazioni, "programma/prenotazioni.txt");
+            salvaLezioniSuFile(lezioni, "programma/lezioni.txt");
 
             printf("Premi INVIO per tornare indietro.....");
             getchar();
